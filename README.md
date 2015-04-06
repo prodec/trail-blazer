@@ -1,2 +1,2 @@
 # trail-blazer
-Mission planner for drones from model 4.
+Mission planner for model 4 drones.
