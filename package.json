@@ -1,5 +1,6 @@
 {
   "name": "trail-blazer",
+<<<<<<< HEAD
   "version": "0.1.0",
   "description": "Drone flight planner.",
   "main": "server.js",
