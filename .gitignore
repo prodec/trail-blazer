@@ -16,7 +16,6 @@
 /libpeerconnection.log
 npm-debug.log
 testem.log
-<<<<<<< HEAD
 
 ### OSX ###
 .DS_Store
@@ -43,5 +42,3 @@ Icon
 Network Trash Folder
 Temporary Items
 .apdisk
-=======
->>>>>>> 864ee16... Initial project structure.
