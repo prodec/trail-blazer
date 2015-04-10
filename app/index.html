@@ -19,9 +19,17 @@
 
     {{content-for 'head-footer'}}
   </head>
+  <!-- Disclaimer: This code will be extracted to a ember component, it's just for visual test. -Kappa -->
   <body>
+    <div id="menu-wrapper">
+      <div id="menu">
+        <div><button class="button button-royal button-square button-jumbo"><i class="fa fa-location-arrow"></i></button></div>
+        <div><button class="button button-action button-square button-jumbo"><i class="fa fa-map-marker"></i></button></div>
+        <div><button class="button button-caution button-square button-jumbo"><i class="fa fa-share-alt"></i></button></div>
+        <div><button class="button button-highlight button-square button-jumbo"><i class="fa fa-flag"></i></button></div>
+        <div><button class="button button-primary button-square button-jumbo"><i class="fa fa-anchor"></i></button></div>
+      </div>
+    </div>
     <div id="map"></div>
-    {{content-for 'body'}}
-    {{content-for 'body-footer'}}
   </body>
 </html>
