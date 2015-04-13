@@ -29,7 +29,21 @@
         <div><button class="button button-highlight button-square button-jumbo"><i class="fa fa-flag"></i></button></div>
         <div><button class="button button-primary button-square button-jumbo"><i class="fa fa-anchor"></i></button></div>
       </div>
+      <div id="menu-slideout" class="menu-slideout-off">
+        <div class="slideout-color"></div>
+      </div>
     </div>
     <div id="map"></div>
   </body>
 </html>
+
+<script>
+  $(".button-royal").click(function(e) {
+    if($("#menu-slideout").hasClass("menu-slideout-off")) {
+      $("#menu-slideout").removeClass("menu-slideout-off").addClass("menu-slideout-on");
+    } else {
+      $("#menu-slideout").removeClass("menu-slideout-on").addClass("menu-slideout-off");
+    }
+  })
+</script>
+
