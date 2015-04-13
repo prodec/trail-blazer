@@ -8,32 +8,33 @@ html, body, #map {
 }
 
 #menu {
-    z-index: 0;
+    z-index: 1;
     position: absolute;
     margin-left: 50px;
 }
 
 #menu-slideout {
+    z-index: 0;
+    position: relative;
     box-sizing: border-box;
     position: absolute;
-    margin-left: 110px;
-    height: 300px;
     background-color: white;
+    width: 402px;
+    border-right: solid 10px #7b72e9;
+    transition: opacity .055s, margin-left .055s;
+    margin-left: 50px;
     opacity: 0;
-    border-right: solid 0 #7b72e9;
-    transition: all 4s;
+    height: 300px;
 }
 
-#menu-slideout.menu-slideout-off {
-    width: 0;
-    opacity: 0;
-    border-right: solid 0 #7b72e9;
+#menu-slideout.after-transition {
+    height: 0;
+    overflow: hidden;
 }
 
 #menu-slideout.menu-slideout-on {
-    width: 402px;
+    margin-left: 110px;
     opacity: 1;
-    border-right: solid 10px #7b72e9;
 }
 
 #menu-wrapper {

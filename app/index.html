@@ -39,11 +39,14 @@
 
 <script>
   $(".button-royal").click(function(e) {
-    if($("#menu-slideout").hasClass("menu-slideout-off")) {
-      $("#menu-slideout").removeClass("menu-slideout-off").addClass("menu-slideout-on");
+    if($("#menu-slideout").hasClass("menu-slideout-on")) {
+      $("#menu-slideout").one("transitionend", function(e){
+        $(this).addClass("after-transition"); 
+      });
+      $("#menu-slideout").removeClass("menu-slideout-on")
     } else {
-      $("#menu-slideout").removeClass("menu-slideout-on").addClass("menu-slideout-off");
+      $("#menu-slideout").removeClass("after-transition"); 
+      $("#menu-slideout").addClass("menu-slideout-on");
     }
-  })
+  });
 </script>
-
