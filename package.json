@@ -1,7 +1,7 @@
 {
   "name": "trail-blazer",
   "version": "0.0.0",
-  "description": "Small description for trail-blazer goes here",
+  "description": "A drone flight planner for people who hate ugly apps.",
   "private": true,
   "directories": {
     "doc": "doc",
@@ -22,6 +22,7 @@
     "broccoli-asset-rev": "^2.0.2",
     "broccoli-merge-trees": "0.2.1",
     "broccoli-static-compiler": "^0.2.1",
+    "broccoli-sass": "^0.6.4",
     "ember-cli": "0.2.3",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-babel": "^5.0.0",

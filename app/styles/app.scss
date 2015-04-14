@@ -32,6 +32,14 @@ html, body, #map {
     overflow: hidden;
 }
 
+button::-moz-focus-inner {
+    border: 0;
+}
+
+.button-royal:focus{
+    background-color: #7B72E9;
+}
+
 #menu-slideout.menu-slideout-on {
     margin-left: 110px;
     opacity: 1;
