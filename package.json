@@ -1,11 +1,28 @@
 {
   "name": "trail-blazer",
+  "version": "0.0.0",
+  "description": "A drone flight planner for people who hate ugly apps.",
+  "private": true,
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "start": "ember server",
+    "build": "ember build",
+    "test": "ember test"
+  },
+  "repository": "",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^2.0.2",
     "broccoli-merge-trees": "0.2.1",
     "broccoli-static-compiler": "^0.2.1",
+    "broccoli-sass": "^0.6.4",
     "ember-cli": "0.2.3",
     "ember-cli-app-version": "0.3.3",
     "ember-cli-babel": "^5.0.0",
