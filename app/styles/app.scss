@@ -1,3 +1,26 @@
+@import "../../vendor/Buttons/scss/_options.scss";
+
+$containers-slideout: ("#slideout-goto" "#slideout-marker" "#slideout-line" "#slideout-battery" "#slideout-tie");  
+
+@mixin container-slideout {
+    z-index: 0;
+    position: relative;
+    box-sizing: border-box;
+    position: absolute;
+    background-color: white;
+    width: 402px;
+    border-right: solid 10px;
+    transition: opacity 0.055s, margin-left 0.055s;
+    margin-left: 50px;
+    opacity: 0;
+    height: 300px;
+}
+
+@mixin slideout-after-transition {
+    height: 0;
+    overflow: hidden;
+}
+
 html, body, #map {
     padding: 0;
     margin: 0;
@@ -13,38 +36,25 @@ html, body, #map {
     margin-left: 50px;
 }
 
-#menu-slideout {
-    z-index: 0;
-    position: relative;
-    box-sizing: border-box;
-    position: absolute;
-    background-color: white;
-    width: 402px;
-    border-right: solid 10px;
-    border-right-color: #7b72e9;
-    transition: opacity 0.055s, margin-left 0.055s;
-    margin-left: 50px;
-    opacity: 0;
-    height: 300px;
-}
+@each $container-slideout in $containers-slideout {
+    #{$container-slideout} {
+        @include container-slideout
+    }
 
-#menu-slideout.after-transition {
-    height: 0;
-    overflow: hidden;
+    #{$container-slideout}.after-transition {
+        @include slideout-after-transition
+    }
+
+    #{$container-slideout}.menu-slideout-on {
+        margin-left: 110px;
+        opacity: 1;
+    }
 }
 
 button::-moz-focus-inner {
     border: 0;
 }
 
-.button-royal:focus{
-    background-color: #7B72E9;
-}
-
-#menu-slideout.menu-slideout-on {
-    margin-left: 110px;
-    opacity: 1;
-}
 
 #menu-wrapper {
     position: relative;
