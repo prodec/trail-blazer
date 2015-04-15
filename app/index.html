@@ -23,11 +23,31 @@
   <body>
     <div id="menu-wrapper">
       <div id="menu">
-        <div><button class="button button-royal button-square button-jumbo"><i class="fa fa-location-arrow"></i></button></div>
-        <div><button class="button button-action button-square button-jumbo"><i class="fa fa-map-marker"></i></button></div>
-        <div><button class="button button-caution button-square button-jumbo"><i class="fa fa-share-alt"></i></button></div>
-        <div><button class="button button-highlight button-square button-jumbo"><i class="fa fa-flag"></i></button></div>
-        <div><button class="button button-primary button-square button-jumbo"><i class="fa fa-anchor"></i></button></div>
+        <div>
+          <button id="goto-button" class="button button-royal button-square button-jumbo">
+            <i class="fa fa-location-arrow"></i>
+          </button>
+        </div>
+        <div>
+          <button id="marker-button" class="button button-action button-square button-jumbo">
+            <i class="fa fa-map-marker"></i>
+          </button>
+        </div>
+        <div>
+          <button id="line-button" class="button button-caution button-square button-jumbo">
+            <i class="fa fa-share-alt"></i>
+          </button>
+        </div>
+        <div>
+          <button id="battery-button" class="button button-highlight button-square button-jumbo">
+            <i class="fa fa-flag"></i>
+          </button>
+        </div>
+        <div>
+          <button id="tie-button" class="button button-primary button-square button-jumbo">
+            <i class="fa fa-anchor"></i>
+          </button>
+        </div>
       </div>
       <div id="menu-slideout" class="menu-slideout-off">
         <div class="slideout-color"></div>
@@ -38,15 +58,31 @@
 </html>
 
 <script>
-  $(".button-royal").click(function(e) {
-    if($("#menu-slideout").hasClass("menu-slideout-on")) {
-      $("#menu-slideout").one("transitionend", function(e){
-        $(this).addClass("after-transition"); 
-      });
-      $("#menu-slideout").removeClass("menu-slideout-on")
-    } else {
-      $("#menu-slideout").removeClass("after-transition"); 
-      $("#menu-slideout").addClass("menu-slideout-on");
+  $("#menu-wrapper").on("click", ".button:not('.clicked')", function(e) {
+    button = $(this);
+    slideout = $("#menu-slideout");
+
+
+    if(slideout.hasClass("menu-slideout-on")) {
+      slideout.removeClass("menu-slideout-on");
     }
+
+    $(".clicked").removeClass("clicked");
+    button.addClass("clicked");
+    slideout.removeClass("after-transition");
+    slideout.css("border-right-color", button.css("background-color"));
+    slideout.addClass("menu-slideout-on");
+  });
+
+  $("#menu-wrapper").on("click", ".clicked", function() {
+    button = $(this);
+    slideout = $("#menu-slideout");
+
+    slideout.one("transitionend", function(){
+      button.addClass("after-transition"); 
+    });
+
+    slideout.removeClass("menu-slideout-on");
+    button.removeClass("clicked");
   });
 </script>
