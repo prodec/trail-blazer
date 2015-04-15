@@ -20,8 +20,9 @@ html, body, #map {
     position: absolute;
     background-color: white;
     width: 402px;
-    border-right: solid 10px #7b72e9;
-    transition: opacity .055s, margin-left .055s;
+    border-right: solid 10px;
+    border-right-color: #7b72e9;
+    transition: opacity 0.055s, margin-left 0.055s;
     margin-left: 50px;
     opacity: 0;
     height: 300px;
