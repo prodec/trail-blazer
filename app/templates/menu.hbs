@@ -1,0 +1,67 @@
+<div id="menu-wrapper">
+  <div id="menu">
+    <div>
+      <button id="goto" class="button button-royal button-square button-jumbo">
+        <i class="fa fa-location-arrow"></i>
+      </button>
+    </div>
+    <div>
+      <button id="marker" class="button button-action button-square button-jumbo">
+        <i class="fa fa-map-marker"></i>
+      </button>
+    </div>
+    <div>
+      <button id="line" class="button button-caution button-square button-jumbo">
+        <i class="fa fa-share-alt"></i>
+      </button>
+    </div>
+    <div>
+      <button id="battery" class="button button-highlight button-square button-jumbo">
+        <i class="fa fa-flag"></i>
+      </button>
+    </div>
+    <div>
+      <button id="tie" class="button button-primary button-square button-jumbo">
+        <i class="fa fa-anchor"></i>
+      </button>
+    </div>
+  </div>
+  {{#each session in sessions}}
+    <div id={{session}} class="after-transition slide">
+      <div class="slideout-color"></div>
+    </div>
+  {{/each}}
+</div>
+
+<script>
+  $("#menu-wrapper").on("click", ".button:not('.clicked')", function(e) {
+    button = $(this);
+    id = button.prop("id");
+    slideout = $("#slideout-" + id);
+
+
+    if(slideout.hasClass("menu-slideout-on")) {
+      slideout.removeClass("menu-slideout-on");
+    }
+
+    $(".clicked").removeClass("clicked");
+    button.addClass("clicked");
+    $(".slide").removeClass("after-transition");
+    slideout.css("border-right-color", button.css("background-color"));
+    $(".menu-slideout-on").removeClass("menu-slideout-on");
+    slideout.addClass("menu-slideout-on");
+  });
+
+  $("#menu-wrapper").on("click", ".clicked", function() {
+    button = $(this);
+    id = button.prop("id");
+    slideout = $("#slideout-" + id);
+
+    slideout.one("transitionend", function(){
+      $(".slide").addClass("after-transition");
+    });
+   
+    $(".menu-slideout-on").removeClass("menu-slideout-on");
+    button.removeClass("clicked");
+  });
+</script>
