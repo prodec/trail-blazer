@@ -5,105 +5,24 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>TrailBlazer</title>
     <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     {{content-for 'head'}}
 
     <link rel="stylesheet" href="assets/vendor.css">
     <link rel="stylesheet" href="assets/trail-blazer.css">
 
-    <script src="assets/vendor.js"></script>
-    <script src="assets/trail-blazer.js"></script>
     <script src="http://maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
+    <script src="assets/vendor.js"></script>
     <script src="assets/leaflet-google.js"></script>
-
+    <script src="assets/trail-blazer.js"></script>
+    
     {{content-for 'head-footer'}}
   </head>
   <!-- Disclaimer: This code will be extracted to a ember component, it's just for visual test. -Kappa -->
   <body>
-    <div id="menu-wrapper">
-      <div id="menu">
-        <div>
-          <button id="goto" class="button button-royal button-square button-jumbo">
-            <i class="fa fa-location-arrow"></i>
-          </button>
-        </div>
-        <div>
-          <button id="marker" class="button button-action button-square button-jumbo">
-            <i class="fa fa-map-marker"></i>
-          </button>
-        </div>
-        <div>
-          <button id="line" class="button button-caution button-square button-jumbo">
-            <i class="fa fa-share-alt"></i>
-          </button>
-        </div>
-        <div>
-          <button id="battery" class="button button-highlight button-square button-jumbo">
-            <i class="fa fa-flag"></i>
-          </button>
-        </div>
-        <div>
-          <button id="tie" class="button button-primary button-square button-jumbo">
-            <i class="fa fa-anchor"></i>
-          </button>
-        </div>
-      </div>
+    {{content-for 'body'}}
 
-      <div id="slideout-goto">
-        <div class="slideout-color"></div>
-      </div>
-
-      <div id="slideout-marker">
-        <div class="slideout-color"></div>
-      </div>
-
-      <div id="slideout-line">
-        <div class="slideout-color"></div>
-      </div>
-
-      <div id="slideout-battery">
-        <div class="slideout-color"></div>
-      </div>
-
-      <div id="slideout-tie">
-        <div class="slideout-color"></div>
-      </div>
-
-    </div>
-    <div id="map"></div>
+    {{content-for 'body-footer'}}
   </body>
 </html>
-
-<script>
-  $("#menu-wrapper").on("click", ".button:not('.clicked')", function(e) {
-    button = $(this);
-    id = button.prop("id");
-    slideout = $("#slideout-" + id);
-
-
-    if(slideout.hasClass("menu-slideout-on")) {
-      slideout.removeClass("menu-slideout-on");
-    }
-
-    $(".clicked").removeClass("clicked");
-    button.addClass("clicked");
-    $(".after-transition").removeClass("after-transition");
-    slideout.css("border-right-color", button.css("background-color"));
-    $(".menu-slideout-on").removeClass("menu-slideout-on");
-    slideout.addClass("menu-slideout-on");
-  });
-
-  $("#menu-wrapper").on("click", ".clicked", function() {
-    button = $(this);
-    id = button.prop("id");
-    slideout = $("#slideout-" + id);
-
-    slideout.one("transitionend", function(){
-      button.addClass("after-transition"); 
-    });
-   
-    $(".menu-slideout-on").removeClass("menu-slideout-on");
-    button.removeClass("clicked");
-  });
-</script>
