@@ -4,6 +4,6 @@ export default Ember.View.extend({
   classNames: ['content'],
 
   initLeaflet: function () {
-    this.get('leaflet').attachTo('.content')
+    this.get('leaflet').attachTo('.content');
   }.on('didInsertElement')
 });
