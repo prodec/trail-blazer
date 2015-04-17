@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 var LeafletInit = Ember.Object.extend({
   map: null,
+
   initMap: function (options) {
     var container = Ember.$('<div/>'), map, googleLayer;
 
