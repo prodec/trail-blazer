@@ -32,6 +32,6 @@ export default {
 
   initialize: function (container, application) {
     container.register('leaflet:main', LeafletInit);
-    application.inject('view', 'leaflet', 'leaflet:main');
+    application.inject('component', 'leaflet', 'leaflet:main');
   }
 };
