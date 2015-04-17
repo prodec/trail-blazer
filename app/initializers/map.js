@@ -3,15 +3,14 @@ import Ember from 'ember';
 var LeafletInit = Ember.Object.extend({
   map: null,
   initMap: function (options) {
-    var container = Ember.$('<div/>');
-    var map;
+    var container = Ember.$('<div/>'), map, googleLayer;
 
     options = options || {};
 
     container.attr('id', options.containerId || 'map');
 
-    var map = new L.Map(container.get(0), { center: new L.LatLng(51.51, -0.11), zoom: 13 });
-    var googleLayer = new L.Google('SATELLITE');
+    map = new L.Map(container.get(0), { center: new L.LatLng(51.51, -0.11), zoom: 13 });
+    googleLayer = new L.Google('SATELLITE');
     map.addLayer(googleLayer);
 
     this.set('map', map);
