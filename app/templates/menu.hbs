@@ -1,30 +1,12 @@
 <div id="menu-wrapper">
   <div id="menu">
-    <div>
-      <button id="goto" class="button button-royal button-square button-jumbo">
-        <i class="fa fa-location-arrow"></i>
-      </button>
-    </div>
-    <div>
-      <button id="marker" class="button button-action button-square button-jumbo">
-        <i class="fa fa-map-marker"></i>
-      </button>
-    </div>
-    <div>
-      <button id="line" class="button button-caution button-square button-jumbo">
-        <i class="fa fa-share-alt"></i>
-      </button>
-    </div>
-    <div>
-      <button id="battery" class="button button-highlight button-square button-jumbo">
-        <i class="fa fa-flag"></i>
-      </button>
-    </div>
-    <div>
-      <button id="tie" class="button button-primary button-square button-jumbo">
-        <i class="fa fa-anchor"></i>
-      </button>
-    </div>
+    {{#each button in buttons}}
+      <div>
+        <button id={{button.id}} class="button {{button.class}} button-square button-jumbo">
+          <i class="fa {{button.icon}}"></i>
+        </button>
+      </div>
+    {{/each}}
   </div>
   {{#each session in sessions}}
     <div id={{session}} class="after-transition slide">
