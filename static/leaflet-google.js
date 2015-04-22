@@ -141,7 +141,5 @@ L.Google = L.Class.extend({
 		google.maps.event.trigger(this._google, "resize");
 	},
 
-	onReposition: function() {
-		//google.maps.event.trigger(this._google, "resize");
-	}
+  onReposition: function() {}
 });
