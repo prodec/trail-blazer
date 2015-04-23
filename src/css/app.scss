@@ -1,87 +1,29 @@
-$profiles: ("#slideout-goto": #7b72e9,
-            "#slideout-marker": #a5de37,
-            "#slideout-line": #ff4351,
-            "#slideout-battery": #feae1b,
-            "#slideout-tie": #1b9af7);
-$positions: ("", "-top", "-right", "-left", "-bottom");
-$sans-serif: "Roboto", sans-serif;
-
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
-
-%sans-bold {
-  font-family: $sans-serif;
-  font-weight: 700;
-}
+$containers-slideout: ("#slideout-goto" "#slideout-marker" "#slideout-line" "#slideout-battery" "#slideout-tie");  
 
 @mixin container-slideout {
+    z-index: 1;
     box-sizing: border-box;
     position: absolute;
-    top: 0;
     background-color: white;
     width: 402px;
     border-right: solid 10px;
-    transition: opacity 0.1s, margin-left 0.1s;
-    margin-left: -60px;
-    display: none;
+    transition: opacity 0.055s, margin-left 0.055s;
+    margin-left: 50px;
     opacity: 0;
     padding: 30px;
     height: 300px;
 }
 
-@mixin container-slideout-active {
-    display: inline;
-    margin-left: 0;
-    opacity: 1;
-}
-
-textarea {
-    line-height: 20px;
-    resize: none;
+@mixin slideout-after-transition {
+    height: 0;
+    width: 0;
+    overflow: hidden;
 }
 
 html, body {
     padding: 0;
     margin: 0;
-    color: #222;
-}
-
-.glyphicons {
-    left: 18px;
-    bottom: 6px;
-}
-
-.button {
-    z-index: 3;
-    position: relative;
-
-    &.active {
-      box-shadow: inset 0 0 10px rgba(0,0,0,.30);
-    }
-}
-
-.glyphicons, .glyphicons:before {
-    color: inherit;
-}
-
-.pure-form {
-    select:invalid {
-        color: #a9a9a9;
-    }
-
-    option:disabled {
-        color: #a9a9a9;
-    }
-
-    option {
-        color: #222;
-    }
-}
-
-@each $position in $positions {
-  .l-box#{$position} {
-    padding#{$position}: 1.17em;
-  }
-}
+} 
 
 .content {
     position: absolute;
@@ -95,229 +37,36 @@ html, body {
     z-index: 0;
     position: relative;
     height: 100%;
-
-    .leaflet-google-layer {
-      z-index: 0;
-    }
-
-    .leaflet-map-pane {
-      z-index: 1;
-    }
 }
 
 #menu-wrapper {
+    z-index: 1;
     position: absolute;
     top: 30%;
     transform: translateY(-30%);
 }
 
 #menu {
-    z-index: 3;
+    z-index: 2;
     position: absolute;
     margin-left: 50px;
-    font-size: 0;
-    line-height: 0;
-
-    div {
-      font-size: 14px;
-
-      .submit {
-          position: absolute;
-          bottom: 30px;
-          right: 30px;
-      }
-    }
 }
 
-@each $slideout, $color in $profiles {
-    #{$slideout} {
-        @include container-slideout;
-        border-right-color: $color;
-        font-size: 12px;
+@each $container-slideout in $containers-slideout {
+    #{$container-slideout} {
+        @include container-slideout
     }
 
-    #{$slideout}.container-slideout-active {
-        @include container-slideout-active;
+    #{$container-slideout}.after-transition {
+        @include slideout-after-transition
+    }
+
+    #{$container-slideout}.menu-slideout-on {
+        margin-left: 110px;
+        opacity: 1;
     }
 }
 
 button::-moz-focus-inner {
     border: 0;
-}
-
-#icon-selection {
-    margin-left: 17px;
-}
-
-.icon-map {
-    opacity: 0.3;
-    margin-right: 12px;
-    transition: opacity 0.5s;
-}
-
-.icon-map-selected {
-    opacity: 1;
-}
-
-#icon-info {
-    margin-top: 10px;
-    position: absolute;
-}
-
-#icon-info-description {
-    font-size: 16px;
-    height: 180px;
-    width: 300px;
-}
-
-.leaflet-popup-content-wrapper {
-    text-align: center;
-    border-radius: 0;
-    padding: 2px;
-}
-
-.popup-action-link {
-    margin-left: 5px;
-    margin-right: 5px;
-}
-
-.popup-content {
-    margin-bottom: 20px;
-    word-break: break-word;
-}
-
-.popup-actions {
-    a {
-        text-decoration: none;
-    }
-}
-
-.content-editable {
-    height: 100px !important;
-    width: 200px !important;
-    margin-bottom: 15px;
-    word-break: break-word;
-}
-
-.leaflet-marker-icon, .leaflet-marker-shadow {
-    -webkit-transition: margin 0.2s;
-    -moz-transition: margin 0.2s;
-    -o-transition: margin 0.2s;
-    transition: margin 0.2s;
-}
-
-#slideout-marker .mdl-textfield :after {
-    background-color: #a5de37;
-}
-
-#widgets {
-  @extend %sans-bold;
-  z-index: 0;
-  position: absolute;
-  bottom: 25px;
-  right: 10px;
-  width: 195px;
-  color: #f4f4f4;
-  overflow: visible;
-  line-height: normal;
-
-  &:hover {
-    opacity: 1;
-  }
-
-  > * {
-    @keyframes blink-danger {
-      50% { background-color: rgba(0, 0, 0, .87); }
-      50.001% { background-color: rgba(45, 0, 0, .87); }
-      100% { background-color: rgba(45, 0, 0, .87); }
-    }
-
-    display: block;
-    margin-top: 10px;
-    background-color: rgba(0, 0, 0, .87);
-    opacity: .88;
-
-    &.danger {
-      animation: blink-danger 2s infinite;
-    }
-  }
-
-  #wind-speed-widget {
-    font-weight: 700;
-    padding: 15px 0px 15px 15px;
-    height: 82px;
-    overflow-x: visible;
-
-    .windmill {
-      display: inline-block;
-      margin: 10px 17px 0 9px;
-      position: relative;
-      background-color: #f4f4f4;
-      width: 2px;
-      height: 38px;
-
-      .turbine {
-        @keyframes rotatemill {
-          0%   { transform: rotate(0deg); }
-          100% { transform: rotate(120deg); }
-        }
-
-        position: relative;
-        top: -5px;
-        left: -2px;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        animation: rotatemill 0s linear infinite;
-
-        &.slow { animation-duration: 1.8s; }
-        &.normal { animation-duration: .6s; }
-        &.fast { animation-duration: .2s; }
-
-       .blade {
-          position: absolute;
-          left: 0px;
-          bottom: 3px;
-          border-style: solid;
-          border-color: transparent;
-          border-bottom-width: 15px;
-          border-bottom-color: #fff;
-          transform-origin: bottom;
-
-          &:nth-child(2) { transform: rotate(120deg); }
-          &:nth-child(3) { transform: rotate(240deg); }
-        }
-      }
-    }
-
-    .speed-wrapper {
-      display: inline-block;
-      position: relative;
-      vertical-align: top;
-      top: -5px;
-      width: 96px;
-      height: 65px;
-      overflow: hidden;
-
-      .speed-value {
-        display: inline-block;
-        float: right;
-        font-size: 55px;
-
-        &:before {
-          content: '000';
-          color: #555;
-        }
-      }
-    }
-
-    .speed-unit {
-      display: inline-block;
-      font-size: 15px;
-      font-weight: 400;
-      margin-left: 7px;
-      position: relative;
-      bottom: 2px;
-    }
-  }
 }

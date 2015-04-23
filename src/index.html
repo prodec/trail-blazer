@@ -3,21 +3,9 @@
   <head>
     <meta charset="UTF-8">
     <title>Trail Blazer</title>
-    <link rel="stylesheet" href="//cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
-    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
-    <link rel="stylesheet" href="/node_modules/material-design-lite/material.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
-    <script src="//maps.google.com/maps/api/js?v=3.2&sensor=false"></script>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="/node_modules/material-design-lite/material.min.js"></script>
-    <script src="main.js"></script>
-    <script type="text/javascript">
-      var ServerConstants = {
-        NODE_ENV: "{%= o.htmlWebpackPlugin.options.environment %}",
-        PORT: "{%= o.htmlWebpackPlugin.options.port %}"
-      };
-    </script>
+    <div id="main" class="container"></div>
+    <script src="js/main.js"></script>
   </body>
 </html>
