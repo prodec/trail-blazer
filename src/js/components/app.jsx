@@ -1,16 +1,12 @@
 import React from 'react';
-import Map from './map';
-import Menu from './menu';
-import Widgets from './widgets/widgets';
+import Leaflet from './leaflet';
 
-export default class App extends React.Component {
-  render() {
+export default React.createClass({
+  render: function() {
     return (
-      <div id="main" className="content">
-        <Map />
-        <Menu />
-        <Widgets />
+      <div id="main">
+        <Leaflet />
       </div>
-    );
+    )
   }
-}
+});

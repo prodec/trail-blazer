@@ -1,8 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var dotenv = require('dotenv');
-dotenv.load();
 
 module.exports = {
   debug: true,
@@ -15,32 +13,21 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'main.js',
-    publicPath: '/'
+    publicPath: '/assets/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin({
-      filename: 'index.html',
-      template: 'src/index.html',
-      environment: process.env.NODE_ENV,
-      port: process.env.PORT
-    })
+    new HtmlWebpackPlugin()
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: 'react-hot!babel?optional[]=runtime&stage=0',
-        include: path.join(__dirname, 'src') },
-      { test: /\.json$/, loader: 'json-loader' },
-      { test: /\.scss$/, loader: 'style!css!autoprefixer-loader!sass',
-        include: path.join(__dirname, 'src/css') },
-      { test: /\.css$/, loader: 'style!css!autoprefixer-loader' },
-      { test: /\.png$/, loader: 'url' },
-      { test: /\.otf$|\.ttf$|\.svg$|\.eot$|\.woff$/, loader: 'url' }
-    ],
-    noParse: /proj4\.js$/
+      { test: /\.jsx?$/, loaders: ['jsx-loader?harmony', 'react-hot', 'babel'], include: path.join(__dirname, 'src') },
+      { test: /\.js?$/, loaders: ['babel'], exclude: /node_modules/ },
+      { test: /\.scss?$/, loader: 'style!css!sass', include: path.join(__dirname, 'src/css') }
+    ]
   }
 };
