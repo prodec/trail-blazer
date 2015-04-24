@@ -1,99 +1,22 @@
-import L from 'leaflet';
-import $ from 'jquery';
 import React from 'react';
-import GoogleLeaflet from '../lib/google';
-import '../lib/popupLeaflet';
-import Actions from '../actions/actions';
-import goToPositionStore from '../stores/goToPositionStore';
-import modeStore from '../stores/modeStore';
-import addMarkerStore from '../stores/addMarkerStore';
-import removeMarkerStore from '../stores/removeMarkerStore';
-import { SettingConstants } from '../constants/constants';
+import L from 'leaflet';
+import constants from '../constants/constants';
+import GoogleLeaflet from '../plugins/google';
 
-export default class Map extends React.Component {
-  constructor() {
-    super();
-    this.state = { map: null, set: { 'default-cursor': true, 'crosshair-cursor': false } };
-  }
-
-  componentDidMount() {
-    this.initMap();
-    goToPositionStore.addChangeListener(this.goToPosition);
-    modeStore.addChangeListener(this.onChangeMode);
-    addMarkerStore.addChangeListener(this.addMarkerToMap);
-    removeMarkerStore.addChangeListener(this.removeMarkerFromMap);
-  }
-
-  render() {
-    return <div id="map"></div>;
-  }
-
-  initMap() {
+export default React.createClass({
+  loadMap: function() {
     L.Icon.Default.imagePath = '//cdn.leafletjs.com/leaflet-0.7.3/images';
-    let map = new L.Map('map', { zoom: SettingConstants.ZOOM });
-
+    var map = new L.Map('map', { center: new L.LatLng(51.51, -0.11), zoom: 13 })
     map.addLayer(new GoogleLeaflet('SATELLITE'));
-    this.addMapListeners(map);
-    this.initMapCenter(map);
-    this.setState({ map });
-    Actions.addMap(map);
+  },
+
+  componentDidMount: function() {
+    this.loadMap();
+  },
+
+  render: function() {
+    return (
+      <div id='map'></div>
+    )
   }
-
-  addMapListeners(map) {
-    map.on('moveend', () => { Actions.registerMapCenter(map.getCenter()); });
-  }
-
-  initMapCenter(map) {
-    map.once('locationerror', () => { this.updateMapCenter(new L.LatLng(51.51, -0.11)); });
-    map.locate({ setView: true, maxZoom: SettingConstants.ZOOM });
-  }
-
-  onChangeMode = () => {
-    let data = modeStore.getState();
-    let active = modeStore.getState().active;
-    let cursor = data.modes.get(active).cursor;
-
-    $('.leaflet-container').css('cursor', cursor);
-  }
-
-  addMarkerToMap = () => {
-    let marker = addMarkerStore.getState().markerToAdd;
-
-    this.addToMap(marker);
-  }
-
-  removeMarkerFromMap = () => {
-    let marker = removeMarkerStore.getState().markerToRemove;
-
-    this.removeFromMap(marker);
-  }
-
-  goToPosition = () => {
-    let marker = this.getGoToMarker();
-
-    if (marker) {
-      if (!this.hasLayer(marker)) { this.addToMap(marker); }
-      this.updateMapCenter(marker.getLatLng());
-    }
-  }
-
-  getGoToMarker() {
-    return goToPositionStore.getState().goToMarker;
-  }
-
-  hasLayer(layer) {
-    this.state.map.hasLayer(layer);
-  }
-
-  addToMap(layer) {
-    this.state.map.addLayer(layer);
-  }
-
-  removeFromMap(marker) {
-    this.state.map.removeLayer(marker);
-  }
-
-  updateMapCenter(latLng) {
-    this.state.map.setView(latLng);
-  }
-}
+});
