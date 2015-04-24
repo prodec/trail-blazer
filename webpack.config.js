@@ -13,12 +13,15 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: 'main.js',
-    publicPath: '/assets/'
+    publicPath: '/'
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin()
+    new HtmlWebpackPlugin({
+      filename: 'index.html',
+      template: 'src/index.html'
+    })
   ],
   resolve: {
     extensions: ['', '.js', '.jsx']
@@ -27,7 +30,9 @@ module.exports = {
     loaders: [
       { test: /\.jsx?$/, loaders: ['jsx-loader?harmony', 'react-hot', 'babel'], include: path.join(__dirname, 'src') },
       { test: /\.js?$/, loaders: ['babel'], exclude: /node_modules/ },
-      { test: /\.scss?$/, loader: 'style!css!sass', include: path.join(__dirname, 'src/css') }
+      { test: /\.scss?$/, loader: 'style!css!sass', include: path.join(__dirname, 'src/css') },
+      { test: /\.css?$/, loader: 'style!css' },
+      { test: /\.png?$/, loader: 'url' }
     ]
   }
 };
