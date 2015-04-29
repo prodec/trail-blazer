@@ -25,6 +25,19 @@ html, body {
     margin: 0;
 } 
 
+.glyphicons {
+    left: 18px;
+    bottom: 6px;
+}
+
+.button {
+    font-size: 2px;
+}
+
+.glyphicons, .glyphicons:before {
+    color: inherit;
+}
+
 .content {
     position: absolute;
     top: 0;
@@ -50,6 +63,7 @@ html, body {
     z-index: 2;
     position: absolute;
     margin-left: 50px;
+    font-size: 0;
 }
 
 @each $container-slideout in $containers-slideout {

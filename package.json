@@ -22,7 +22,6 @@
     "style-loader": "^0.11.0",
     "react-hot-loader": "^1.2.5",
     "jsx-loader": "^0.13.1",
-    "leaflet": "^0.7.3",
     "react": "^0.13.2",
     "google-maps-api": "^1.0.2",
     "webpack": "^1.7.2",
