@@ -1,6 +1,15 @@
 import React from 'react';
+
+// Styles
+import '../css/lib/buttons.css';
+import '../css/lib/glyphicons.css';
+import '../css/lib/style.css';
 import '../css/app.scss';
-import '../../node_modules/leaflet/dist/leaflet.css';
+
+// JS 
+import './lib/buttons';
+
+// React
 import App from './components/app';
 import constants from './constants/constants';
 
