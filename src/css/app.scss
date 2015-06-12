@@ -1,29 +1,34 @@
-$containers-slideout: ("#slideout-goto" "#slideout-marker" "#slideout-line" "#slideout-battery" "#slideout-tie");  
+$profiles: ("#slideout-goto": #7b72e9,
+            "#slideout-marker": #a5de37,
+            "#slideout-line": #ff4351,
+            "#slideout-battery": #feae1b,
+            "#slideout-tie": #1b9af7);  
 
 @mixin container-slideout {
-    z-index: 1;
     box-sizing: border-box;
     position: absolute;
+    top: 0;
     background-color: white;
     width: 402px;
     border-right: solid 10px;
-    transition: opacity 0.055s, margin-left 0.055s;
-    margin-left: 50px;
+    transition: opacity 0.1s, margin-left 0.1s;
+    margin-left: -60px;
+    display: none;
     opacity: 0;
     padding: 30px;
     height: 300px;
 }
 
-@mixin slideout-after-transition {
-    height: 0;
-    width: 0;
-    overflow: hidden;
+@mixin container-slideout-active {
+    display: inline;
+    margin-left: 0;
+    opacity: 1;
 }
 
 html, body {
     padding: 0;
     margin: 0;
-} 
+}
 
 .glyphicons {
     left: 18px;
@@ -31,6 +36,8 @@ html, body {
 }
 
 .button {
+    z-index: 3;
+    position: relative;
     font-size: 2px;
 }
 
@@ -53,31 +60,26 @@ html, body {
 }
 
 #menu-wrapper {
-    z-index: 1;
     position: absolute;
     top: 30%;
     transform: translateY(-30%);
 }
 
 #menu {
-    z-index: 2;
+    z-index: 3;
     position: absolute;
     margin-left: 50px;
     font-size: 0;
 }
 
-@each $container-slideout in $containers-slideout {
-    #{$container-slideout} {
-        @include container-slideout
+@each $slideout, $color in $profiles {
+    #{$slideout} {
+        @include container-slideout;
+        border-right-color: $color;
     }
 
-    #{$container-slideout}.after-transition {
-        @include slideout-after-transition
-    }
-
-    #{$container-slideout}.menu-slideout-on {
-        margin-left: 110px;
-        opacity: 1;
+    #{$slideout}.container-slideout-active {
+        @include container-slideout-active;
     }
 }
 
