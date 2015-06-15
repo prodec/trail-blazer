@@ -1,0 +1,88 @@
+$profiles: ("#slideout-goto": #7b72e9,
+            "#slideout-marker": #a5de37,
+            "#slideout-line": #ff4351,
+            "#slideout-battery": #feae1b,
+            "#slideout-tie": #1b9af7);  
+
+@mixin container-slideout {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    background-color: white;
+    width: 402px;
+    border-right: solid 10px;
+    transition: opacity 0.1s, margin-left 0.1s;
+    margin-left: -60px;
+    display: none;
+    opacity: 0;
+    padding: 30px;
+    height: 300px;
+}
+
+@mixin container-slideout-active {
+    display: inline;
+    margin-left: 0;
+    opacity: 1;
+}
+
+html, body {
+    padding: 0;
+    margin: 0;
+}
+
+.glyphicons {
+    left: 18px;
+    bottom: 6px;
+}
+
+.button {
+    z-index: 3;
+    position: relative;
+    font-size: 2px;
+}
+
+.glyphicons, .glyphicons:before {
+    color: inherit;
+}
+
+.content {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+#map {
+    z-index: 0;
+    position: relative;
+    height: 100%;
+}
+
+#menu-wrapper {
+    position: absolute;
+    top: 30%;
+    transform: translateY(-30%);
+}
+
+#menu {
+    z-index: 3;
+    position: absolute;
+    margin-left: 50px;
+    font-size: 0;
+}
+
+@each $slideout, $color in $profiles {
+    #{$slideout} {
+        @include container-slideout;
+        border-right-color: $color;
+    }
+
+    #{$slideout}.container-slideout-active {
+        @include container-slideout-active;
+    }
+}
+
+button::-moz-focus-inner {
+    border: 0;
+}
