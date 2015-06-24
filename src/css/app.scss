@@ -120,6 +120,7 @@ html, body {
     #{$slideout} {
         @include container-slideout;
         border-right-color: $color;
+        font-size: 12px;
     }
 
     #{$slideout}.container-slideout-active {
@@ -129,4 +130,8 @@ html, body {
 
 button::-moz-focus-inner {
     border: 0;
+}
+
+.icon-map-selection {
+    margin-right: 15px;
 }
