@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import GoTo from './goTo';
+import Marker from './marker';
 
 export default class Menu extends React.Component {
   constructor() {
@@ -65,7 +66,9 @@ export default class Menu extends React.Component {
             </div>
           </div>
           <div id="slideout-marker" className={classNames(this.state.sets['marker'])} >
-            <div className="slideout-color"></div>
+            <div className="slideout-color">
+            <Marker />
+            </div>
           </div>
           <div id="slideout-line" className={classNames(this.state.sets['line'])}>
             <div className="slideout-color"></div>
