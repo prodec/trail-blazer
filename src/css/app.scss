@@ -2,7 +2,9 @@ $profiles: ("#slideout-goto": #7b72e9,
             "#slideout-marker": #a5de37,
             "#slideout-line": #ff4351,
             "#slideout-battery": #feae1b,
-            "#slideout-tie": #1b9af7);  
+            "#slideout-tie": #1b9af7);
+
+$positions: ("", "-top", "-right", "-left", "-bottom");
 
 @mixin container-slideout {
     box-sizing: border-box;
@@ -28,6 +30,7 @@ $profiles: ("#slideout-goto": #7b72e9,
 html, body {
     padding: 0;
     margin: 0;
+    color: #222;
 }
 
 .glyphicons {
@@ -38,11 +41,30 @@ html, body {
 .button {
     z-index: 3;
     position: relative;
-    font-size: 2px;
 }
 
 .glyphicons, .glyphicons:before {
     color: inherit;
+}
+
+.pure-form {
+    select:invalid {
+        color: #a9a9a9;
+    }
+
+    option:disabled {
+        color: #a9a9a9;
+    }
+
+    option {
+        color: #222;
+    }
+}
+
+@each $position in $positions {
+  .l-box#{$position} {
+    padding#{$position}: 1.17em;
+  }
 }
 
 .content {
@@ -70,6 +92,16 @@ html, body {
     position: absolute;
     margin-left: 50px;
     font-size: 0;
+
+    div {
+      font-size: 14px;
+
+      .submit {
+          position: absolute;
+          bottom: 30px;
+          right: 30px;
+      }
+    }
 }
 
 @each $slideout, $color in $profiles {
