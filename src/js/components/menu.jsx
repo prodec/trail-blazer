@@ -2,24 +2,16 @@ import React from 'react';
 import classNames from 'classnames';
 import GoTo from './goTo';
 import Marker from './marker';
+import constants from '../constants/constants';
 
 export default class Menu extends React.Component {
   constructor() {
     super();
     this.togglePanel= this.togglePanel.bind(this);
 
-    let items = ['goto', 'marker', 'line', 'battery', 'tie'];
-    let sets = this.initClassSets(items);
+    let items = constants.MENU_ITEMS;
+    let sets = this._initClassSets(items);
     this.state = { active: null, sets: sets, items: items };
-  }
-
-  initClassSets(items) {
-    let reducer = (sets, item) => {
-      sets[item] = { 'container-slideout-active': false };
-      return sets;
-    }
-
-    return items.reduce(reducer, {});
   }
 
   togglePanel(e) {
@@ -38,6 +30,15 @@ export default class Menu extends React.Component {
 
       return state;
     });
+  }
+
+  _initClassSets(items) {
+    let reducer = (sets, item) => {
+      sets[item] = { 'container-slideout-active': false };
+      return sets;
+    }
+
+    return items.reduce(reducer, {});
   }
 
   render() {
@@ -67,7 +68,7 @@ export default class Menu extends React.Component {
           </div>
           <div id="slideout-marker" className={classNames(this.state.sets['marker'])} >
             <div className="slideout-color">
-            <Marker />
+              <Marker />
             </div>
           </div>
           <div id="slideout-line" className={classNames(this.state.sets['line'])}>
