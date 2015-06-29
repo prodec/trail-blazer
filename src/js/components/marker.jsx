@@ -1,24 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
+import constants from '../constants/constants';
 
 export default class Marker extends React.Component {
   constructor() {
     super();
-    this.selectIcon = this.selectIcon.bind(this);
-    this.preSelect = this.preSelect.bind(this);
+    this.selectIcon = this._selectIcon.bind(this);
+    this.preSelect = this._preSelect.bind(this);
+    this.initIcon = this.initIcon.bind(this);
 
-    let icons = ['radio-station', 'helicopter', 'high-building',
-                 'mountains', 'power-line', 'birds', 'tree'];
-    let sets = this.initClassSets(icons);
+    let icons = constants.ICONS;
+    let sets = this._initClassSets(icons);
+
     this.state = {
       icons: icons,
       active: 'radio-station',
+      marker: null,
       sets: sets
     };
     this.preSelect();
   }
 
-  initClassSets(icons) {
+  initIcon(e) {
+    this.selectIcon(e);
+
+    let icon = new L.Icon({ iconUrl: '' });
+    let marker = new L.marker({ icon: icon })
+
+    this.setState((state) => {
+      state.marker = marker;
+      return state;
+    });
+  }
+
+  _initClassSets(icons) {
     let reducer = (sets, item) => {
       sets[item] = { 'icon-map': true, 'icon-map-selected': false };
       return sets;
@@ -26,12 +41,12 @@ export default class Marker extends React.Component {
 
     return icons.reduce(reducer, {});
   }
-  
-  preSelect() {
+
+  _preSelect() {
     this.state.sets['radio-station']['icon-map-selected'] = true;
   }
 
-  selectIcon(e) {
+  _selectIcon(e) {
     let current = e.currentTarget.id;
     this.setState((state, props) => {
       let isActive = (current == state.active);
@@ -53,7 +68,7 @@ export default class Marker extends React.Component {
               <img src={"/src/images/" + icon + ".png"} 
                    className={classNames(this.state.sets[icon])}
                    key={i}
-                   onClick={this.selectIcon}
+                   onClick={this.initIcon}
                    id={icon} />
             </a>
           ) 
