@@ -1,6 +1,7 @@
 import React from 'react';
 import { goTo } from '../constants/constants';
 import classNames from 'classnames';
+import CoordinateConverter from '../utils/coordinate_converter';
 
 export default class GoTo extends React.Component {
   constructor() {
@@ -67,6 +68,7 @@ class Form extends React.Component {
     super();
     this.state = { zone: '', datum: '' };
     this._bindValue = this._bindValue.bind(this);
+    this._sendCoordinates = this._sendCoordinates.bind(this);
   }
 
   render() {
@@ -80,7 +82,8 @@ class Form extends React.Component {
               </div>
               <input required className="pure-input-1" key="lon" type="text" name="lon" placeholder="Longitude"
                 value={this.state.lon} onChange={this._bindValue} />
-              <button className="button button-royal button-capitalize submit" type="button">
+              <button className="button button-royal button-capitalize submit" type="button"
+                onClick={this._sendCoordinates}>
                 ir para
               </button>
           </form>
@@ -136,6 +139,17 @@ class Form extends React.Component {
   }
 
   _sendCoordinates() {
+    let [lat, lon] = this._getPoint();
+  }
 
+  _getPoint() {
+    if (this.props.selectedTab === goTo.POS_GEO) {
+      return CoordinateConverter.latLonToPoint(this.state.lon,
+                                               this.state.lat);
+    }
+    return CoordinateConverter.utmToPoint(this.state.datum,
+                                          this.state.zone,
+                                          this.state.east,
+                                          this.state.north);
   }
 }
