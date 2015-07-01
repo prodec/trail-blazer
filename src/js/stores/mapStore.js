@@ -30,32 +30,6 @@ class MapStore extends EventEmitter {
     this.emit(change);
   }
 
-  registerCallbacks() {
-    return dispatcher.register(action => {
-      switch(action.type) {
-        case ActionConstants.CHANGE_CURSOR:
-          data.cursor = action.cursor;
-          this.emitChange(EventConstants.CHANGE_CURSOR);
-          break;
-
-        case ActionConstants.ADD_MAP:
-          data.map = action.map;
-          this.emitChange(EventConstants.CHANGE_MAP);
-          break;
-
-        case ActionConstants.GO_TO:
-          let latlon = action.latlon;
-          this
-            .updateGoToMarkerPosition(latlon)
-            .emitChange(EventConstants.CHANGE_GO_TO);
-          break;
-
-        default:
-          break;
-      }
-    });
-  }
-
   updateGoToMarkerPosition(latlon) {
     let marker = data.goToMarker;
     if (marker) {
@@ -76,6 +50,36 @@ class MapStore extends EventEmitter {
                                   fillOpacity: 0.85
                                 });
     data.goToMarker = circle;
+  }
+
+  registerCallbacks() {
+    return dispatcher.register((action) => {
+      switch(action.type) {
+        case ActionConstants.CHANGE_CURSOR:
+          data.cursor = action.cursor;
+          this.emitChange(EventConstants.CHANGE_CURSOR);
+          break;
+
+        case ActionConstants.ADD_MAP:
+          data.map = action.map;
+          this.emitChange(EventConstants.CHANGE_MAP);
+          break;
+
+        case ActionConstants.GO_TO:
+          let latlon = action.latlon;
+          this.updateGoToMarkerPosition(latlon)
+              .emitChange(EventConstants.CHANGE_GO_TO);
+          break;
+
+        case constants.CHANGE_CURSOR:
+          data.cursor = action.cursor;
+          mapStore.emitChange(constants.CHANGE_CURSOR);
+          break;
+
+        default:
+          break;
+      }
+    });
   }
 }
 

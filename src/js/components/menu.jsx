@@ -18,7 +18,7 @@ export default class Menu extends React.Component {
     let current = e.currentTarget.id;
 
     this.setState((state, props) => {
-      let isActive = (current == state.active);
+      let isActive = (current === state.active);
       state.sets[current]['container-slideout-active'] = !isActive;
 
       if (isActive) {
