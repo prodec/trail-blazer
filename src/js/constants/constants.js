@@ -7,3 +7,8 @@ export let goTo = {
   POS_GEO: 'geo',
   POS_UTM: 'utm'
 };
+
+export let settings = {
+  DEFAULT_PROJECTION: 'EPSG:4326',
+  MAP_PROJECTION: 'EPSG:3857'
+};
