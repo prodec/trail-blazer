@@ -10,9 +10,10 @@ export const MarkerConstants = keyMirror({
 
 export const ActionConstants = keyMirror({
   ADD_MAP: null,
-  GO_TO: null
+  GO_TO: null,
   ADD_ITEM: null,
-  REMOVE_ITEM: null
+  REMOVE_ITEM: null,
+  CHANGE_CURSOR: null
 });
 
 export const EventConstants = keyMirror({
