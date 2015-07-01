@@ -1,6 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 import constants from '../constants/constants';
+import mapStore from '../stores/mapStore';
 
 export default class Marker extends React.Component {
   constructor() {
@@ -15,17 +16,18 @@ export default class Marker extends React.Component {
     this.state = {
       icons: icons,
       active: 'radio-station',
-      marker: null,
+      marker: L.marker(L.latLng(50.5, 30.5), { icon: icons['radio-station'] }),
       sets: sets
     };
-    this.preSelect();
+
+    this._preSelect();
   }
 
   initIcon(e) {
     this.selectIcon(e);
 
-    let icon = new L.Icon({ iconUrl: '' });
-    let marker = new L.marker({ icon: icon })
+    let icon = L.Icon({ iconUrl: e.currentTarget.attributes.src });
+    let marker = L.marker({ icon: icon })
 
     this.setState((state) => {
       state.marker = marker;
@@ -47,6 +49,8 @@ export default class Marker extends React.Component {
   }
 
   _selectIcon(e) {
+    let bob = mapStore;
+    debugger
     let current = e.currentTarget.id;
     this.setState((state, props) => {
       let isActive = (current == state.active);
