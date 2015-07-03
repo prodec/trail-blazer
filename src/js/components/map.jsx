@@ -1,12 +1,8 @@
 import React from 'react';
 import GoogleLeaflet from '../lib/google';
-<<<<<<< HEAD
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 import { EventConstants } from '../constants/constants';
-=======
-import actions from '../actions/actions';
->>>>>>> 240bee6... Adiciona estrutura de stores para mapa e cursores.
 
 export default class Map extends React.Component {
   constructor() {
@@ -17,8 +13,8 @@ export default class Map extends React.Component {
 
   componentDidMount() {
     L.Icon.Default.imagePath = '//cdn.leafletjs.com/leaflet-0.7.3/images';
-<<<<<<< HEAD
     let map = new L.Map('map', { center: new L.LatLng(51.51, -0.11), zoom: 17 });
+
     map.addLayer(new GoogleLeaflet('SATELLITE'));
     this.setState({ map });
     Actions.addMap(map);
@@ -27,12 +23,6 @@ export default class Map extends React.Component {
 
   shouldComponentUpdate() {
     return false;
-=======
-    let map = new L.Map('map', { center: new L.LatLng(50.5, 30.5), zoom: 13 })
-    map.addLayer(new GoogleLeaflet('SATELLITE'));
-    L.marker([50.5, 30.5], { zIndexOffset: 99 }).addTo(map);
-    actions.addMap(map);
->>>>>>> 240bee6... Adiciona estrutura de stores para mapa e cursores.
   }
 
   render() {
