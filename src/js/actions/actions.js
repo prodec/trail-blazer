@@ -1,11 +1,18 @@
 import dispatcher from '../dispatcher/dispatcher';
-import constants from '../constants/constants';
+import { ActionConstants } from '../constants/constants';
 
-export default {
-  addItem: function(item){
-    dispatcher.handleViewAction({
-      actionType: constants.ADD_ITEM,
-      item: item
-    })
+export default class Actions {
+  static changeCursor(cursor) {
+    dispatcher.handleAction({
+      type: ActionConstants.CHANGE_CURSOR,
+      cursor
+    });
+  }
+
+  static addMap(map) {
+    dispatcher.handleAction({
+      type: ActionConstants.ADD_MAP,
+      map
+    });
   }
 }

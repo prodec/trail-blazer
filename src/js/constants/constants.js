@@ -1,14 +1,22 @@
-export let actions = {
-  ADD_ITEM: 'ADD_ITEM',
-  REMOVE_ITEM: 'REMOVE_ITEM'
-};
+import keyMirror from 'keymirror';
 
-export let goTo = {
+export const ActionConstants = keyMirror({
+  ADD_MAP: null,
+  CHANGE_CURSOR: null
+});
+
+export const EventConstants = keyMirror({
+  CHANGE: null,
+  CHANGE_CURSOR: null,
+  CHANGE_MAP: null
+});
+
+export const GoToTabConstants = {
   POS_GEO: 'geo',
   POS_UTM: 'utm'
 };
 
-export let settings = {
+export const SettingConstants = {
   DEFAULT_PROJECTION: 'EPSG:4326',
-  MAP_PROJECTION: 'EPSG:3857'
+  MAP_PROJECTION: 'EPSG:4326'
 };
