@@ -3,15 +3,22 @@ import classNames from 'classnames';
 import GoTo from './goTo';
 import Marker from './marker';
 import constants from '../constants/constants';
+import actions from '../actions/actions';
 
 export default class Menu extends React.Component {
   constructor() {
     super();
     this.togglePanel= this.togglePanel.bind(this);
+    this.setupPanel= this.setupPanel.bind(this);
 
     let items = constants.MENU_ITEMS;
     let sets = this._initClassSets(items);
     this.state = { active: null, sets: sets, items: items };
+  }
+
+  setupPanel(e) {
+    this.togglePanel(e);
+    this._changeCursor(constants.CURSOR_CROSSHAIR);
   }
 
   togglePanel(e) {
@@ -23,6 +30,7 @@ export default class Menu extends React.Component {
 
       if (isActive) {
         state.active = null;
+        this._changeCursor(constants.CURSOR_GRAB);
       } else {
         if (state.active !== null) { state.sets[state.active]['container-slideout-active'] = false };
         state.active = current;
@@ -30,6 +38,10 @@ export default class Menu extends React.Component {
 
       return state;
     });
+  }
+
+  _changeCursor(cursor) {
+    actions.changeCursor(cursor);
   }
 
   _initClassSets(items) {
@@ -48,7 +60,7 @@ export default class Menu extends React.Component {
           <button id="goto" className="button button-square button-jumbo button-royal" onClick={this.togglePanel}>
             <i className="glyphicons compass"></i>
           </button>
-          <button id="marker" className="button button-square button-jumbo button-action" onClick={this.togglePanel}>
+          <button id="marker" className="button button-square button-jumbo button-action" onClick={this.setupPanel}>
             <i className="glyphicons google_maps"></i>
           </button>
           <button id="line" className="button button-square button-jumbo button-caution" onClick={this.togglePanel}>

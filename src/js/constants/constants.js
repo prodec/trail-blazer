@@ -1,5 +1,10 @@
 import keyMirror from 'keymirror';
 
+export const CursorConstants = keyMirror({
+  CURSOR_CROSSHAIR: 'crosshair',
+  CURSOR_GRAB: ''
+)};
+
 export const MenuConstants = keyMirror({
   MENU_ITEMS: ['goto', 'marker', 'line', 'battery', 'tie']
 )};
