@@ -68,7 +68,7 @@ class Tab extends React.Component {
 class Form extends React.Component {
   constructor() {
     super();
-    this.state = { zone: '', datum: '', map: this._getMap() };
+    this.state = { map: this._getMap() };
     this._bindValue = this._bindValue.bind(this);
     this._goToCoordinate = this._goToCoordinate.bind(this);
     this._setMap = this._setMap.bind(this);
@@ -83,15 +83,14 @@ class Form extends React.Component {
     if (this.props.selectedTab === GoToTabConstants.POS_GEO) {
       return (
         <div id="goto-body">
-          <form className="pure-form">
+          <form className="pure-form" onSubmit={this._goToCoordinate}>
               <div className="pure-u-1 l-box-top l-box-bottom">
-                <input required className="pure-input-1" key="lat" type="text" name="lat" placeholder="Latitude"
+                <input required className="pure-input-1" key="lat" type="number" step="any" name="lat" placeholder="Latitude"
                   value={this.state.lat} onChange={this._bindValue} />
               </div>
-              <input required className="pure-input-1" key="lon" type="text" name="lon" placeholder="Longitude"
+              <input required className="pure-input-1" key="lon" type="number" step="any" name="lon" placeholder="Longitude"
                 value={this.state.lon} onChange={this._bindValue} />
-              <button className="button button-royal button-capitalize submit" type="button"
-                onClick={this._goToCoordinate}>
+              <button className="button button-royal button-capitalize submit" type="submit">
                 ir para
               </button>
           </form>
@@ -100,14 +99,14 @@ class Form extends React.Component {
     } else {
       return (
         <div id="goto-body">
-          <form className="pure-form">
+          <form className="pure-form" onSubmit={this._goToCoordinate}>
             <div className="pure-g">
               <div className="pure-u-1 l-box-top l-box-bottom">
-                <input required className="pure-input-1" key="north" type="text" name="north" placeholder="Norte"
+                <input required className="pure-input-1" key="north" type="number" step="any" name="north" placeholder="Norte"
                   value={this.state.north} onChange={this._bindValue} />
               </div>
               <div className="pure-u-1 l-box-bottom">
-                <input required className="pure-input-1" key="east" type="text" name="east" placeholder="Leste"
+                <input required className="pure-input-1" key="east" type="number" step="any" name="east" placeholder="Leste"
                   value={this.state.east} onChange={this._bindValue} />
               </div>
               <div className="pure-u-12-24 l-box-right l-box-bottom">
@@ -132,8 +131,7 @@ class Form extends React.Component {
                 </select>
               </div>
             </div>
-            <button className="button button-royal button-capitalize submit" type="button"
-              onClick={this._goToCoordinate}>
+            <button className="button button-royal button-capitalize submit" type="submit">
               ir para
             </button>
           </form>
@@ -164,7 +162,8 @@ class Form extends React.Component {
     return mapStore.getState().map;
   }
 
-  _goToCoordinate() {
+  _goToCoordinate(e) {
+    e.preventDefault();
     let latlon = this._getLatLon();
     this._updateMarker(latlon);
     this._updateMapCenter(latlon);
