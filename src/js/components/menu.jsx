@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import GoTo from './go_to';
+import GoTo from './goTo';
 
 export default class Menu extends React.Component {
   constructor() {
