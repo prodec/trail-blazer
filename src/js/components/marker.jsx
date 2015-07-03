@@ -50,7 +50,6 @@ export default class Marker extends React.Component {
 
   _selectIcon(e) {
     let bob = mapStore;
-    debugger
     let current = e.currentTarget.id;
     this.setState((state, props) => {
       let isActive = (current == state.active);
