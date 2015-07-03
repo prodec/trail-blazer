@@ -1,17 +1,42 @@
-import Store from './store';
+import { EventEmitter } from 'events';
+import dispatcher from '../dispatcher/dispatcher';
+import { ActionConstants, EventConstants } from '../constants/constants';
 
-class MapStore extends Store {
+let _data = { cursor: null, map: null };
+
+class MapStore extends EventEmitter {
   constructor() {
     super();
-    this.data = { map: null };
+    this.dispatchToken = this._registerCallbacks();
   }
 
-  registerCallbacks() {
-    return this.dispatcher.register((action) => {
+  getState() {
+    return _data;
+  }
+
+  addChangeListener(callback, change = EventConstants.CHANGE) {
+    this.on(change, callback);
+  }
+
+  removeChangeListener(callback, change = EventConstants.CHANGE) {
+    this.removeListener(change, callback);
+  }
+
+  _emitChange(change = EventConstants.CHANGE) {
+    this.emit(change);
+  }
+
+  _registerCallbacks() {
+    return dispatcher.register(action => {
       switch(action.type) {
-        case this.ActionConstants.ADD_MAP:
-          this.data.map = action.map;
-          this.emitChange();
+        case ActionConstants.CHANGE_CURSOR:
+          _data.cursor = action.cursor;
+          this._emitChange(EventConstants.CHANGE_CURSOR);
+          break;
+
+        case ActionConstants.ADD_MAP:
+          _data.map = action.map;
+          this._emitChange(EventConstants.CHANGE_MAP);
           break;
 
         default:
@@ -19,7 +44,6 @@ class MapStore extends Store {
       }
     });
   }
-
 }
 
 let mapStore = new MapStore();

@@ -1,21 +1,23 @@
 import React from 'react';
-import { goTo } from '../constants/constants';
+import { GoToTabConstants, EventConstants } from '../constants/constants';
 import classNames from 'classnames';
-import CoordinateConverter from '../utils/coordinate_converter';
+import CoordinateConverter from '../utils/coordinateConverter';
+import mapStore from '../stores/mapStore';
 
 export default class GoTo extends React.Component {
   constructor() {
     super();
-    this.state = { selectedTab: goTo.POS_GEO };
+    this.state = { selectedTab: GoToTabConstants.POS_GEO };
   }
 
   render() {
-    let goToKeys = Object.keys(goTo);
-    let width = `${100 / goToKeys.length}%`;
-    let tabs = goToKeys.map(key => {
+    let tabKeys = Object.keys(GoToTabConstants);
+    let width = `${100 / tabKeys.length}%`;
+    let tabs = tabKeys.map(key => {
       return (
-        <Tab selectedTab={this.state.selectedTab}
-          value={goTo[key]}
+        <Tab key={key}
+          selectedTab={this.state.selectedTab}
+          value={GoToTabConstants[key]}
           width={width}
           setSelectedTab={this._setSelectedTab.bind(this)} />
       );
@@ -66,13 +68,19 @@ class Tab extends React.Component {
 class Form extends React.Component {
   constructor() {
     super();
-    this.state = { zone: '', datum: '' };
+    this.state = { zone: '', datum: '', map: this._getMap() };
     this._bindValue = this._bindValue.bind(this);
-    this._sendCoordinates = this._sendCoordinates.bind(this);
+    this._goToCoordinate = this._goToCoordinate.bind(this);
+    this._setMap = this._setMap.bind(this);
+    mapStore.addChangeListener(this._setMap, EventConstants.CHANGE_MAP);
+  }
+
+  componentWillUnmount() {
+    mapStore.removeChangeListener(this._setMap, EventConstants.CHANGE_MAP);
   }
 
   render() {
-    if (this.props.selectedTab === goTo.POS_GEO) {
+    if (this.props.selectedTab === GoToTabConstants.POS_GEO) {
       return (
         <div id="goto-body">
           <form className="pure-form">
@@ -83,7 +91,7 @@ class Form extends React.Component {
               <input required className="pure-input-1" key="lon" type="text" name="lon" placeholder="Longitude"
                 value={this.state.lon} onChange={this._bindValue} />
               <button className="button button-royal button-capitalize submit" type="button"
-                onClick={this._sendCoordinates}>
+                onClick={this._goToCoordinate}>
                 ir para
               </button>
           </form>
@@ -125,7 +133,7 @@ class Form extends React.Component {
               </div>
             </div>
             <button className="button button-royal button-capitalize submit" type="button"
-              onClick={this._sendCoordinates}>
+              onClick={this._goToCoordinate}>
               ir para
             </button>
           </form>
@@ -138,18 +146,54 @@ class Form extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  _sendCoordinates() {
-    let [lat, lon] = this._getPoint();
+  _getLatLon() {
+    let point;
+    if (this.props.selectedTab === GoToTabConstants.POS_GEO) {
+      point = CoordinateConverter.latLonToPoint(this.state.lon,
+                                                this.state.lat);
+    } else {
+      point = CoordinateConverter.utmToPoint(this.state.datum,
+                                             this.state.zone,
+                                             this.state.east,
+                                             this.state.north);
+    }
+    return L.latLng(...point);
   }
 
-  _getPoint() {
-    if (this.props.selectedTab === goTo.POS_GEO) {
-      return CoordinateConverter.latLonToPoint(this.state.lon,
-                                               this.state.lat);
-    }
-    return CoordinateConverter.utmToPoint(this.state.datum,
-                                          this.state.zone,
-                                          this.state.east,
-                                          this.state.north);
+  _getMap() {
+    return mapStore.getState().map;
+  }
+
+  _goToCoordinate() {
+    let latlon = this._getLatLon();
+    this._updateMarker(latlon);
+    this._updateMapCenter(latlon);
+  }
+
+  _initMarker(latlon, radius = 10) {
+    let circle = L.circle(latlon,
+                          radius, {
+                            weight: '2',
+                            color: 'green',
+                            opacity: 0.85,
+                            fillColor: '#00ff00',
+                            fillOpacity: 0.85
+                          }).addTo(this.state.map);
+    this.setState({ marker: circle });
+    return circle;
+  }
+
+  _setMap() {
+    this.setState({ map: this._getMap() });
+  }
+
+  _updateMarker(latlon) {
+    let marker = this.state.marker;
+    if (!marker) { marker = this._initMarker(latlon); }
+    marker.setLatLng(latlon);
+  }
+
+  _updateMapCenter(latlon) {
+    this.state.map.setView(latlon);
   }
 }
