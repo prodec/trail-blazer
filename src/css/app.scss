@@ -148,18 +148,11 @@ button::-moz-focus-inner {
 
 #icon-info {
   margin-top: 10px;
-  width: 600px;
+  position: absolute;
 }
 
 #icon-info-description {
   font-size: 16px;
   height: 180px;
-}
-
-.leaflet-map-pane {
-  z-index: 2 !important;
-}
-
-.leaflet-google-layer {
-  z-index: 1 !important;
+  width: 300px
 }

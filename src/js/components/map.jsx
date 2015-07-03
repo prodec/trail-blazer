@@ -3,12 +3,14 @@ import GoogleLeaflet from '../lib/google';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 import { EventConstants } from '../constants/constants';
+import classNames from 'classnames';
 
 export default class Map extends React.Component {
   constructor() {
     super();
-    this.state = { map: null };
+    this.state = { map: null, set: { 'default-cursor': true, 'crosshair-cursor': false } };
     this.goToPosition = this.goToPosition.bind(this);
+    this._onChangeCursor = this._onChangeCursor.bind(this);
   }
 
   componentDidMount() {
@@ -19,10 +21,13 @@ export default class Map extends React.Component {
     this.setState({ map });
     Actions.addMap(map);
     mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
+    mapStore.addChangeListener(this._onChangeCursor, constants.CHANGE_CURSOR);
   }
 
-  shouldComponentUpdate() {
-    return false;
+  /* Leaflet already manipulate the map class names, so you can't change the map
+     class set, this is why jquery is used. */
+  _onChangeCursor(e) {
+    $('.leaflet-container').css('cursor', mapStore.getState().cursor);
   }
 
   render() {
