@@ -1,41 +1,41 @@
 import React from 'react';
 import classNames from 'classnames';
 import constants from '../constants/constants';
+import actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 
 export default class Marker extends React.Component {
   constructor() {
     super();
-    this.selectIcon = this._selectIcon.bind(this);
-    this.preSelect = this._preSelect.bind(this);
+    this.selectIcon = this.selectIcon.bind(this);
     this.initIcon = this.initIcon.bind(this);
+    this.addMarker = this.addMarker.bind(this);
 
     let icons = constants.ICONS;
-    let sets = this._initClassSets(icons);
+    let sets = this.initClassSets(icons);
 
     this.state = {
       icons: icons,
+      currentIcon: null,
       active: 'radio-station',
-      marker: L.marker(L.latLng(50.5, 30.5), { icon: icons['radio-station'] }),
-      sets: sets
+      sets: sets,
     };
 
-    this._preSelect();
+    this.state.sets['radio-station']['icon-map-selected'] = true;
+    mapStore.addChangeListener(this.onChangeMode.bind(this), constants.CHANGE_MODE);
   }
 
   initIcon(e) {
     this.selectIcon(e);
-
     let icon = L.Icon({ iconUrl: e.currentTarget.attributes.src });
-    let marker = L.marker({ icon: icon })
 
     this.setState((state) => {
-      state.marker = marker;
+      state.currentIcon = icon;
       return state;
     });
   }
 
-  _initClassSets(icons) {
+  initClassSets(icons) {
     let reducer = (sets, item) => {
       sets[item] = { 'icon-map': true, 'icon-map-selected': false };
       return sets;
@@ -44,13 +44,9 @@ export default class Marker extends React.Component {
     return icons.reduce(reducer, {});
   }
 
-  _preSelect() {
-    this.state.sets['radio-station']['icon-map-selected'] = true;
-  }
-
-  _selectIcon(e) {
-    let bob = mapStore;
+  selectIcon(e) {
     let current = e.currentTarget.id;
+
     this.setState((state, props) => {
       let isActive = (current == state.active);
 
@@ -60,6 +56,21 @@ export default class Marker extends React.Component {
 
       return state;
     });
+  }
+
+  onChangeMode() {
+    let data = mapStore.getState();
+
+    if (data.mode === constants.MARKER_MODE) {
+      data.map.on('click', (e) => { this.addMarker(e) });
+    } else {
+      data.map.off('click', (e) => { this.addMarker(e) });
+    }
+  }
+
+  addMarker(e) {
+    let marker = new L.Marker(e.latlng, this.state.currentIcon);
+    actions.addMarker(marker);
   }
 
   render() {
