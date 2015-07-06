@@ -5,8 +5,8 @@ import { SettingConstants } from '../constants/constants';
 
 export default class CoordinateConverter {
   static utmToPoint(datum, zone, east, north) {
-    [east, north].forEach(v => { v = this._replaceComma(v); });
-    let referenceSystem = this._referenceSystems(datum);
+    [east, north].forEach(v => { v = this.replaceComma(v); });
+    let referenceSystem = this.referenceSystems(datum);
     let fromSrid = new Proj4js.Proj(Proj4js.defs(`EPSG:${referenceSystem + parseInt(zone)}`));
     let toSrid = new Proj4js.Proj(Proj4js.defs(SettingConstants.MAP_PROJECTION));
     let position = Proj4js.toPoint([parseFloat(east), parseFloat(north)]);
@@ -15,7 +15,7 @@ export default class CoordinateConverter {
   }
 
   static latLonToPoint(lon, lat) {
-    [lon, lat].forEach(v => { this._replaceComma(v); });
+    [lon, lat].forEach(v => { this.replaceComma(v); });
     if (SettingConstants.DEFAULT_PROJECTION === SettingConstants.MAP_PROJECTION) {
       return [lat, lon];
     }
@@ -26,7 +26,7 @@ export default class CoordinateConverter {
     return [point.y, point.x];
   }
 
-  static _referenceSystems(datum) {
+  static referenceSystems(datum) {
     return ({
       wgs84: 32700,
       sirgas2000: 31960,
@@ -34,7 +34,7 @@ export default class CoordinateConverter {
     }[datum]);
   }
 
-  static _replaceComma(number) {
+  static replaceComma(number) {
     if (isNaN(number)) { return number.replace(',', '.'); }
     return number;
   }
