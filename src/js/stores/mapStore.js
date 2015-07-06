@@ -6,6 +6,8 @@ let data = {
   cursor: null,
   goToMarker: null,
   map: null
+  mode: null,
+  marker: null
 };
 
 class MapStore extends EventEmitter {
@@ -74,6 +76,11 @@ class MapStore extends EventEmitter {
         case constants.CHANGE_CURSOR:
           data.cursor = action.cursor;
           mapStore.emitChange(constants.CHANGE_CURSOR);
+          break;
+
+        case constants.ADD_MARKER:
+          data.marker = action.marker;
+          mapStore.emitChange(constants.ADD_MARKER);
           break;
 
         default:
