@@ -1,6 +1,7 @@
 import React from 'react';
 import GoogleLeaflet from '../lib/google';
 import Actions from '../actions/actions';
+import '../stores/mapStore';
 
 export default class Map extends React.Component {
   componentDidMount() {

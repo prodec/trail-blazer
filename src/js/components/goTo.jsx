@@ -1,8 +1,8 @@
 import React from 'react';
-import { GoToTabConstants, EventConstants } from '../constants/constants';
+import { GoToTabConstants } from '../constants/constants';
 import classNames from 'classnames';
 import CoordinateConverter from '../utils/coordinateConverter';
-import mapStore from '../stores/mapStore';
+import Actions from '../actions/actions';
 
 export default class GoTo extends React.Component {
   constructor() {
@@ -68,15 +68,9 @@ class Tab extends React.Component {
 class Form extends React.Component {
   constructor() {
     super();
-    this.state = { map: this._getMap() };
+    this.state = {};
     this._bindValue = this._bindValue.bind(this);
     this._goToCoordinate = this._goToCoordinate.bind(this);
-    this._setMap = this._setMap.bind(this);
-    mapStore.addChangeListener(this._setMap, EventConstants.CHANGE_MAP);
-  }
-
-  componentWillUnmount() {
-    mapStore.removeChangeListener(this._setMap, EventConstants.CHANGE_MAP);
   }
 
   render() {
@@ -158,41 +152,8 @@ class Form extends React.Component {
     return L.latLng(...point);
   }
 
-  _getMap() {
-    return mapStore.getState().map;
-  }
-
   _goToCoordinate(e) {
     e.preventDefault();
-    let latlon = this._getLatLon();
-    this._updateMarker(latlon);
-    this._updateMapCenter(latlon);
-  }
-
-  _initMarker(latlon, radius = 7) {
-    let circle = L.circleMarker(latlon, {
-                                  radius: radius,
-                                  weight: '1',
-                                  color: 'green',
-                                  opacity: 0.85,
-                                  fillColor: '#00ff00',
-                                  fillOpacity: 0.85
-                                }).addTo(this.state.map);
-    this.setState({ marker: circle });
-    return circle;
-  }
-
-  _setMap() {
-    this.setState({ map: this._getMap() });
-  }
-
-  _updateMarker(latlon) {
-    let marker = this.state.marker;
-    if (!marker) { marker = this._initMarker(latlon); }
-    marker.setLatLng(latlon);
-  }
-
-  _updateMapCenter(latlon) {
-    this.state.map.setView(latlon);
+    Actions.goToCoordinate(this._getLatLon());
   }
 }

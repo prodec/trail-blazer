@@ -15,4 +15,11 @@ export default class Actions {
       map
     });
   }
+
+  static goToCoordinate(latlon) {
+    dispatcher.handleAction({
+      type: ActionConstants.GO_TO,
+      latlon
+    });
+  }
 }
