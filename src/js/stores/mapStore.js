@@ -2,7 +2,7 @@ import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher/dispatcher';
 import { ActionConstants, EventConstants } from '../constants/constants';
 
-let _data = {
+let data = {
   cursor: null,
   goToMarker: null,
   map: null
@@ -11,11 +11,11 @@ let _data = {
 class MapStore extends EventEmitter {
   constructor() {
     super();
-    this.dispatchToken = this._registerCallbacks();
+    this.dispatchToken = this.registerCallbacks();
   }
 
   getState() {
-    return _data;
+    return data;
   }
 
   addChangeListener(callback, change = EventConstants.CHANGE) {
@@ -26,11 +26,11 @@ class MapStore extends EventEmitter {
     this.removeListener(change, callback);
   }
 
-  _emitChange(change = EventConstants.CHANGE) {
+  emitChange(change = EventConstants.CHANGE) {
     this.emit(change);
   }
 
-  _initGoToMarker(latlon) {
+  initGoToMarker(latlon) {
     let circle = L.circleMarker(latlon, {
                                   radius: 7,
                                   weight: '1',
@@ -38,29 +38,29 @@ class MapStore extends EventEmitter {
                                   opacity: 0.85,
                                   fillColor: '#00ff00',
                                   fillOpacity: 0.85
-                                }).addTo(_data.map);
-    _data.goToMarker = circle;
+                                }).addTo(data.map);
+    data.goToMarker = circle;
   }
 
-  _registerCallbacks() {
+  registerCallbacks() {
     return dispatcher.register(action => {
       switch(action.type) {
         case ActionConstants.CHANGE_CURSOR:
-          _data.cursor = action.cursor;
-          this._emitChange(EventConstants.CHANGE_CURSOR);
+          data.cursor = action.cursor;
+          this.emitChange(EventConstants.CHANGE_CURSOR);
           break;
 
         case ActionConstants.ADD_MAP:
-          _data.map = action.map;
-          this._emitChange(EventConstants.CHANGE_MAP);
+          data.map = action.map;
+          this.emitChange(EventConstants.CHANGE_MAP);
           break;
 
         case ActionConstants.GO_TO:
           let latlon = action.latlon;
           this
-            ._updateGoToMarkerPosition(latlon)
-            ._updateMapCenter(latlon)
-            ._emitChange(EventConstants.CHANGE_GOTO);
+            .updateGoToMarkerPosition(latlon)
+            .updateMapCenter(latlon)
+            .emitChange(EventConstants.CHANGE_GOTO);
           break;
 
         default:
@@ -69,18 +69,18 @@ class MapStore extends EventEmitter {
     });
   }
 
-  _updateGoToMarkerPosition(latlon) {
-    let marker = _data.goToMarker;
+  updateGoToMarkerPosition(latlon) {
+    let marker = data.goToMarker;
     if (marker) {
       marker.setLatLng(latlon);
     } else {
-      this._initGoToMarker(latlon);
+      this.initGoToMarker(latlon);
     }
     return this;
   }
 
-  _updateMapCenter(latlon) {
-    _data.map.setView(latlon);
+  updateMapCenter(latlon) {
+    data.map.setView(latlon);
     return this;
   }
 }
