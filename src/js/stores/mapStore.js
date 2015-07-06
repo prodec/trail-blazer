@@ -2,7 +2,11 @@ import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher/dispatcher';
 import { ActionConstants, EventConstants } from '../constants/constants';
 
-let _data = { cursor: null, map: null };
+let _data = {
+  cursor: null,
+  goToMarker: null,
+  map: null
+};
 
 class MapStore extends EventEmitter {
   constructor() {
@@ -26,6 +30,18 @@ class MapStore extends EventEmitter {
     this.emit(change);
   }
 
+  _initGoToMarker(latlon) {
+    let circle = L.circleMarker(latlon, {
+                                  radius: 7,
+                                  weight: '1',
+                                  color: 'green',
+                                  opacity: 0.85,
+                                  fillColor: '#00ff00',
+                                  fillOpacity: 0.85
+                                }).addTo(_data.map);
+    _data.goToMarker = circle;
+  }
+
   _registerCallbacks() {
     return dispatcher.register(action => {
       switch(action.type) {
@@ -39,10 +55,33 @@ class MapStore extends EventEmitter {
           this._emitChange(EventConstants.CHANGE_MAP);
           break;
 
+        case ActionConstants.GO_TO:
+          let latlon = action.latlon;
+          this
+            ._updateGoToMarkerPosition(latlon)
+            ._updateMapCenter(latlon)
+            ._emitChange(EventConstants.CHANGE_GOTO);
+          break;
+
         default:
           break;
       }
     });
+  }
+
+  _updateGoToMarkerPosition(latlon) {
+    let marker = _data.goToMarker;
+    if (marker) {
+      marker.setLatLng(latlon);
+    } else {
+      this._initGoToMarker(latlon);
+    }
+    return this;
+  }
+
+  _updateMapCenter(latlon) {
+    _data.map.setView(latlon);
+    return this;
   }
 }
 
