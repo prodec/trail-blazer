@@ -169,15 +169,15 @@ class Form extends React.Component {
     this._updateMapCenter(latlon);
   }
 
-  _initMarker(latlon, radius = 10) {
-    let circle = L.circle(latlon,
-                          radius, {
-                            weight: '2',
-                            color: 'green',
-                            opacity: 0.85,
-                            fillColor: '#00ff00',
-                            fillOpacity: 0.85
-                          }).addTo(this.state.map);
+  _initMarker(latlon, radius = 7) {
+    let circle = L.circleMarker(latlon, {
+                                  radius: radius,
+                                  weight: '1',
+                                  color: 'green',
+                                  opacity: 0.85,
+                                  fillColor: '#00ff00',
+                                  fillOpacity: 0.85
+                                }).addTo(this.state.map);
     this.setState({ marker: circle });
     return circle;
   }
