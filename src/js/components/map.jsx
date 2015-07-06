@@ -10,7 +10,7 @@ export default class Map extends React.Component {
     super();
     this.state = { map: null, set: { 'default-cursor': true, 'crosshair-cursor': false } };
     this.goToPosition = this.goToPosition.bind(this);
-    this._onChangeCursor = this._onChangeCursor.bind(this);
+    this.onChangeCursor = this.onChangeCursor.bind(this);
   }
 
   componentDidMount() {
@@ -20,14 +20,24 @@ export default class Map extends React.Component {
     map.addLayer(new GoogleLeaflet('SATELLITE'));
     this.setState({ map });
     Actions.addMap(map);
+
     mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
-    mapStore.addChangeListener(this._onChangeCursor, constants.CHANGE_CURSOR);
+    mapStore.addChangeListener(this.onChangeCursor, constants.CHANGE_CURSOR);
+    mapStore.addChangeListener(this.onAddMarker, constants.ADD_MARKER);
   }
 
-  /* Leaflet already manipulate the map class names, so you can't change the map
-     class set, this is why jquery is used. */
-  _onChangeCursor(e) {
+  // Leaflet already manipulate the map class names, so you can't change the map
+  // class set or the map don't will work properly, this is why jquery is used.
+  onChangeCursor(e) {
     $('.leaflet-container').css('cursor', mapStore.getState().cursor);
+  }
+
+  onAddMarker(e) {
+    let data = this.getState();
+    let marker = data.marker;
+    let map = data.map;
+    
+    marker.addTo(map);
   }
 
   render() {

@@ -9,6 +9,11 @@ export const MenuConstants = keyMirror({
   MENU_ITEMS: ['goto', 'marker', 'line', 'battery', 'tie']
 )};
 
+export const ModeConstants = keyMirror({
+  MARKER_MODE: null
+)};
+
+
 export const MarkerConstants = keyMirror({
   ICONS: ['radio-station', 'helicopter', 'high-building', 'mountains', 'power-line', 'birds', 'tree']
 )};
