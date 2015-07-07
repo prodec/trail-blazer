@@ -12,14 +12,14 @@ export default class Actions {
   static changeMode(mode) {
     dispatcher.handleAction({
       type: constants.CHANGE_MODE,
-      mode: mode
+      mode
     })
   }
 
   static addMarker(marker) {
     dispatcher.handleAction({
       type: constants.ADD_MARKER,
-      marker: marker
+      marker
     })
   }
 
