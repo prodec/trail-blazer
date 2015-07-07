@@ -3,23 +3,30 @@ import classNames from 'classnames';
 import GoTo from './goTo';
 import Marker from './marker';
 import constants from '../constants/constants';
-import actions from '../actions/actions';
+import Actions from '../actions/actions';
 
 export default class Menu extends React.Component {
   constructor() {
     super();
     this.togglePanel= this.togglePanel.bind(this);
     this.setupMarker= this.setupMarker.bind(this);
+    this.setupGoTo = this.setupGoTo.bind(this);
 
     let items = constants.MENU_ITEMS;
     let sets = this.initClassSets(items);
-    this.state = { active: null, sets: sets, items: items };
+    this.state = { active: null, sets, items };
   }
 
   setupMarker(e) {
     this.togglePanel(e);
-    actions.changeCursor(constants.CURSOR_CROSSHAIR);
-    actions.changeMode(constants.MARKER_MODE);
+    Actions.changeCursor(constants.CURSOR_CROSSHAIR);
+    Actions.changeMode(constants.MARKER_MODE);
+  }
+
+  setupGoTo(e) {
+    this.togglePanel(e);
+    Actions.changeMode(constants.GO_TO_MODE);
+    Actions.changeCursor(constants.CURSOR_GRAB);
   }
 
   togglePanel(e) {
@@ -31,7 +38,8 @@ export default class Menu extends React.Component {
 
       if (isActive) {
         state.active = null;
-        this.changeCursor(constants.CURSOR_GRAB);
+        Actions.changeCursor(constants.CURSOR_GRAB);
+        Actions.changeMode(constants.VIEW_MODE);
       } else {
         if (state.active !== null) { state.sets[state.active]['container-slideout-active'] = false };
         state.active = current;
@@ -54,7 +62,7 @@ export default class Menu extends React.Component {
     return (
       <div id="menu-wrapper">
         <div id="menu">
-          <button id="goto" className="button button-square button-jumbo button-royal" onClick={this.togglePanel}>
+          <button id="goto" className="button button-square button-jumbo button-royal" onClick={this.setupGoTo}>
             <i className="glyphicons compass"></i>
           </button>
           <button id="marker" className="button button-square button-jumbo button-action" onClick={this.setupMarker}>
