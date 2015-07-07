@@ -17,7 +17,7 @@ export default class Map extends React.Component {
     map.addLayer(new GoogleLeaflet('SATELLITE'));
     this.setState({ map });
     Actions.addMap(map);
-    mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GOTO);
+    mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
   }
 
   shouldComponentUpdate() {
