@@ -9,6 +9,20 @@ export default class Actions {
     });
   }
 
+  static changeMode(mode) {
+    dispatcher.handleAction({
+      type: ActionConstants.CHANGE_MODE,
+      mode
+    })
+  }
+
+  static addMarker(marker) {
+    dispatcher.handleAction({
+      type: ActionConstants.ADD_MARKER,
+      marker
+    })
+  }
+
   static addMap(map) {
     dispatcher.handleAction({
       type: ActionConstants.ADD_MAP,

@@ -5,7 +5,9 @@ import { ActionConstants, EventConstants } from '../constants/constants';
 let data = {
   cursor: null,
   goToMarker: null,
-  map: null
+  map: null,
+  mode: null,
+  marker: null
 };
 
 class MapStore extends EventEmitter {
@@ -30,8 +32,29 @@ class MapStore extends EventEmitter {
     this.emit(change);
   }
 
+  updateGoToMarkerPosition(latlon) {
+    let marker = data.goToMarker;
+    if (marker) {
+      marker.setLatLng(latlon);
+    } else {
+      this.initGoToMarker(latlon);
+    }
+  }
+
+  initGoToMarker(latlon) {
+    let options = { radius: 7,
+                    weight: '1',
+                    color: 'green',
+                    opacity: 0.85,
+                    fillColor: '#00ff00',
+                    fillOpacity: 0.85 };
+
+    let circle = L.circleMarker(latlon, options);
+    data.goToMarker = circle;
+  }
+
   registerCallbacks() {
-    return dispatcher.register(action => {
+    return dispatcher.register((action) => {
       switch(action.type) {
         case ActionConstants.CHANGE_CURSOR:
           data.cursor = action.cursor;
@@ -44,38 +67,29 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.GO_TO:
-          let latlon = action.latlon;
-          this
-            .updateGoToMarkerPosition(latlon)
-            .emitChange(EventConstants.CHANGE_GO_TO);
+          this.updateGoToMarkerPosition(action.latlon);
+          this.emitChange(EventConstants.CHANGE_GO_TO);
+          break;
+
+        case ActionConstants.CHANGE_CURSOR:
+          data.cursor = action.cursor;
+          this.emitChange(EventConstants.CHANGE_CURSOR);
+          break;
+
+        case ActionConstants.ADD_MARKER:
+          data.marker = action.marker;
+          this.emitChange(EventConstants.ADD_MARKER);
+          break;
+
+        case ActionConstants.CHANGE_MODE:
+          data.mode = action.mode;
+          this.emitChange(EventConstants.CHANGE_MODE);
           break;
 
         default:
           break;
       }
     });
-  }
-
-  updateGoToMarkerPosition(latlon) {
-    let marker = data.goToMarker;
-    if (marker) {
-      marker.setLatLng(latlon);
-    } else {
-      this.initGoToMarker(latlon);
-    }
-    return this;
-  }
-
-  initGoToMarker(latlon) {
-    let circle = L.circleMarker(latlon, {
-                                  radius: 7,
-                                  weight: '1',
-                                  color: 'green',
-                                  opacity: 0.85,
-                                  fillColor: '#00ff00',
-                                  fillOpacity: 0.85
-                                });
-    data.goToMarker = circle;
   }
 }
 

@@ -120,6 +120,7 @@ html, body {
     #{$slideout} {
         @include container-slideout;
         border-right-color: $color;
+        font-size: 12px;
     }
 
     #{$slideout}.container-slideout-active {
@@ -129,4 +130,35 @@ html, body {
 
 button::-moz-focus-inner {
     border: 0;
+}
+
+#icon-selection {
+    margin-left: 17px;
+}
+
+.icon-map {
+    opacity: 0.3;
+    margin-right: 12px;
+    transition: opacity 0.5s;
+}
+
+.icon-map-selected {
+    opacity: 1;
+}
+
+#icon-info {
+  margin-top: 10px;
+  position: absolute;
+}
+
+#icon-info-description {
+  font-size: 16px;
+  height: 180px;
+  width: 300px
+}
+
+.leaflet-popup-content-wrapper {
+    text-align: center;
+    border-radius: 0;
+    padding: 2px;
 }
