@@ -1,36 +1,39 @@
 import React from 'react';
 import classNames from 'classnames';
 import constants from '../constants/constants';
-import actions from '../actions/actions';
+import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 
 export default class Marker extends React.Component {
   constructor() {
     super();
     this.selectIcon = this.selectIcon.bind(this);
-    this.initIcon = this.initIcon.bind(this);
+    this.changeIcon = this.changeIcon.bind(this);
     this.addMarker = this.addMarker.bind(this);
+    this.changeText = this.changeText.bind(this);
 
     let icons = constants.ICONS;
     let sets = this.initClassSets(icons);
 
     this.state = {
-      icons: icons,
-      currentIcon: null,
+      icons,
+      selectedIcon: new L.Icon({ iconUrl: '/src/images/radio-station.png', iconAnchor: constants.ICON_ANCHOR }),
+      text: '',
       active: 'radio-station',
-      sets: sets,
+      sets
     };
 
     this.state.sets['radio-station']['icon-map-selected'] = true;
     mapStore.addChangeListener(this.onChangeMode.bind(this), constants.CHANGE_MODE);
   }
 
-  initIcon(e) {
+  changeIcon(e) {
     this.selectIcon(e);
-    let icon = L.Icon({ iconUrl: e.currentTarget.attributes.src });
+    let icon = new L.Icon({ iconUrl: $(e.currentTarget).attr('src'),
+                            iconAnchor: constants.ICON_ANCHOR }) ;
 
     this.setState((state) => {
-      state.currentIcon = icon;
+      state.selectedIcon = icon;
       return state;
     });
   }
@@ -62,15 +65,25 @@ export default class Marker extends React.Component {
     let data = mapStore.getState();
 
     if (data.mode === constants.MARKER_MODE) {
-      data.map.on('click', (e) => { this.addMarker(e) });
+      data.map.on('click', this.addMarker);
     } else {
-      data.map.off('click', (e) => { this.addMarker(e) });
+      data.map.off('click', this.addMarker);
     }
   }
 
   addMarker(e) {
-    let marker = new L.Marker(e.latlng, this.state.currentIcon);
-    actions.addMarker(marker);
+    let marker = new L.Marker(e.latlng, { icon: this.state.selectedIcon });
+    let text = this.state.text;
+
+    if (text !== '') {
+      marker.bindPopup(this.state.text, { offset: constants.POPUP_OFFSET, className: 'marker-popup' })
+    }
+    Actions.addMarker(marker);
+    this.setState({ text: '' });
+  }
+
+  changeText(e) {
+    this.setState({ text: e.target.value });
   }
 
   render() {
@@ -82,14 +95,19 @@ export default class Marker extends React.Component {
               <img src={"/src/images/" + icon + ".png"} 
                    className={classNames(this.state.sets[icon])}
                    key={i}
-                   onClick={this.initIcon}
+                   onClick={this.changeIcon}
                    id={icon} />
             </a>
           ) 
         })}
 
         <div id="icon-info" className="pure-form">
-          <textarea id="icon-info-description" className="pure-input-1-2" placeholder="Observações"></textarea>
+          <textarea id="icon-info-description"
+                    className="pure-input-1-2"
+                    onChange={this.changeText} 
+                    value={this.state.text}
+                    placeholder="Observações">
+          </textarea>
         </div>
       </div>
     )

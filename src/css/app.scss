@@ -156,3 +156,9 @@ button::-moz-focus-inner {
   height: 180px;
   width: 300px
 }
+
+.leaflet-popup-content-wrapper {
+    text-align: center;
+    border-radius: 0;
+    padding: 2px;
+}
