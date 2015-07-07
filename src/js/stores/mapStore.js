@@ -47,7 +47,7 @@ class MapStore extends EventEmitter {
           let latlon = action.latlon;
           this
             .updateGoToMarkerPosition(latlon)
-            .emitChange(EventConstants.CHANGE_GOTO);
+            .emitChange(EventConstants.CHANGE_GO_TO);
           break;
 
         default:
