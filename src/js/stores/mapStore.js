@@ -30,18 +30,6 @@ class MapStore extends EventEmitter {
     this.emit(change);
   }
 
-  initGoToMarker(latlon) {
-    let circle = L.circleMarker(latlon, {
-                                  radius: 7,
-                                  weight: '1',
-                                  color: 'green',
-                                  opacity: 0.85,
-                                  fillColor: '#00ff00',
-                                  fillOpacity: 0.85
-                                }).addTo(data.map);
-    data.goToMarker = circle;
-  }
-
   registerCallbacks() {
     return dispatcher.register(action => {
       switch(action.type) {
@@ -59,7 +47,6 @@ class MapStore extends EventEmitter {
           let latlon = action.latlon;
           this
             .updateGoToMarkerPosition(latlon)
-            .updateMapCenter(latlon)
             .emitChange(EventConstants.CHANGE_GOTO);
           break;
 
@@ -79,9 +66,16 @@ class MapStore extends EventEmitter {
     return this;
   }
 
-  updateMapCenter(latlon) {
-    data.map.setView(latlon);
-    return this;
+  initGoToMarker(latlon) {
+    let circle = L.circleMarker(latlon, {
+                                  radius: 7,
+                                  weight: '1',
+                                  color: 'green',
+                                  opacity: 0.85,
+                                  fillColor: '#00ff00',
+                                  fillOpacity: 0.85
+                                });
+    data.goToMarker = circle;
   }
 }
 
