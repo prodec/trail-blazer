@@ -1,5 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
+import GoTo from './goTo';
 
 export default class Menu extends React.Component {
   constructor() {
@@ -32,7 +33,7 @@ export default class Menu extends React.Component {
       } else {
         if (state.active !== null) { state.sets[state.active]['container-slideout-active'] = false };
         state.active = current;
-      } 
+      }
 
       return state;
     });
@@ -59,7 +60,9 @@ export default class Menu extends React.Component {
           </button>
 
           <div id="slideout-goto" className={classNames(this.state.sets['goto'])}>
-            <div className="slideout-color"></div>
+            <div className="slideout-color">
+              <GoTo />
+            </div>
           </div>
           <div id="slideout-marker" className={classNames(this.state.sets['marker'])} >
             <div className="slideout-color"></div>

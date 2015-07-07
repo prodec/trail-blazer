@@ -1,16 +1,16 @@
 import React from 'react';
 
 // Styles
+import 'purecss';
 import '../css/lib/buttons.css';
 import '../css/lib/glyphicons.css';
 import '../css/lib/style.css';
 import '../css/app.scss';
 
-// JS 
+// JS
 import './lib/buttons';
 
 // React
 import App from './components/app';
-import constants from './constants/constants';
 
 React.render(<App />, document.body);
