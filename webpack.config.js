@@ -34,6 +34,7 @@ module.exports = {
       { test: /\.css?$/, loader: 'style!css' },
       { test: /\.png?$/, loader: 'url' },
       { test: /\.otf?$|\.ttf?$|\.svg?$|\.eot?$|\.woff?$/, loader: 'url' }
-    ]
+    ],
+    noParse: /proj4\.js$/
   }
 };
