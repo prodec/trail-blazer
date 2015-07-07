@@ -68,7 +68,14 @@ class Tab extends React.Component {
 class Form extends React.Component {
   constructor() {
     super();
-    this.state = {};
+    this.state = {
+      lat: null,
+      lon: null,
+      north: null,
+      east: null,
+      zone: '',
+      datum: ''
+    };
     this.bindValue = this.bindValue.bind(this);
     this.goToCoordinate = this.goToCoordinate.bind(this);
   }
