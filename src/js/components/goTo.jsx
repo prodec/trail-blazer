@@ -1,8 +1,8 @@
 import React from 'react';
-import { GoToTabConstants } from '../constants/constants';
 import classNames from 'classnames';
 import CoordinateConverter from '../utils/coordinateConverter';
 import Actions from '../actions/actions';
+import { GoToTabConstants } from '../constants/constants';
 
 export default class GoTo extends React.Component {
   constructor() {
