@@ -1,8 +1,8 @@
 import React from 'react';
 import classNames from 'classnames';
-import constants from '../constants/constants';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
+import { ModeConstants, MarkerConstants, ModeContants } from '../constants/constants';
 
 export default class Marker extends React.Component {
   constructor() {
@@ -12,25 +12,25 @@ export default class Marker extends React.Component {
     this.addMarker = this.addMarker.bind(this);
     this.changeText = this.changeText.bind(this);
 
-    let icons = constants.ICONS;
+    let icons = MarkerConstants.ICONS;
     let sets = this.initClassSets(icons);
 
     this.state = {
       icons,
-      selectedIcon: new L.Icon({ iconUrl: '/src/images/radio-station.png', iconAnchor: constants.ICON_ANCHOR }),
+      selectedIcon: new L.Icon({ iconUrl: '/src/images/radio-station.png', iconAnchor: MarkerConstants.ICON_ANCHOR }),
       text: '',
       active: 'radio-station',
       sets
     };
 
     this.state.sets['radio-station']['icon-map-selected'] = true;
-    mapStore.addChangeListener(this.onChangeMode.bind(this), constants.CHANGE_MODE);
+    mapStore.addChangeListener(this.onChangeMode.bind(this), ModeConstants.CHANGE_MODE);
   }
 
   changeIcon(e) {
     this.selectIcon(e);
     let icon = new L.Icon({ iconUrl: $(e.currentTarget).attr('src'),
-                            iconAnchor: constants.ICON_ANCHOR }) ;
+                            iconAnchor: MarkerConstants.ICON_ANCHOR }) ;
 
     this.setState((state) => {
       state.selectedIcon = icon;
@@ -64,7 +64,7 @@ export default class Marker extends React.Component {
   onChangeMode() {
     let data = mapStore.getState();
 
-    if (data.mode === constants.MARKER_MODE) {
+    if (data.mode === ModeConstants.MARKER_MODE) {
       data.map.on('click', this.addMarker);
     } else {
       data.map.off('click', this.addMarker);
@@ -76,7 +76,7 @@ export default class Marker extends React.Component {
     let text = this.state.text;
 
     if (text !== '') {
-      marker.bindPopup(this.state.text, { offset: constants.POPUP_OFFSET, className: 'marker-popup' })
+      marker.bindPopup(this.state.text, { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' })
     }
     Actions.addMarker(marker);
     this.setState({ text: '' });

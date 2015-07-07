@@ -2,8 +2,8 @@ import React from 'react';
 import classNames from 'classnames';
 import GoTo from './goTo';
 import Marker from './marker';
-import constants from '../constants/constants';
 import Actions from '../actions/actions';
+import { MenuConstants, CursorConstants, ModeConstants } from '../constants/constants';
 
 export default class Menu extends React.Component {
   constructor() {
@@ -12,21 +12,21 @@ export default class Menu extends React.Component {
     this.setupMarker= this.setupMarker.bind(this);
     this.setupGoTo = this.setupGoTo.bind(this);
 
-    let items = constants.MENU_ITEMS;
+    let items = MenuConstants.MENU_ITEMS;
     let sets = this.initClassSets(items);
     this.state = { active: null, sets, items };
   }
 
   setupMarker(e) {
     this.togglePanel(e);
-    Actions.changeCursor(constants.CURSOR_CROSSHAIR);
-    Actions.changeMode(constants.MARKER_MODE);
+    Actions.changeMode(ModeConstants.MARKER_MODE);
+    Actions.changeCursor(CursorConstants.CURSOR_CROSSHAIR);
   }
 
   setupGoTo(e) {
     this.togglePanel(e);
-    Actions.changeMode(constants.GO_TO_MODE);
-    Actions.changeCursor(constants.CURSOR_GRAB);
+    Actions.changeMode(ModeConstants.GO_TO_MODE);
+    Actions.changeCursor(CursorConstants.CURSOR_GRAB);
   }
 
   togglePanel(e) {
@@ -38,8 +38,8 @@ export default class Menu extends React.Component {
 
       if (isActive) {
         state.active = null;
-        Actions.changeCursor(constants.CURSOR_GRAB);
-        Actions.changeMode(constants.VIEW_MODE);
+        Actions.changeCursor(CursorConstants.CURSOR_GRAB);
+        Actions.changeMode(ModeConstants.VIEW_MODE);
       } else {
         if (state.active !== null) { state.sets[state.active]['container-slideout-active'] = false };
         state.active = current;

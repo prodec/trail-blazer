@@ -2,8 +2,8 @@ import React from 'react';
 import GoogleLeaflet from '../lib/google';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
-import { EventConstants } from '../constants/constants';
 import classNames from 'classnames';
+import { EventConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
   constructor() {
@@ -22,8 +22,8 @@ export default class Map extends React.Component {
     Actions.addMap(map);
 
     mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
-    mapStore.addChangeListener(this.onChangeCursor, constants.CHANGE_CURSOR);
-    mapStore.addChangeListener(this.onAddMarker, constants.ADD_MARKER);
+    mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
+    mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
   }
 
   // Leaflet already manipulate the map class names, so you can't change the map
@@ -32,7 +32,7 @@ export default class Map extends React.Component {
     $('.leaflet-container').css('cursor', mapStore.getState().cursor);
   }
 
-  onAddMarker(e) {
+  addMarkerToMap(e) {
     let data = this.getState();
     let marker = data.marker;
     let map = data.map;
