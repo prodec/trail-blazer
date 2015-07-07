@@ -5,7 +5,7 @@ import { ActionConstants, EventConstants } from '../constants/constants';
 let data = {
   cursor: null,
   goToMarker: null,
-  map: null
+  map: null,
   mode: null,
   marker: null
 };
@@ -39,18 +39,17 @@ class MapStore extends EventEmitter {
     } else {
       this.initGoToMarker(latlon);
     }
-    return this;
   }
 
   initGoToMarker(latlon) {
-    let circle = L.circleMarker(latlon, {
-                                  radius: 7,
-                                  weight: '1',
-                                  color: 'green',
-                                  opacity: 0.85,
-                                  fillColor: '#00ff00',
-                                  fillOpacity: 0.85
-                                });
+    let options = { radius: 7,
+                    weight: '1',
+                    color: 'green',
+                    opacity: 0.85,
+                    fillColor: '#00ff00',
+                    fillOpacity: 0.85 };
+
+    let circle = L.circleMarker(latlon, options);
     data.goToMarker = circle;
   }
 
@@ -68,19 +67,23 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.GO_TO:
-          let latlon = action.latlon;
-          this.updateGoToMarkerPosition(latlon)
-              .emitChange(EventConstants.CHANGE_GO_TO);
+          this.updateGoToMarkerPosition(action.latlon);
+          this.emitChange(EventConstants.CHANGE_GO_TO);
           break;
 
-        case constants.CHANGE_CURSOR:
+        case ActionConstants.CHANGE_CURSOR:
           data.cursor = action.cursor;
-          mapStore.emitChange(constants.CHANGE_CURSOR);
+          this.emitChange(EventConstants.CHANGE_CURSOR);
           break;
 
-        case constants.ADD_MARKER:
+        case ActionConstants.ADD_MARKER:
           data.marker = action.marker;
-          mapStore.emitChange(constants.ADD_MARKER);
+          this.emitChange(EventConstants.ADD_MARKER);
+          break;
+
+        case ActionConstants.CHANGE_MODE:
+          data.mode = action.mode;
+          this.emitChange(EventConstants.CHANGE_MODE);
           break;
 
         default:
