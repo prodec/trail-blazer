@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
+import Popup from './popup';
 import { ModeConstants, MarkerConstants, ModeContants } from '../constants/constants';
 
 export default class Marker extends React.Component {
@@ -75,10 +76,10 @@ export default class Marker extends React.Component {
   addMarker(e) {
     let marker = new L.Marker(e.latlng, { icon: this.state.selectedIcon });
     let text = this.state.text;
+    let options = { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' };
+    let popup = new Popup(marker, text);
 
-    if (text !== '') {
-      marker.bindPopup(this.state.text, { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' })
-    }
+    popup.bind(marker, text);
     Actions.addMarker(marker);
     this.setState({ text: '' });
   }
@@ -107,6 +108,7 @@ export default class Marker extends React.Component {
                     className="pure-input-1-2"
                     onChange={this.changeText}
                     value={this.state.text}
+                    maxLength="140"
                     placeholder="Observações">
           </textarea>
         </div>
