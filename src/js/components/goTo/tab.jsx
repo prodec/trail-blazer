@@ -8,12 +8,12 @@ export default class Tab extends React.Component {
   }
 
   render() {
-    let classes = classNames(
+    let classes = classNames([
       'button',
       'button-royal',
       'button-capitalize',
       { 'active': this.isActive() }
-    );
+    ]);
 
     return (
       <input

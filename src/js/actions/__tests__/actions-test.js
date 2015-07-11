@@ -11,13 +11,13 @@ describe('Actions', () => {
     dispatcher.handleAction.mockClear();
   });
 
-  it(`creates ${ActionConstants.CHANGE_MODE} action`, () => {
-    Actions.changeMode({});
+  it(`creates ${ActionConstants.CHANGE_CURSOR} action`, () => {
+    Actions.changeCursor({});
     expectCommon();
   });
 
-  it(`creates ${ActionConstants.ADD_MAP} action`, () => {
-    Actions.addMap({});
+  it(`creates ${ActionConstants.CHANGE_MODE} action`, () => {
+    Actions.changeMode({});
     expectCommon();
   });
 
@@ -26,13 +26,8 @@ describe('Actions', () => {
     expectCommon();
   });
 
-  it(`creates ${ActionConstants.REMOVE_MARKER} action`, () => {
-    Actions.removeMarker({});
-    expectCommon();
-  });
-
-  it(`creates ${ActionConstants.UPDATE_MARKER} action`, () => {
-    Actions.updateMarker({});
+  it(`creates ${ActionConstants.ADD_MAP} action`, () => {
+    Actions.addMap({});
     expectCommon();
   });
 
@@ -41,17 +36,7 @@ describe('Actions', () => {
     expectCommon();
   });
 
-  it(`creates ${ActionConstants.MAP_CENTER_REGISTER} action`, () => {
-    Actions.registerMapCenter({});
-    expectCommon();
-  });
-
-  it(`creates ${ActionConstants.ERROR_HANDLE} action`, () => {
-    Actions.handleError({});
-    expectCommon();
-  });
-
-  function expectCommon() {
+  let expectCommon = () => {
     expect(dispatcher.handleAction.mock.calls.length).toBe(1);
-  }
+  };
 });

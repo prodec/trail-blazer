@@ -38,8 +38,8 @@ describe('GoTo', () => {
     it('on geo form submit', () => {
       formTag = getForm(goTo);
       formObject = TestUtils.findRenderedComponentWithType(goTo, Form);
-      formObject.getLatLng = jest.genMockFunction();
 
+      formObject.getlatlng = jest.genMockFunction();
       TestUtils.Simulate.submit(formTag);
       expect(Actions.goToCoordinate.mock.calls.length).toBe(1);
     });
@@ -50,28 +50,26 @@ describe('GoTo', () => {
       TestUtils.Simulate.click(utmTab);
       formTag = getForm(goTo);
       formObject = TestUtils.findRenderedComponentWithType(goTo, Form);
-      formObject.getLatLng = jest.genMockFunction();
+      formObject.getlatlng = jest.genMockFunction();
 
       TestUtils.Simulate.submit(formTag);
       expect(Actions.goToCoordinate.mock.calls.length).toBe(1);
     });
   });
 
-  function getTabs(component) {
+  let getTabs = (component) => {
     let tabs = Object.keys(require.requireActual('../../constants/constants').GoToTabConstants);
-
     return tabs.sort().map(key => {
       return React.findDOMNode(component.refs[key]);
     });
-  }
+  };
 
-  function getForm(component) {
+  let getForm = (component) => {
     return React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'form'));
-  }
+  };
 
-  function getFirstInputName(component) {
+  let getFirstInputName = (component) => {
     let form = getForm(component);
-
     return $(form).find('input').first().attr('name');
-  }
+  };
 });

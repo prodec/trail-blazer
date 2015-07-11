@@ -13,14 +13,14 @@ export default class Actions {
     dispatcher.handleAction({
       type: ActionConstants.CHANGE_MODE,
       mode
-    })
+    });
   }
 
   static addMarker(marker) {
     dispatcher.handleAction({
       type: ActionConstants.ADD_MARKER,
       marker
-    })
+    });
   }
 
   static addMap(map) {
@@ -30,10 +30,10 @@ export default class Actions {
     });
   }
 
-  static goToCoordinate(latlon) {
+  static goToCoordinate(latlng) {
     dispatcher.handleAction({
       type: ActionConstants.GO_TO,
-      latlon
+      latlng
     });
   }
 }
