@@ -1,3 +1,4 @@
+import L from 'leaflet';
 // L.TileLayer is used for standard xyz-numbered tile layers.
 // Convert this file to ES6 later.
 L.Google = L.Class.extend({
@@ -96,9 +97,9 @@ L.Google = L.Class.extend({
     });
 
     var _this = this;
-    this._reposition = google.maps.event.addListenerOnce(map, "center_changed", 
+    this._reposition = google.maps.event.addListenerOnce(map, "center_changed",
       function() { _this.onReposition(); });
-  
+
     map.backgroundColor = '#ff0000';
     this._google = map;
   },

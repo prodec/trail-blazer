@@ -1,76 +1,15 @@
 import React from 'react';
-import classNames from 'classnames';
-import CoordinateConverter from '../utils/coordinateConverter';
-import Actions from '../actions/actions';
-import { GoToTabConstants } from '../constants/constants';
+import L from 'leaflet';
+import Actions from '../../actions/actions';
+import { GoToTabConstants } from '../../constants/constants';
+import CoordinateConverter from '../../utils/coordinateConverter';
 
-export default class GoTo extends React.Component {
-  constructor() {
-    super();
-    this.state = { selectedTab: GoToTabConstants.POS_GEO };
-  }
-
-  render() {
-    let tabKeys = Object.keys(GoToTabConstants);
-    let width = `${100 / tabKeys.length}%`;
-    let tabs = tabKeys.map(key => {
-      return (
-        <Tab key={key}
-          selectedTab={this.state.selectedTab}
-          value={GoToTabConstants[key]}
-          width={width}
-          setSelectedTab={this.setSelectedTab.bind(this)} />
-      );
-    });
-
-    return (
-      <div id="goto-tabs">
-        {tabs}
-        <Form selectedTab={this.state.selectedTab} />
-      </div>
-    );
-  }
-
-  setSelectedTab(e) {
-    this.setState({ selectedTab: e.target.value });
-  }
-}
-
-class Tab extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {};
-  }
-
-  render() {
-    let classes = classNames([
-      'button',
-      'button-royal',
-      'button-capitalize',
-      { 'active': this.isActive() }
-    ]);
-
-    return (
-      <input
-        className={classes}
-        style={{width: this.props.width}}
-        type="button"
-        value={this.props.value}
-        onClick={this.props.setSelectedTab} />
-    );
-  }
-
-  isActive() {
-    return this.props.selectedTab === this.props.value;
-  }
-}
-
-class Form extends React.Component {
+export default class Form extends React.Component {
   constructor() {
     super();
     this.state = {
       lat: null,
-      lon: null,
+      lng: null,
       north: null,
       east: null,
       zone: '',
@@ -89,8 +28,8 @@ class Form extends React.Component {
                 <input required className="pure-input-1" key="lat" type="number" step="any" name="lat" placeholder="Latitude"
                   value={this.state.lat} onChange={this.bindValue} />
               </div>
-              <input required className="pure-input-1" key="lon" type="number" step="any" name="lon" placeholder="Longitude"
-                value={this.state.lon} onChange={this.bindValue} />
+              <input required className="pure-input-1" key="lng" type="number" step="any" name="lng" placeholder="Longitude"
+                value={this.state.lng} onChange={this.bindValue} />
               <button className="button button-royal button-capitalize submit" type="submit">
                 ir para
               </button>
@@ -100,7 +39,7 @@ class Form extends React.Component {
     } else {
       return (
         <div id="goto-body">
-          <form className="pure-form" onSubmit={this.goToCoordinate}>
+          <form className="pure-form" onSubmit={this.goToCoordinate.bind(this)}>
             <div className="pure-g">
               <div className="pure-u-1 l-box-top l-box-bottom">
                 <input required className="pure-input-1" key="north" type="number" step="any" name="north" placeholder="Norte"
@@ -145,11 +84,11 @@ class Form extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  getLatLon() {
+  getlatlng() {
     let point;
     if (this.props.selectedTab === GoToTabConstants.POS_GEO) {
-      point = CoordinateConverter.latLonToPoint(this.state.lon,
-                                                this.state.lat);
+      point = CoordinateConverter.latLngToPoint(this.state.lat,
+                                                this.state.lng);
     } else {
       point = CoordinateConverter.utmToPoint(this.state.datum,
                                              this.state.zone,
@@ -161,6 +100,6 @@ class Form extends React.Component {
 
   goToCoordinate(e) {
     e.preventDefault();
-    Actions.goToCoordinate(this.getLatLon());
+    Actions.goToCoordinate(this.getlatlng());
   }
 }
