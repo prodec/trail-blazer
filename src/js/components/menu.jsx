@@ -1,6 +1,6 @@
 import React from 'react';
 import classNames from 'classnames';
-import GoTo from './goTo';
+import GoTo from './goTo/goTo';
 import Marker from './marker';
 import Actions from '../actions/actions';
 import { MenuConstants, CursorConstants, ModeConstants } from '../constants/constants';
@@ -8,8 +8,8 @@ import { MenuConstants, CursorConstants, ModeConstants } from '../constants/cons
 export default class Menu extends React.Component {
   constructor() {
     super();
-    this.togglePanel= this.togglePanel.bind(this);
-    this.setupMarker= this.setupMarker.bind(this);
+    this.togglePanel = this.togglePanel.bind(this);
+    this.setupMarker = this.setupMarker.bind(this);
     this.setupGoTo = this.setupGoTo.bind(this);
 
     let items = MenuConstants.MENU_ITEMS;

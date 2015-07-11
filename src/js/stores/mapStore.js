@@ -1,3 +1,4 @@
+import L from 'leaflet';
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher/dispatcher';
 import { ActionConstants, EventConstants } from '../constants/constants';
@@ -32,42 +33,36 @@ class MapStore extends EventEmitter {
     this.emit(change);
   }
 
-  updateGoToMarkerPosition(latlon) {
+  updateGoToMarkerPosition(latlng) {
     let marker = data.goToMarker;
     if (marker) {
-      marker.setLatLng(latlon);
+      marker.setLatLng(latlng);
     } else {
-      this.initGoToMarker(latlon);
+      this.initGoToMarker(latlng);
     }
   }
 
-  initGoToMarker(latlon) {
+  initGoToMarker(latlng) {
     let options = { radius: 7,
                     weight: '1',
                     color: 'green',
                     opacity: 0.85,
                     fillColor: '#00ff00',
                     fillOpacity: 0.85 };
-
-    let circle = L.circleMarker(latlon, options);
+    let circle = L.circleMarker(latlng, options);
     data.goToMarker = circle;
   }
 
   registerCallbacks() {
     return dispatcher.register((action) => {
       switch(action.type) {
-        case ActionConstants.CHANGE_CURSOR:
-          data.cursor = action.cursor;
-          this.emitChange(EventConstants.CHANGE_CURSOR);
-          break;
-
         case ActionConstants.ADD_MAP:
           data.map = action.map;
           this.emitChange(EventConstants.CHANGE_MAP);
           break;
 
         case ActionConstants.GO_TO:
-          this.updateGoToMarkerPosition(action.latlon);
+          this.updateGoToMarkerPosition(action.latlng);
           this.emitChange(EventConstants.CHANGE_GO_TO);
           break;
 

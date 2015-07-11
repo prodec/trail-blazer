@@ -1,8 +1,9 @@
+import L from 'leaflet';
+import $ from 'jquery';
 import React from 'react';
 import GoogleLeaflet from '../lib/google';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
-import classNames from 'classnames';
 import { EventConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
@@ -14,29 +15,32 @@ export default class Map extends React.Component {
   }
 
   componentDidMount() {
+    this.initMap();
+    mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
+    mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
+    mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
+  }
+
+  initMap() {
     L.Icon.Default.imagePath = '//cdn.leafletjs.com/leaflet-0.7.3/images';
     let map = new L.Map('map', { center: new L.LatLng(51.51, -0.11), zoom: 17 });
 
     map.addLayer(new GoogleLeaflet('SATELLITE'));
     this.setState({ map });
     Actions.addMap(map);
-
-    mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
-    mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
-    mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
   }
 
   // Leaflet already manipulate the map class names, so you can't change the map
   // class set or the map don't will work properly, this is why jquery is used.
-  onChangeCursor(e) {
+  onChangeCursor() {
     $('.leaflet-container').css('cursor', mapStore.getState().cursor);
   }
 
-  addMarkerToMap(e) {
+  addMarkerToMap() {
     let data = this.getState();
     let marker = data.marker;
     let map = data.map;
-    
+
     marker.addTo(map);
   }
 
@@ -64,7 +68,7 @@ export default class Map extends React.Component {
     this.state.map.addLayer(layer);
   }
 
-  updateMapCenter(latlon) {
-    this.state.map.setView(latlon);
+  updateMapCenter(latlng) {
+    this.state.map.setView(latlng);
   }
 }

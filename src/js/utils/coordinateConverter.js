@@ -5,23 +5,23 @@ import { SettingConstants } from '../constants/constants';
 
 export default class CoordinateConverter {
   static utmToPoint(datum, zone, east, north) {
-    [east, north].forEach(v => { v = this.replaceComma(v); });
+    [east, north] = [east, north].map(v => { return this.toFloat(v); });
     let referenceSystem = this.referenceSystems(datum);
     let fromSrid = new Proj4js.Proj(Proj4js.defs(`EPSG:${referenceSystem + parseInt(zone)}`));
     let toSrid = new Proj4js.Proj(Proj4js.defs(SettingConstants.MAP_PROJECTION));
-    let position = Proj4js.toPoint([parseFloat(east), parseFloat(north)]);
+    let position = Proj4js.toPoint([east, north]);
     let point = Proj4js.transform(fromSrid, toSrid, position);
     return [point.y, point.x];
   }
 
-  static latLonToPoint(lon, lat) {
-    [lon, lat].forEach(v => { this.replaceComma(v); });
+  static latLngToPoint(lat, lon) {
+    [lon, lat] = [lon, lat].map(v => { return this.toFloat(v); });
     if (SettingConstants.DEFAULT_PROJECTION === SettingConstants.MAP_PROJECTION) {
       return [lat, lon];
     }
     let fromSrid = new Proj4js.Proj(Proj4js.defs(SettingConstants.DEFAULT_PROJECTION));
     let toSrid = new Proj4js.Proj(Proj4js.defs(SettingConstants.MAP_PROJECTION));
-    let position = Proj4js.toPoint([parseFloat(lon), parseFloat(lat)]);
+    let position = Proj4js.toPoint([lon, lat]);
     let point = Proj4js.transform(fromSrid, toSrid, position);
     return [point.y, point.x];
   }
@@ -34,8 +34,8 @@ export default class CoordinateConverter {
     }[datum]);
   }
 
-  static replaceComma(number) {
-    if (isNaN(number)) { return number.replace(',', '.'); }
-    return number;
+  static toFloat(number) {
+    if (isNaN(number)) { number = number.replace(',', '.'); }
+    return parseFloat(number);
   }
 }

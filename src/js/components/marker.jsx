@@ -1,3 +1,4 @@
+import L from 'leaflet';
 import React from 'react';
 import classNames from 'classnames';
 import Actions from '../actions/actions';
@@ -92,19 +93,19 @@ export default class Marker extends React.Component {
         {this.state.icons.map((icon, i) => {
           return(
             <a href="javascript:void(0)" key={i}>
-              <img src={"/src/images/" + icon + ".png"} 
+              <img src={"/src/images/" + icon + ".png"}
                    className={classNames(this.state.sets[icon])}
                    key={i}
                    onClick={this.changeIcon}
                    id={icon} />
             </a>
-          ) 
+          )
         })}
 
         <div id="icon-info" className="pure-form">
           <textarea id="icon-info-description"
                     className="pure-input-1-2"
-                    onChange={this.changeText} 
+                    onChange={this.changeText}
                     value={this.state.text}
                     placeholder="Observações">
           </textarea>
