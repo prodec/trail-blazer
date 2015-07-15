@@ -32,7 +32,8 @@ export default class Marker extends React.Component {
   changeIcon(e) {
     this.selectIcon(e);
     let icon = new L.Icon({ iconUrl: $(e.currentTarget).attr('src'),
-                            iconAnchor: MarkerConstants.ICON_ANCHOR }) ;
+                            iconAnchor: MarkerConstants.ICON_ANCHOR,
+                            draggable: true });
 
     this.setState((state) => {
       state.selectedIcon = icon;
