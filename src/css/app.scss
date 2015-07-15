@@ -147,14 +147,14 @@ button::-moz-focus-inner {
 }
 
 #icon-info {
-  margin-top: 10px;
-  position: absolute;
+    margin-top: 10px;
+    position: absolute;
 }
 
 #icon-info-description {
-  font-size: 16px;
-  height: 180px;
-  width: 300px
+    font-size: 16px;
+    height: 180px;
+    width: 300px;
 }
 
 .leaflet-popup-content-wrapper {
@@ -169,7 +169,8 @@ button::-moz-focus-inner {
 }
 
 .popup-content {
-    margin-bottom: 10px;
+    margin-bottom: 30px;
     max-width: 250px;
+    height: 50px;
     word-break: break-word;
 }
