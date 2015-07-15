@@ -1,10 +1,15 @@
+import React from 'react';
 import { MarkerConstants } from '../constants/constants';
+import Actions from '../actions/actions';
 
 export default class Popup {
   constructor(marker, text) {
     this.marker = marker;
     this.text = text;
     this.options = { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' };
+  }
+
+  removeMarker() {
   }
 
   bind() {
