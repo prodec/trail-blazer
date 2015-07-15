@@ -8,7 +8,7 @@ let data = {
   goToMarker: null,
   map: null,
   mode: null,
-  marker: null
+  markers: []
 };
 
 class MapStore extends EventEmitter {
@@ -72,7 +72,7 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.ADD_MARKER:
-          data.marker = action.marker;
+          data.markers.push(action.marker);
           this.emitChange(EventConstants.ADD_MARKER);
           break;
 
