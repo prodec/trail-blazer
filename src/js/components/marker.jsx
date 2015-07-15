@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 import Popup from './popup';
-import { ModeConstants, MarkerConstants, ModeContants } from '../constants/constants';
+import { ModeConstants, MarkerConstants } from '../constants/constants';
 
 export default class Marker extends React.Component {
   constructor() {
