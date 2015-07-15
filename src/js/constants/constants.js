@@ -28,7 +28,8 @@ export const ActionConstants = keyMirror({
   REMOVE_ITEM: null,
   CHANGE_CURSOR: null,
   CHANGE_MODE: null,
-  ADD_MARKER: null
+  ADD_MARKER: null,
+  REMOVE_MARKER: null
 });
 
 export const EventConstants = keyMirror({
