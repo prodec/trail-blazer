@@ -38,7 +38,8 @@ export default class Map extends React.Component {
 
   addMarkerToMap() {
     let data = this.getState();
-    let marker = data.marker;
+    let markers = data.markers;
+    let marker = markers[markers.length - 1];
     let map = data.map;
 
     marker.addTo(map);
