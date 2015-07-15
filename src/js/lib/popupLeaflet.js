@@ -1,5 +1,3 @@
-import L from 'leaflet';
-
 L.Map = L.Map.extend({
   closePopup: function(popup) {
     if (!popup || popup === this._popup) {
