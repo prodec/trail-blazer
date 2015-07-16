@@ -2,6 +2,7 @@ import L from 'leaflet';
 import $ from 'jquery';
 import React from 'react';
 import GoogleLeaflet from '../lib/google';
+import PopupLeaflet from '../lib/popupLeaflet';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 import { EventConstants } from '../constants/constants';
