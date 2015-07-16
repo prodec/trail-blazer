@@ -75,18 +75,31 @@ export default class Marker extends React.Component {
   }
 
   addMarker(e) {
-    let marker = new L.Marker(e.latlng, { icon: this.state.selectedIcon });
+    let marker = this.markerWithEvents(new L.Marker(e.latlng, { icon: this.state.selectedIcon }));
     let text = this.state.text;
     let options = { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' };
-    let popup = new Popup(marker, text);
-
-    popup.bind(marker, text);
+    let id = `${mapStore.getState().markers.length}_marker`;
+    let popup = new Popup(marker, text, id);
+    
     Actions.addMarker(marker);
+    popup.bindOnMarker();
     this.setState({ text: '' });
   }
 
   changeText(e) {
     this.setState({ text: e.target.value });
+  }
+
+  markerWithEvents(marker) {
+    marker.on('click', (e) => {
+      $(e.target.getPopup()._container).css('display', 'block');
+    })
+
+    marker.on('add', () => {
+      $('.leaflet-popup').css('display', 'none')
+    });
+
+    return marker;
   }
 
   render() {
