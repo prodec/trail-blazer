@@ -3,10 +3,11 @@ import React from 'react';
 import classNames from 'classnames';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
-import Popup from './popup';
+import Popup from '../utils/popup';
+import Marker from '../utils/marker';
 import { ModeConstants, MarkerConstants } from '../constants/constants';
 
-export default class Marker extends React.Component {
+export default class MarkerUI extends React.Component {
   constructor() {
     super();
     this.selectIcon = this.selectIcon.bind(this);
@@ -75,12 +76,11 @@ export default class Marker extends React.Component {
   }
 
   addMarker(e) {
-    let marker = this.markerWithEvents(new L.Marker(e.latlng, { icon: this.state.selectedIcon }));
+    let marker = new Marker(e.latlng, this.state.selectedIcon);
     let text = this.state.text;
-    let options = { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' };
     let id = `${mapStore.getState().markers.length}_marker`;
     let popup = new Popup(marker, text, id);
-    
+
     Actions.addMarker(marker);
     popup.bindOnMarker();
     this.setState({ text: '' });
@@ -88,18 +88,6 @@ export default class Marker extends React.Component {
 
   changeText(e) {
     this.setState({ text: e.target.value });
-  }
-
-  markerWithEvents(marker) {
-    marker.on('click', (e) => {
-      $(e.target.getPopup()._container).css('display', 'block');
-    })
-
-    marker.on('add', () => {
-      $('.leaflet-popup').css('display', 'none')
-    });
-
-    return marker;
   }
 
   render() {

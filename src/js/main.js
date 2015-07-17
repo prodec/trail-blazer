@@ -1,10 +1,16 @@
-var React = require('react');
+import React from 'react';
 
-// Not ideal to use createFactory, but don't know how to use JSX to solve this
-// Posted question at: https://gist.github.com/sebmarkbage/ae327f2eda03bf165261
-var App = require('./components/app.js');
+// Styles
+import 'purecss';
+import '../css/lib/buttons.css';
+import '../css/lib/glyphicons.css';
+import '../css/lib/style.css';
+import '../css/app.scss';
 
-React.render(
-  <App />,
-  document.getElementById('main')
-);
+// JS
+import './lib/buttons';
+
+// React
+import App from './components/app';
+
+React.render(<App />, document.body);

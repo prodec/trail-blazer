@@ -31,8 +31,7 @@ export default class Map extends React.Component {
     Actions.addMap(map);
   }
 
-  // Leaflet already manipulate the map class names, so you can't change the map
-  // class set or the map don't will work properly, this is why jquery is used.
+
   onChangeCursor() {
     $('.leaflet-container').css('cursor', mapStore.getState().cursor);
   }
