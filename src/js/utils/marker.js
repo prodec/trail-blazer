@@ -1,3 +1,4 @@
+import L from 'leaflet';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
 import { ModeConstants } from '../constants/constants';
@@ -16,6 +17,8 @@ export default class Marker {
   withHooks(marker) {
     let iconMargin = 0; 
     let icon = this.icon;
+    let mode = null;
+    let map = mapStore.getState().map;
 
     marker.on('click', (e) => {
       e.target.getPopup()._isOpen = false;
@@ -29,15 +32,23 @@ export default class Marker {
     marker.on('dragstart', (e) => {
       let icon = e.target._icon; 
 
+      mode = mapStore.getState().mode;
+      Actions.changeMode(ModeConstants);
+
       if (!iconMargin) {
         iconMargin = parseInt(L.DomUtil.getStyle(icon, 'marginTop'));
       }
     
-      icon.style.marginTop = (iconMargin - 15)  + 'px';
+      icon.style.marginTop = `${iconMargin - 15}px`;
     });
-    
+
     marker.on('dragend', (e) => {
-      e.target._icon.style.marginTop = iconMargin + 'px';
+      let map = mapStore.getState().map;
+      e.target._icon.style.marginTop = `${iconMargin}px`;
+
+      map.once('click', () => {
+        Actions.changeMode(mode);
+      })
     });
 
     return marker;
