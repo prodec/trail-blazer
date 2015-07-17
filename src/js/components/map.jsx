@@ -51,8 +51,9 @@ export default class Map extends React.Component {
 
   goToPosition() {
     let marker = this.getGoToMarker();
+
     if (marker) {
-      if (!this.hasLayer(marker)) { this.addToMap(marker); }
+      if (!this.hasLayer(marker)) { this.addToMap(marker) }
       this.updateMapCenter(marker.getLatLng());
     }
   }

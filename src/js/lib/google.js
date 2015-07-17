@@ -1,4 +1,5 @@
 import L from 'leaflet';
+
 // L.TileLayer is used for standard xyz-numbered tile layers.
 // Convert this file to ES6 later.
 L.Google = L.Class.extend({

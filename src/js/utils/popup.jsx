@@ -1,3 +1,4 @@
+import L from 'leaflet';
 import React from 'react';
 import { MarkerConstants } from '../constants/constants';
 import PopupUI from '../components/popup'
