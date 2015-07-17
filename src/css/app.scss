@@ -172,3 +172,10 @@ button::-moz-focus-inner {
     margin-bottom: 30px;
     word-break: break-word;
 }
+
+.leaflet-marker-icon, .leaflet-marker-shadow {
+    -webkit-transition: margin 0.2s;
+    -moz-transition: margin 0.2s;
+    -o-transition: margin 0.2s;
+    transition: margin 0.2s;
+} 
