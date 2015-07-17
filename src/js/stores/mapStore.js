@@ -35,6 +35,7 @@ class MapStore extends EventEmitter {
 
   updateGoToMarkerPosition(latlng) {
     let marker = data.goToMarker;
+
     if (marker) {
       marker.setLatLng(latlng);
     } else {
