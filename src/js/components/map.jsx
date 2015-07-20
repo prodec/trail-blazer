@@ -31,18 +31,18 @@ export default class Map extends React.Component {
     Actions.addMap(map);
   }
 
-
   onChangeCursor() {
     $('.leaflet-container').css('cursor', mapStore.getState().cursor);
   }
 
   addMarkerToMap() {
-    let data = this.getState();
-    let markers = data.markers;
-    let marker = markers[markers.length - 1];
-    let map = data.map;
+    let marker = mapStore.getState().layerToAdd;
+    this.addToMap(marker);
+  }
 
-    marker.addTo(map);
+  removeMarkerFromMap() {
+    let marker = mapStore.getState().layerToRemove;
+    this.removeFromMap(marker);
   }
 
   render() {
@@ -68,6 +68,10 @@ export default class Map extends React.Component {
 
   addToMap(layer) {
     this.state.map.addLayer(layer);
+  }
+
+  removeFromMap(marker) {
+    this.state.map.removeLayer(marker);
   }
 
   updateMapCenter(latlng) {

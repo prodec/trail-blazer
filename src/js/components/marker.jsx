@@ -78,7 +78,7 @@ export default class MarkerUI extends React.Component {
   addMarker(e) {
     let marker = new Marker(e.latlng, this.state.selectedIcon);
     let text = this.state.text;
-    let id = `${mapStore.getState().markers.length}_marker`;
+    let id = Marker.idOnMap(marker);
     let popup = new Popup(marker, text, id);
 
     Actions.addMarker(marker);
