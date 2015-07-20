@@ -1,6 +1,7 @@
 import L from 'leaflet';
 import { EventEmitter } from 'events';
 import dispatcher from '../dispatcher/dispatcher';
+import Marker from '../utils/marker';
 import { ActionConstants, EventConstants } from '../constants/constants';
 
 let data = {
@@ -8,13 +9,29 @@ let data = {
   goToMarker: null,
   map: null,
   mode: null,
-  markers: []
+  markers: {},
+  layerToRemove: null,
+  layerToAdd: null
 };
 
 class MapStore extends EventEmitter {
   constructor() {
     super();
     this.dispatchToken = this.registerCallbacks();
+  }
+
+  addMarker(marker) {
+    let id = Marker.idOnMap(marker);
+
+    data.markers[id] = marker;
+    data.layerToAdd = marker;
+  }
+
+  removeMarker(marker) {
+    let id = Marker.idOnMap(marker);
+
+    delete(data.markers[id]);
+    data.layerToRemove = marker;
   }
 
   getState() {
@@ -73,8 +90,13 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.ADD_MARKER:
-          data.markers.push(action.marker);
+          this.addMarker(action.marker);
           this.emitChange(EventConstants.ADD_MARKER);
+          break;
+
+        case ActionConstants.REMOVE_MARKER:
+          this.removeMarker(action.marker);
+          this.emitChange(EventConstants.REMOVE_MARKER);
           break;
 
         case ActionConstants.CHANGE_MODE:

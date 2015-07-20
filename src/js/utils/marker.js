@@ -14,6 +14,10 @@ export default class Marker {
     return this.withHooks(marker);
   }
 
+  static idOnMap(marker) {
+    return L.stamp(marker);
+  }
+
   withHooks(marker) {
     let iconMargin = 0; 
     let icon = this.icon;
