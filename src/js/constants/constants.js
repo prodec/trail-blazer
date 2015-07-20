@@ -37,7 +37,8 @@ export const EventConstants = keyMirror({
   CHANGE_CURSOR: null,
   CHANGE_MAP: null,
   CHANGE_GO_TO: null,
-  ADD_MARKER: null
+  ADD_MARKER: null,
+  REMOVE_MARKER: null
 });
 
 export const GoToTabConstants = {

@@ -11,14 +11,14 @@ export default class Popup {
                      className: 'marker-popup',
                      minWidth: 200,
                      autoClose: false };
-    this.id = id;
+    this.id = `${id}-marker-popup`;
   }
 
   bindOnMarker() {
     let body = `<div id =${this.id}></div>`;
     this.marker.bindPopup(body, this.options).openPopup();
 
-    React.render(<PopupUI text={this.text} />,
+    React.render(<PopupUI text={this.text} marker={this.marker} />,
                   document.getElementById(this.id));
   }
 }
