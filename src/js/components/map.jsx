@@ -13,6 +13,8 @@ export default class Map extends React.Component {
     this.state = { map: null, set: { 'default-cursor': true, 'crosshair-cursor': false } };
     this.goToPosition = this.goToPosition.bind(this);
     this.onChangeCursor = this.onChangeCursor.bind(this);
+    this.addMarkerToMap = this.addMarkerToMap.bind(this);
+    this.removeMarkerFromMap = this.removeMarkerFromMap.bind(this);
   }
 
   componentDidMount() {
@@ -20,6 +22,7 @@ export default class Map extends React.Component {
     mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
     mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
     mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
+    mapStore.addChangeListener(this.removeMarkerFromMap, EventConstants.REMOVE_MARKER);
   }
 
   initMap() {
