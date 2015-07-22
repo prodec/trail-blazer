@@ -45,7 +45,7 @@ export default class PopupUI extends React.Component {
     let editing = !this.state.editing;
 
     Actions.updateMarker(this.state.marker, text);
-    this.setState({ editing });
+    this.setState({ editing, originalText: text });
   }
 
   render() {
