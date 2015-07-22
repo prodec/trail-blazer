@@ -29,7 +29,9 @@ export const ActionConstants = keyMirror({
   CHANGE_CURSOR: null,
   CHANGE_MODE: null,
   ADD_MARKER: null,
-  REMOVE_MARKER: null
+  REMOVE_MARKER: null,
+  UPDATE_MARKER: null,
+  SAVE_MARKER_CONTENT: null
 });
 
 export const EventConstants = keyMirror({
@@ -38,7 +40,9 @@ export const EventConstants = keyMirror({
   CHANGE_MAP: null,
   CHANGE_GO_TO: null,
   ADD_MARKER: null,
-  REMOVE_MARKER: null
+  REMOVE_MARKER: null,
+  UPDATE_MARKER: null,
+  SAVE_MARKER_CONTENT: null
 });
 
 export const GoToTabConstants = {

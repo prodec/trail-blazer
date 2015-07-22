@@ -169,7 +169,20 @@ button::-moz-focus-inner {
 }
 
 .popup-content {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+
+.popup-actions {
+    a {
+        text-decoration: none;   
+    }
+}
+
+.content-editable {
+    height: 100px !important;
+    width: 200px !important;
+    margin-bottom: 15px;
     word-break: break-word;
 }
 
