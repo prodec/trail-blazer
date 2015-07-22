@@ -57,7 +57,10 @@ export default class MarkerUI extends React.Component {
     this.setState((state, props) => {
       let isActive = (current == state.active);
 
-      if (!isActive) { state.sets[state.active]['icon-map-selected'] = false };
+      if (!isActive) {
+        state.sets[state.active]['icon-map-selected'] = false
+      }
+
       state.sets[current]['icon-map-selected'] = true;
       state.active = current;
 
