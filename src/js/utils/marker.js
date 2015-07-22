@@ -21,7 +21,7 @@ export default class Marker {
   withHooks(marker) {
     let iconMargin = 0; 
     let icon = this.icon;
-    let mode = null;
+    let mode;
     let map = mapStore.getState().map;
 
     marker.on('click', (e) => {
@@ -37,7 +37,7 @@ export default class Marker {
       let icon = e.target._icon; 
 
       mode = mapStore.getState().mode;
-      Actions.changeMode(ModeConstants);
+      Actions.changeMode(ModeConstants.VIEW_MODE);
 
       if (!iconMargin) {
         iconMargin = parseInt(L.DomUtil.getStyle(icon, 'marginTop'));
