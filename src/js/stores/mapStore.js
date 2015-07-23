@@ -9,7 +9,7 @@ let data = {
   goToMarker: null,
   map: null,
   mode: null,
-  markers: {},
+  markers: new Map(),
   layerToRemove: null,
   layerToAdd: null,
   layerToUpdate: null
@@ -21,24 +21,19 @@ class MapStore extends EventEmitter {
     this.dispatchToken = this.registerCallbacks();
   }
 
-  addMarker(marker, content) {
+  addOrUpdateMarker(marker, content) {
     let id = Marker.idOnMap(marker);
     let markerData = { marker, content }
 
-    data.markers[id] = markerData;
+    data.markers.set(id, markerData);
     data.layerToAdd = marker;
   }
 
   removeMarker(marker) {
     let id = Marker.idOnMap(marker);
 
-    delete(data.markers[id]);
+    data.markers.delete(id);
     data.layerToRemove = marker;
-  }
-
-  updateMarker(marker, content) {
-    let id = Marker.idOnMap(marker);
-    data.markers[id] = { marker, content };
   }
 
   getState() {
@@ -97,7 +92,7 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.ADD_MARKER:
-          this.addMarker(action.marker, action.content);
+          this.addOrUpdateMarker(action.marker, action.content);
           this.emitChange(EventConstants.ADD_MARKER);
           break;
 
@@ -107,7 +102,7 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.UPDATE_MARKER:
-          this.updateMarker(action.marker, action.content);
+          this.addOrUpdateMarker(action.marker, action.content);
           this.emitChange(EventConstants.UPDATE_MARKER);
           break;
 
