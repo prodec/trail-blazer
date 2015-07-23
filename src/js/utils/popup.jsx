@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import React from 'react';
 import { MarkerConstants } from '../constants/constants';
-import PopupUI from '../components/popup'
+import PopupContent from '../components/popupContent'
 
 export default class Popup {
   constructor(marker, text, id) {
@@ -18,7 +18,7 @@ export default class Popup {
     let body = `<div id =${this.id}></div>`;
 
     this.marker.bindPopup(body, this.options).openPopup();
-    React.render(<PopupUI text={this.text} marker={this.marker} />,
+    React.render(<PopupContent text={this.text} marker={this.marker} />,
                   document.getElementById(this.id));
   }
 }
