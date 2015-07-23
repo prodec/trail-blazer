@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import mapStore from '../stores/mapStore';
 import Popup from '../utils/popup';
 
-export default class PopupUI extends React.Component {
+export default class PopupContent extends React.Component {
   constructor(props) {
     super();
     this.removeMarker = this.removeMarker.bind(this);
