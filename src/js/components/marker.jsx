@@ -3,9 +3,11 @@ import React from 'react';
 import classNames from 'classnames';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
-import { ModeConstants, MarkerConstants, ModeContants } from '../constants/constants';
+import Popup from '../utils/popup';
+import Marker from '../utils/marker';
+import { ModeConstants, MarkerConstants } from '../constants/constants';
 
-export default class Marker extends React.Component {
+export default class MarkerUI extends React.Component {
   constructor() {
     super();
     this.selectIcon = this.selectIcon.bind(this);
@@ -31,7 +33,8 @@ export default class Marker extends React.Component {
   changeIcon(e) {
     this.selectIcon(e);
     let icon = new L.Icon({ iconUrl: $(e.currentTarget).attr('src'),
-                            iconAnchor: MarkerConstants.ICON_ANCHOR }) ;
+                            iconAnchor: MarkerConstants.ICON_ANCHOR,
+                            draggable: true });
 
     this.setState((state) => {
       state.selectedIcon = icon;
@@ -54,7 +57,10 @@ export default class Marker extends React.Component {
     this.setState((state, props) => {
       let isActive = (current == state.active);
 
-      if (!isActive) { state.sets[state.active]['icon-map-selected'] = false }
+      if (!isActive) {
+        state.sets[state.active]['icon-map-selected'] = false
+      }
+
       state.sets[current]['icon-map-selected'] = true;
       state.active = current;
 
@@ -73,13 +79,14 @@ export default class Marker extends React.Component {
   }
 
   addMarker(e) {
-    let marker = new L.Marker(e.latlng, { icon: this.state.selectedIcon });
-    let text = this.state.text;
+    let marker = new Marker(e.latlng, this.state.selectedIcon);
+    let content = this.state.text;
+    let id = Marker.idOnMap(marker);
+    let popup = new Popup(marker, content, id);
 
-    if (text !== '') {
-      marker.bindPopup(this.state.text, { offset: MarkerConstants.POPUP_OFFSET, className: 'marker-popup' })
-    }
-    Actions.addMarker(marker);
+    Actions.addMarker(marker, content);
+    popup.bindOnMarker();
+
     this.setState({ text: '' });
   }
 
@@ -107,6 +114,7 @@ export default class Marker extends React.Component {
                     className="pure-input-1-2"
                     onChange={this.changeText}
                     value={this.state.text}
+                    maxLength="140"
                     placeholder="Observações">
           </textarea>
         </div>

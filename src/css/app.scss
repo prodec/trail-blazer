@@ -147,14 +147,14 @@ button::-moz-focus-inner {
 }
 
 #icon-info {
-  margin-top: 10px;
-  position: absolute;
+    margin-top: 10px;
+    position: absolute;
 }
 
 #icon-info-description {
-  font-size: 16px;
-  height: 180px;
-  width: 300px
+    font-size: 16px;
+    height: 180px;
+    width: 300px;
 }
 
 .leaflet-popup-content-wrapper {
@@ -162,3 +162,33 @@ button::-moz-focus-inner {
     border-radius: 0;
     padding: 2px;
 }
+
+.popup-action-link {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.popup-content {
+    margin-bottom: 20px;
+    word-break: break-word;
+}
+
+.popup-actions {
+    a {
+        text-decoration: none;   
+    }
+}
+
+.content-editable {
+    height: 100px !important;
+    width: 200px !important;
+    margin-bottom: 15px;
+    word-break: break-word;
+}
+
+.leaflet-marker-icon, .leaflet-marker-shadow {
+    -webkit-transition: margin 0.2s;
+    -moz-transition: margin 0.2s;
+    -o-transition: margin 0.2s;
+    transition: margin 0.2s;
+} 

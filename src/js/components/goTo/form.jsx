@@ -1,5 +1,5 @@
-import React from 'react';
 import L from 'leaflet';
+import React from 'react';
 import Actions from '../../actions/actions';
 import { GoToTabConstants } from '../../constants/constants';
 import CoordinateConverter from '../../utils/coordinateConverter';

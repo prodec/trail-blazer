@@ -16,24 +16,40 @@ export default class Actions {
     });
   }
 
-  static addMarker(marker) {
-    dispatcher.handleAction({
-      type: ActionConstants.ADD_MARKER,
-      marker
-    });
-  }
-
-  static addMap(map) {
+ static addMap(map) {
     dispatcher.handleAction({
       type: ActionConstants.ADD_MAP,
       map
     });
   }
 
-  static goToCoordinate(latlng) {
+  static addMarker(marker, content = '') {
+    dispatcher.handleAction({
+      type: ActionConstants.ADD_MARKER,
+      marker,
+      content
+    })
+  }
+
+  static removeMarker(marker) {
+    dispatcher.handleAction({
+      type: ActionConstants.REMOVE_MARKER,
+      marker
+    });
+  }
+
+  static updateMarker(marker, content) {
+    dispatcher.handleAction({
+      type: ActionConstants.UPDATE_MARKER,
+      marker,
+      content
+    });
+  }
+
+  static goToCoordinate(latLng) {
     dispatcher.handleAction({
       type: ActionConstants.GO_TO,
-      latlng
+      latLng
     });
   }
 }
