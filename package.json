@@ -6,9 +6,10 @@
   "readme": "https://github.com/prodec/trail-blazer/README.md",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^5.1.11",
+    "babel-core": "^5.8.3",        
     "babel-eslint": "^3.1.20",
-    "babel-loader": "^5.0.0",
+    "babel-loader": "^5.3.2",
+    "babel-runtime": "^5.8.3",
     "classnames": "^2.1.2",
     "css-loader": "^0.11.0",
     "es6-promise": "^1.0.0",
@@ -24,7 +25,6 @@
     "jsx-loader": "^0.13.1",
     "leaflet": "^0.7.3",
     "keymirror": "^0.1.1",
-    "leaflet": "^0.7.3",
     "node-sass": "^3.0.0-beta.4",
     "object-assign": "^1.0.0",
     "proj4": "^2.3.6",
@@ -36,8 +36,8 @@
     "sass-loader": "^1.0.1",
     "style-loader": "^0.11.0",
     "url-loader": "^0.5.5",
-    "webpack": "^1.7.2",
-    "webpack-dev-server": "^1.7.0"
+    "webpack": "^1.10.5",
+    "webpack-dev-server": "^1.10.1"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

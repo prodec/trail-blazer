@@ -11,10 +11,6 @@ export default class Map extends React.Component {
   constructor() {
     super();
     this.state = { map: null, set: { 'default-cursor': true, 'crosshair-cursor': false } };
-    this.goToPosition = this.goToPosition.bind(this);
-    this.onChangeCursor = this.onChangeCursor.bind(this);
-    this.addMarkerToMap = this.addMarkerToMap.bind(this);
-    this.removeMarkerFromMap = this.removeMarkerFromMap.bind(this);
   }
 
   componentDidMount() {
@@ -34,16 +30,16 @@ export default class Map extends React.Component {
     Actions.addMap(map);
   }
 
-  onChangeCursor() {
+  onChangeCursor = () => {
     $('.leaflet-container').css('cursor', mapStore.getState().cursor);
   }
 
-  addMarkerToMap() {
+  addMarkerToMap = () => {
     let marker = mapStore.getState().layerToAdd;
     this.addToMap(marker);
   }
 
-  removeMarkerFromMap() {
+  removeMarkerFromMap = () => {
     let marker = mapStore.getState().layerToRemove;
     this.removeFromMap(marker);
   }
@@ -52,7 +48,7 @@ export default class Map extends React.Component {
     return <div id="map"></div>;
   }
 
-  goToPosition() {
+  goToPosition = () => {
     let marker = this.getGoToMarker();
 
     if (marker) {
@@ -77,7 +73,7 @@ export default class Map extends React.Component {
     this.state.map.removeLayer(marker);
   }
 
-  updateMapCenter(latlng) {
-    this.state.map.setView(latlng);
+  updateMapCenter(latLng) {
+    this.state.map.setView(latLng);
   }
 }
