@@ -10,11 +10,6 @@ import { ModeConstants, MarkerConstants } from '../constants/constants';
 export default class MarkerUI extends React.Component {
   constructor() {
     super();
-    this.selectIcon = this.selectIcon.bind(this);
-    this.changeIcon = this.changeIcon.bind(this);
-    this.addMarker = this.addMarker.bind(this);
-    this.changeText = this.changeText.bind(this);
-
     let icons = MarkerConstants.ICONS;
     let sets = this.initClassSets(icons);
 
@@ -30,7 +25,7 @@ export default class MarkerUI extends React.Component {
     mapStore.addChangeListener(this.onChangeMode.bind(this), ModeConstants.CHANGE_MODE);
   }
 
-  changeIcon(e) {
+  changeIcon = (e) => {
     this.selectIcon(e);
     let icon = new L.Icon({ iconUrl: $(e.currentTarget).attr('src'),
                             iconAnchor: MarkerConstants.ICON_ANCHOR,
@@ -51,7 +46,7 @@ export default class MarkerUI extends React.Component {
     return icons.reduce(reducer, {});
   }
 
-  selectIcon(e) {
+  selectIcon = (e) => {
     let current = e.currentTarget.id;
 
     this.setState((state, props) => {
@@ -78,7 +73,7 @@ export default class MarkerUI extends React.Component {
     }
   }
 
-  addMarker(e) {
+  addMarker = (e) => {
     let marker = new Marker(e.latlng, this.state.selectedIcon);
     let content = this.state.text;
     let id = Marker.idOnMap(marker);
@@ -90,7 +85,7 @@ export default class MarkerUI extends React.Component {
     this.setState({ text: '' });
   }
 
-  changeText(e) {
+  changeText = (e) => {
     this.setState({ text: e.target.value });
   }
 

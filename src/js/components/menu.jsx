@@ -8,28 +8,24 @@ import { MenuConstants, CursorConstants, ModeConstants } from '../constants/cons
 export default class Menu extends React.Component {
   constructor() {
     super();
-    this.togglePanel = this.togglePanel.bind(this);
-    this.setupMarker = this.setupMarker.bind(this);
-    this.setupGoTo = this.setupGoTo.bind(this);
-
     let items = MenuConstants.MENU_ITEMS;
     let sets = this.initClassSets(items);
     this.state = { active: null, sets, items };
   }
 
-  setupMarker(e) {
+  setupMarker = (e) => {
     this.togglePanel(e);
     Actions.changeMode(ModeConstants.MARKER_MODE);
     Actions.changeCursor(CursorConstants.CURSOR_CROSSHAIR);
   }
 
-  setupGoTo(e) {
+  setupGoTo = (e) => {
     this.togglePanel(e);
     Actions.changeMode(ModeConstants.GO_TO_MODE);
     Actions.changeCursor(CursorConstants.CURSOR_GRAB);
   }
 
-  togglePanel(e) {
+  togglePanel = (e) => {
     let current = e.currentTarget.id;
 
     this.setState((state, props) => {
