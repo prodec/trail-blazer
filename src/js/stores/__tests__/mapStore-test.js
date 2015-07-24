@@ -10,11 +10,11 @@ describe('MapStore', () => {
 
   let actionGoToCoordinate = {
     type: ActionConstants.GO_TO,
-    latlng: [1, 2]
+    latLng: [1, 2]
   };
   let actionGoToCoordinateUpdate = {
     type: ActionConstants.GO_TO,
-    latlng: [3, 4]
+    latLng: [3, 4]
   };
 
   beforeEach(() => {
@@ -28,19 +28,19 @@ describe('MapStore', () => {
   });
 
   describe('goToMarker', () => {
-    it('initializes with latlng when null', () => {
+    it('initializes with latLng when null', () => {
       expect(mapStore.getState().goToMarker).toBe(null);
       callback(actionGoToCoordinate);
-      let latlng = mapStore.getState().goToMarker.getLatLng().toString();
-      expect(latlng).toBe('LatLng(1, 2)');
+      let latLng = mapStore.getState().goToMarker.getLatLng().toString();
+      expect(latLng).toBe('LatLng(1, 2)');
     });
 
-    it('updates latlng', () => {
+    it('updates latLng', () => {
       callback(actionGoToCoordinate);
       expect(mapStore.getState().goToMarker).not.toBe(null);
       callback(actionGoToCoordinateUpdate);
-      let latlng = mapStore.getState().goToMarker.getLatLng().toString();
-      expect(latlng).toBe('LatLng(3, 4)');
+      let latLng = mapStore.getState().goToMarker.getLatLng().toString();
+      expect(latLng).toBe('LatLng(3, 4)');
     });
   });
 });
