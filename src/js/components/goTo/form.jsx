@@ -84,7 +84,7 @@ export default class Form extends React.Component {
     this.setState({ [e.target.name]: e.target.value });
   }
 
-  getlatlng() {
+  getLatLng() {
     let point;
     if (this.props.selectedTab === GoToTabConstants.POS_GEO) {
       point = CoordinateConverter.latLngToPoint(this.state.lat,
@@ -100,6 +100,6 @@ export default class Form extends React.Component {
 
   goToCoordinate(e) {
     e.preventDefault();
-    Actions.goToCoordinate(this.getlatlng());
+    Actions.goToCoordinate(this.getLatLng());
   }
 }

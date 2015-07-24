@@ -8,12 +8,6 @@ import Popup from '../utils/popup';
 export default class PopupContent extends React.Component {
   constructor(props) {
     super();
-    this.removeMarker = this.removeMarker.bind(this);
-    this.changeText = this.changeText.bind(this);
-    this.saveContent = this.saveContent.bind(this);
-    this.editContent = this.editContent.bind(this);
-    this.cancelEditContent = this.cancelEditContent.bind(this);
-
     this.state = {
       originalText: props.text,
       text: props.text,
@@ -23,24 +17,24 @@ export default class PopupContent extends React.Component {
     }
   }
 
-  removeMarker() {
+  removeMarker = () => {
     Actions.removeMarker(this.state.marker);
   }
 
-  editContent() {
+  editContent = () => {
     this.setState({ editing: true });
   }
 
-  cancelEditContent() {
+  cancelEditContent = () => {
     let text = this.state.originalText;
     this.setState({ text, editing: false });
   }
 
-  changeText(e) {
+  changeText = (e) => {
     this.setState({ text: e.target.value });
   }
 
-  saveContent() {
+  saveContent = () => {
     let text = this.state.text;
     let editing = !this.state.editing;
 
