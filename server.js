@@ -1,13 +1,28 @@
-var webpack = require('webpack');
-var WebpackDevServer = require('webpack-dev-server');
-var config = require('./webpack.config');
+import express from 'express';
+import path from 'path';
+import apiRoutes from './routes/api';
+import DevServer from './devServer';
+import webpackConfig from './webpack.config';
+import webpackDevServerConfig from './webpackDevServer.config';
+import dotenv from 'dotenv';
+dotenv.load();
 
-new WebpackDevServer(webpack(config), {
-  publicPath: config.output.publicPath,
-  hot: true,
-  historyApiFallback: true,
-  stats: { colors: true }
-}).listen(3000, 'localhost', function (err) {
-  if (err) { console.log(err); }
-  console.log('Listening at localhost:3000');
-});
+let app = express();
+let port = parseInt(process.env.PORT, 10);
+let isDevelopment = process.env.NODE_ENV === 'development';
+
+app
+  .use(express.static(path.join(__dirname, 'dist')))
+  .use('/api', apiRoutes)
+  .get('/', (req, res) => { res.sendFile('index.html'); })
+  .listen(port, (err) => {
+    if (err) { console.log(err); }
+    console.log(`Server listening at localhost:${port}`);
+  });
+
+if (isDevelopment) {
+  let devPort = parseInt(process.env.DEV_PORT, 10);
+  let devServer = new DevServer(webpackConfig, webpackDevServerConfig);
+
+  devServer.listen(devPort);
+}
