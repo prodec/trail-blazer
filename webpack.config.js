@@ -28,8 +28,9 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.jsx?$/, loader: 'jsx-loader?harmony!react-hot!babel', include: path.join(__dirname, 'src') },
-      { test: /\.js?$/, loader: 'babel', exclude: /node_modules/ },
+      { test: /\.jsx?$/, loader: 'jsx-loader?harmony!react-hot!babel?optional[]=runtime&stage=0',
+        include: path.join(__dirname, 'src') },
+      { test: /\.js?$/, loader: 'babel?optional[]=runtime&stage=0', exclude: /node_modules/ },
       { test: /\.scss?$/, loader: 'style!css!sass', include: path.join(__dirname, 'src/css') },
       { test: /\.css?$/, loader: 'style!css' },
       { test: /\.png?$/, loader: 'url' },

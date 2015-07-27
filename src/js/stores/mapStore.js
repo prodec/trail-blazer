@@ -52,24 +52,24 @@ class MapStore extends EventEmitter {
     this.emit(change);
   }
 
-  updateGoToMarkerPosition(latlng) {
+  updateGoToMarkerPosition(latLng) {
     let marker = data.goToMarker;
 
     if (marker) {
-      marker.setLatLng(latlng);
+      marker.setLatLng(latLng);
     } else {
-      this.initGoToMarker(latlng);
+      this.initGoToMarker(latLng);
     }
   }
 
-  initGoToMarker(latlng) {
+  initGoToMarker(latLng) {
     let options = { radius: 7,
                     weight: '1',
                     color: 'green',
                     opacity: 0.85,
                     fillColor: '#00ff00',
                     fillOpacity: 0.85 };
-    let circle = L.circleMarker(latlng, options);
+    let circle = L.circleMarker(latLng, options);
     data.goToMarker = circle;
   }
 
@@ -82,7 +82,7 @@ class MapStore extends EventEmitter {
           break;
 
         case ActionConstants.GO_TO:
-          this.updateGoToMarkerPosition(action.latlng);
+          this.updateGoToMarkerPosition(action.latLng);
           this.emitChange(EventConstants.CHANGE_GO_TO);
           break;
 

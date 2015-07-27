@@ -37,7 +37,7 @@ describe('GoTo', () => {
     it('on geo form submit', () => {
       formTag = getForm(goTo);
       formObject = TestUtils.findRenderedComponentWithType(goTo, Form);
-      formObject.getlatlng = jest.genMockFunction();
+      formObject.getLatLng = jest.genMockFunction();
 
       TestUtils.Simulate.submit(formTag);
       expect(Actions.goToCoordinate.mock.calls.length).toBe(1);
@@ -48,7 +48,7 @@ describe('GoTo', () => {
       TestUtils.Simulate.click(utmTab);
       formTag = getForm(goTo);
       formObject = TestUtils.findRenderedComponentWithType(goTo, Form);
-      formObject.getlatlng = jest.genMockFunction();
+      formObject.getLatLng = jest.genMockFunction();
 
       TestUtils.Simulate.submit(formTag);
       expect(Actions.goToCoordinate.mock.calls.length).toBe(1);
