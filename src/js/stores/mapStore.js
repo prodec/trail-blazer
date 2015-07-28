@@ -23,7 +23,7 @@ class MapStore extends EventEmitter {
 
   addOrUpdateMarker(marker, content) {
     let id = Marker.idOnMap(marker);
-    let markerData = { marker, content }
+    let markerData = { marker, content };
 
     data.markers.set(id, markerData);
     data.layerToAdd = marker;

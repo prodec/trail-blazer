@@ -28,7 +28,7 @@ export default class Actions {
       type: ActionConstants.ADD_MARKER,
       marker,
       content
-    })
+    });
   }
 
   static removeMarker(marker) {

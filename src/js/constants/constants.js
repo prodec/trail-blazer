@@ -12,7 +12,8 @@ export const MenuConstants = {
 export const ModeConstants = keyMirror({
   MARKER_MODE: null,
   VIEW_MODE: null,
-  GO_TO_MODE: null
+  GO_TO_MODE: null,
+  PLAN_MODE: null
 });
 
 export const MarkerConstants = {
