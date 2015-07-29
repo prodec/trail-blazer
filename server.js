@@ -15,8 +15,8 @@ app
   .use(express.static(path.join(__dirname, 'dist')))
   .use('/api', apiRoutes)
   .get('/', (req, res) => { res.sendFile('index.html'); })
-  .listen(port, (err) => {
-    if (err) { console.log(err); }
+  .listen(port, (error) => {
+    if (error) { console.log(error); }
     console.log(`Server listening at localhost:${port}`);
   });
 

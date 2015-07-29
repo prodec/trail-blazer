@@ -7,8 +7,8 @@ export default class DevServer {
   }
 
   listen(port) {
-    this.server.listen(port, (err) => {
-      if (err) { console.log(err); }
+    this.server.listen(port, (error) => {
+      if (error) { console.log(error); }
       console.log(`Development server listening at localhost:${port}`);
     });
   }
