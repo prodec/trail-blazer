@@ -25,12 +25,6 @@ export default class Menu extends React.Component {
     Actions.changeCursor(CursorConstants.CURSOR_GRAB);
   }
 
-  setupFlightPlan = (e) => {
-    this.togglePanel(e);
-    Actions.changeMode(ModeConstants.PLAN_MODE);
-    Actions.changeCursor(CursorConstants.CURSOR_CROSSHAIR);
-  }
-
   togglePanel = (e) => {
     let current = e.currentTarget.id;
 
@@ -70,7 +64,7 @@ export default class Menu extends React.Component {
           <button id="marker" className="button button-square button-jumbo button-action" onClick={this.setupMarker}>
             <i className="glyphicons google_maps"></i>
           </button>
-          <button id="line" className="button button-square button-jumbo button-caution" onClick={this.setupFlightPlan}>
+          <button id="line" className="button button-square button-jumbo button-caution" onClick={this.togglePanel}>
             <i className="glyphicons vector_path_line"></i>
           </button>
           <button id="battery" className="button button-square button-jumbo button-highlight" onClick={this.togglePanel}>
