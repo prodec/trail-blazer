@@ -58,6 +58,7 @@ describe('GoTo', () => {
 
   let getTabs = (component) => {
     let tabs = Object.keys(require.requireActual('../../constants/constants').GoToTabConstants);
+
     return tabs.sort().map(key => {
       return React.findDOMNode(component.refs[key]);
     });
@@ -69,6 +70,7 @@ describe('GoTo', () => {
 
   let getFirstInputName = (component) => {
     let form = getForm(component);
+
     return $(form).find('input').first().attr('name');
   };
 });
