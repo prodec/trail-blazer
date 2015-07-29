@@ -6,7 +6,7 @@
   "readme": "https://github.com/prodec/trail-blazer/README.md",
   "license": "MIT",
   "devDependencies": {
-    "babel-core": "^5.8.3",        
+    "babel-core": "^5.8.3",
     "babel-eslint": "^3.1.20",
     "babel-loader": "^5.3.2",
     "babel-runtime": "^5.8.3",
@@ -37,7 +37,8 @@
     "style-loader": "^0.11.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.10.5",
-    "webpack-dev-server": "^1.10.1"
+    "webpack-dev-server": "^1.10.1",
+    "material-design-lite": "^1.0.2"
   },
   "eslintConfig": {
     "parser": "babel-eslint",

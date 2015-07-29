@@ -22,4 +22,3 @@ export default class Popup {
                   document.getElementById(this.id));
   }
 }
-

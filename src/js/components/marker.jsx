@@ -104,14 +104,18 @@ export default class MarkerUI extends React.Component {
           )
         })}
 
-        <div id="icon-info" className="pure-form">
-          <textarea id="icon-info-description"
-                    className="pure-input-1-2"
-                    onChange={this.changeText}
-                    value={this.state.text}
-                    maxLength="140"
-                    placeholder="Observações">
-          </textarea>
+        <div id="icon-info">
+          <div className="mdl-textfield mdl-js-textfield textfield-demo">
+            <textarea className="mdl-textfield__input pure-input-1-2"
+                      type="text"
+                      rows= "3"
+                      onChange={this.changeText}
+                      value={this.state.text}
+                      maxLength="140"
+                      id="icon-info-description">
+            </textarea>
+            <label className="mdl-textfield__label" for="icon-info-description">Observação</label>
+          </div>
         </div>
       </div>
     )
