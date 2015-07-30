@@ -1,0 +1,5 @@
+dist/*.js
+tmp/*.js
+vendor/*.js
+src/js/lib/*.js
+jestPreprocessor.js

@@ -12,6 +12,7 @@ describe('GoTo', () => {
   it('changes form on tab click', () => {
     let goTo = TestUtils.renderIntoDocument(<GoTo />);
     let [geoTab, utmTab] = getTabs(goTo);
+
     expect(getFirstInputName(goTo)).toBe('lat');
     TestUtils.Simulate.click(utmTab);
     expect(getFirstInputName(goTo)).toBe('north');
@@ -45,6 +46,7 @@ describe('GoTo', () => {
 
     it('on utm form submit', () => {
       let utmTab = getTabs(goTo)[1];
+
       TestUtils.Simulate.click(utmTab);
       formTag = getForm(goTo);
       formObject = TestUtils.findRenderedComponentWithType(goTo, Form);
@@ -57,6 +59,7 @@ describe('GoTo', () => {
 
   let getTabs = (component) => {
     let tabs = Object.keys(require.requireActual('../../constants/constants').GoToTabConstants);
+
     return tabs.sort().map(key => {
       return React.findDOMNode(component.refs[key]);
     });
@@ -68,6 +71,7 @@ describe('GoTo', () => {
 
   let getFirstInputName = (component) => {
     let form = getForm(component);
+
     return $(form).find('input').first().attr('name');
   };
 });
