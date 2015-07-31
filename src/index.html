@@ -13,5 +13,11 @@
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="/node_modules/material-design-lite/material.min.js"></script>
     <script src="main.js"></script>
+    <script type="text/javascript">
+      var ServerConstants = {
+        NODE_ENV: "{%= o.htmlWebpackPlugin.options.environment %}",
+        PORT: "{%= o.htmlWebpackPlugin.options.port %}"
+      };
+    </script>
   </body>
 </html>

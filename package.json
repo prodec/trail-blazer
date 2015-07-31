@@ -7,15 +7,18 @@
   "readme": "https://github.com/prodec/trail-blazer/README.md",
   "license": "MIT",
   "dependencies": {
+    "cors": "^2.7.1",
     "dotenv": "^1.2.0",
     "express": "^4.13.1",
-    "requisition": "^1.5.1"
+    "isomorphic-fetch": "^2.1.1",
+    "qs": "^4.0.0"
   },
   "devDependencies": {
-    "babel-core": "^5.8.19",
+    "autoprefixer-loader": "^2.0.0",
+    "babel-core": "^5.8.20",
     "babel-eslint": "^4.0.5",
     "babel-loader": "^5.3.2",
-    "babel-runtime": "^5.8.19",
+    "babel-runtime": "^5.8.20",
     "classnames": "^2.1.2",
     "css-loader": "^0.11.0",
     "es6-promise": "^1.0.0",
@@ -28,8 +31,11 @@
     "html-webpack-plugin": "^1.3.0",
     "jest-cli": "facebook/jest#0.5.x",
     "jquery": "^2.1.4",
+    "json-loader": "^0.5.2",
     "jsx-loader": "^0.13.1",
     "keymirror": "^0.1.1",
+    "leaflet": "^0.7.3",
+    "moment-timezone": "^0.4.0",
     "node-sass": "^3.0.0-beta.4",
     "object-assign": "^1.0.0",
     "proj4": "^2.3.6",
@@ -64,6 +70,7 @@
         "single"
       ],
       "strict": 0,
+      "yoda": 0,
       "babel/object-shorthand": 1,
       "babel/generator-star": 0,
       "babel/generator-star-spacing": 0,
@@ -126,7 +133,8 @@
       "jasmine": true
     },
     "globals": {
-      "jest": false
+      "jest": false,
+      "ServerConstants": false
     }
   },
   "scripts": {

@@ -6,10 +6,10 @@ import '../lib/popupLeaflet';
 import Actions from '../actions/actions';
 import positionStore from '../stores/positionStore';
 import modeStore from '../stores/modeStore';
-import markerStore from '../stores/markerStore'
+import markerStore from '../stores/markerStore';
 import addMarkerStore from '../stores/addMarkerStore';
 import removeMarkerStore from '../stores/removeMarkerStore';
-import { EventConstants } from '../constants/constants';
+import { SettingConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
   constructor() {
@@ -25,13 +25,28 @@ export default class Map extends React.Component {
     removeMarkerStore.addChangeListener(this.removeMarkerFromMap);
   }
 
+  render() {
+    return <div id="map"></div>;
+  }
+
   initMap() {
     L.Icon.Default.imagePath = '//cdn.leafletjs.com/leaflet-0.7.3/images';
-    let map = new L.Map('map', { center: new L.LatLng(51.51, -0.11), zoom: 17 });
+    let map = new L.Map('map', { zoom: SettingConstants.ZOOM });
 
     map.addLayer(new GoogleLeaflet('SATELLITE'));
+    this.addMapListeners(map);
+    this.initMapCenter(map);
     this.setState({ map });
     Actions.addMap(map);
+  }
+
+  addMapListeners(map) {
+    map.on('moveend', () => { Actions.registerMapCenter(this.state.map.getCenter()); });
+  }
+
+  initMapCenter(map) {
+    map.once('locationerror', () => { this.updateMapCenter(new L.LatLng(51.51, -0.11)); });
+    map.locate({ setView: true, maxZoom: SettingConstants.ZOOM });
   }
 
   onChangeMode = () => {
@@ -53,10 +68,6 @@ export default class Map extends React.Component {
     let data = markerStore.getState();
 
     this.removeFromMap(marker);
-  }
-
-  render() {
-    return <div id="map"></div>;
   }
 
   goToPosition = () => {
