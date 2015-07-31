@@ -31,8 +31,14 @@ export const ActionConstants = keyMirror({
   ADD_MARKER: null,
   REMOVE_MARKER: null,
   UPDATE_MARKER: null,
-  SAVE_MARKER_CONTENT: null
+  SAVE_MARKER_CONTENT: null,
+  MAP_CENTER_REGISTER: null,
+  ERROR_HANDLE: null
 });
+
+export const EndpointConstants = {
+  WIND_SPEED_FETCH: '/api/windSpeed/'
+};
 
 export const EventConstants = keyMirror({
   CHANGE: null,
@@ -51,5 +57,6 @@ export const GoToTabConstants = {
 
 export const SettingConstants = {
   DEFAULT_PROJECTION: 'EPSG:4326',
-  MAP_PROJECTION: 'EPSG:4326'
+  MAP_PROJECTION: 'EPSG:4326',
+  ZOOM: 17
 };

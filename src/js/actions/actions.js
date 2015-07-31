@@ -46,4 +46,19 @@ export default class Actions {
       latLng
     });
   }
+
+  static registerMapCenter(latLng) {
+    dispatcher.handleAction({
+      type: ActionConstants.MAP_CENTER_REGISTER,
+      latLng
+    });
+  }
+
+  static handleError(error) {
+    console.log(error);
+    dispatcher.handleAction({
+      type: ActionConstants.ERROR_HANDLE,
+      error
+    });
+  }
 }

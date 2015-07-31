@@ -14,16 +14,15 @@ export default class WindSpeedWidget extends React.Component {
   }
 
   render() {
-    let widgetClasses = classNames({ 'danger': this.isTooFast() });
-    let turbineClasses = classNames(
+    let classes = classNames([
       'turbine',
       this.getSpeedClass()
-    );
+    ]);
 
     return (
-      <div id="wind-speed-widget" className={widgetClasses}>
+      <div id="wind-speed-widget">
         <div className="windmill">
-          <div className={turbineClasses}>
+          <div className={classes}>
             <div className="blade"></div>
             <div className="blade"></div>
             <div className="blade"></div>
@@ -57,9 +56,5 @@ export default class WindSpeedWidget extends React.Component {
     } else if (10 >= speed && speed > 0) {
       return 'slow';
     }
-  }
-
-  isTooFast() {
-    return this.getSpeedClass() === 'fast';
   }
 }

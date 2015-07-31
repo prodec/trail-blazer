@@ -7,7 +7,7 @@ export default class ApiFetch {
 
   constructor(options) {
     this.url = this.buildUrl(options.url);
-    this.init = { method: options.method || 'get' };
+    this.init = { method: options.method };
     this.responseParser = options.responseParser;
     this.addQuery(options.query);
   }

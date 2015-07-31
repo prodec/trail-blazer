@@ -2,9 +2,8 @@ import Actions from '../actions/actions';
 import Store from './store';
 import ApiFetch from '../utils/apiFetch';
 import PositionInTime from '../utils/positionInTime';
-import debounce from '../utils/debounce';
 import contextPositionStore from './contextPositionStore';
-import { EndpointConstants, SettingConstants } from '../constants/constants';
+import { EndpointConstants } from '../constants/constants';
 
 class WindSpeedStore extends Store {
   constructor() {
@@ -16,6 +15,11 @@ class WindSpeedStore extends Store {
   registerCallbacks() {
     return this.dispatcher.register((action) => {
       switch(action.type) {
+        case this.ActionConstants.WIND_SPEED_FETCH:
+          this.data.windSpeed = action.windSpeed;
+          this.emitChange();
+          break;
+
         case this.ActionConstants.MAP_CENTER_REGISTER:
           this.dispatcher.waitFor([contextPositionStore.dispatchToken]);
           this.fetchAndEmitChange();
@@ -27,23 +31,21 @@ class WindSpeedStore extends Store {
     });
   }
 
-  fetchAndEmitChange = debounce(async () => {
+  async fetchAndEmitChange() {
     try {
-      this.data.windSpeed = await this.fetchWindSpeed();
-      this.emitChange();
+      let { lat, lng, time } = PositionInTime.getCurrent();
+
+      if (lat && lng && time) {
+        let options = {
+          method: 'get',
+          url: EndpointConstants.WIND_SPEED_FETCH,
+          query: { lat, lng, time },
+          responseParser: body => { return Math.round(body.windSpeed); }
+        };
+        this.data.windSpeed = await new ApiFetch(options).run();
+        this.emitChange();
+      }
     } catch (error) { Actions.handleError(error); }
-  }, SettingConstants.DEBOUNCE_INTERVAL)
-
-  fetchWindSpeed() {
-    let { lat, lng, time } = PositionInTime.getCurrent();
-
-    if(!(lat && lng && time)) { return; }
-    let options = {
-      url: EndpointConstants.WIND_SPEED_FETCH,
-      query: { lat, lng, time },
-      responseParser: body => { return Math.round(body.windSpeed); }
-    };
-    return new ApiFetch(options).run();
   }
 }
 
