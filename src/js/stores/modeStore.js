@@ -5,11 +5,10 @@ class ModeStore extends Store {
   constructor() {
     super();
     let modes = new Map();
-
     modes.set(ModeConstants.MARKER_MODE, { cursor: CursorConstants.CURSOR_CROSSHAIR });
     modes.set(ModeConstants.GO_TO_MODE, { cursor: CursorConstants.CURSOR_GRAB });
     modes.set(ModeConstants.VIEW_MODE, { cursor: CursorConstants.CURSOR_GRAB });
-    this.data.modes = modes;
+    this.data['modes'] = modes;
   }
 
   registerCallbacks() {

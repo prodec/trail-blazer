@@ -9,9 +9,10 @@ export default class Store extends EventEmitter {
     this.dispatcher = dispatcher;
     this.ActionConstants = ActionConstants;
     this.EventConstants = EventConstants;
-
     this.dispatchToken = this.registerCallbacks();
   }
+
+  registerCallbacks() {}
 
   getState() {
     return this.data;

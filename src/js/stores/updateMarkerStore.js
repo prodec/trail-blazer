@@ -4,6 +4,15 @@ import markerStore from './markerStore';
 class UpdateMarkerStore extends Store {
   constructor() {
     super();
+    this.data = { markerToUpdate: null };
+  }
+
+  updateMarker(marker) {
+    let markers = markerStore.getState().markers;
+    let id = Marker.idOnMap(marker);
+    let markerData = { marker, content };
+
+    data.markers.set(id, markerData);
   }
 
   registerCallbacks() {
@@ -11,9 +20,9 @@ class UpdateMarkerStore extends Store {
       switch(action.type) {
         case this.ActionConstants.UPDATE_MARKER:
           this.dispatcher.waitFor([markerStore.dispatchToken]);
+          this.updateMarker(action.marker);
           this.emitChange();
           break;
-
         default:
           break;
       }
@@ -21,5 +30,5 @@ class UpdateMarkerStore extends Store {
   }
 }
 
-let updateMarkerStore = new UpdateMarkerStore();
+let updateMarkerStore = new updateMarkerStore();
 export default updateMarkerStore;
