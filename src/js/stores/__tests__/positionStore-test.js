@@ -1,11 +1,12 @@
 jest
-  .dontMock('../mapStore')
+  .dontMock('../store')
+  .dontMock('../positionStore')
   .dontMock('keymirror');
 
-describe('MapStore', () => {
+describe('PositionStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
+  let positionStore;
   let dispatcher;
-  let mapStore;
   let callback;
 
   let actionGoToCoordinate = {
@@ -18,8 +19,8 @@ describe('MapStore', () => {
   };
 
   beforeEach(() => {
-    dispatcher = require('../../dispatcher/dispatcher');
-    mapStore = require('../mapStore');
+    positionStore = require('../positionStore');
+    dispatcher = positionStore.getDispatcher();
     callback = dispatcher.register.mock.calls[0][0];
   });
 
@@ -29,17 +30,17 @@ describe('MapStore', () => {
 
   describe('goToMarker', () => {
     it('initializes with latLng when null', () => {
-      expect(mapStore.getState().goToMarker).toBe(null);
+      expect(positionStore.getState().goToMarker).toBe(null);
       callback(actionGoToCoordinate);
-      let latLng = mapStore.getState().goToMarker.getLatLng().toString();
+      let latLng = positionStore.getState().goToMarker.getLatLng().toString();
       expect(latLng).toBe('LatLng(1, 2)');
     });
 
     it('updates latLng', () => {
       callback(actionGoToCoordinate);
-      expect(mapStore.getState().goToMarker).not.toBe(null);
+      expect(positionStore.getState().goToMarker).not.toBe(null);
       callback(actionGoToCoordinateUpdate);
-      let latLng = mapStore.getState().goToMarker.getLatLng().toString();
+      let latLng = positionStore.getState().goToMarker.getLatLng().toString();
       expect(latLng).toBe('LatLng(3, 4)');
     });
   });
