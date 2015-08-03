@@ -24,6 +24,7 @@ class PositionStore extends Store {
                     opacity: 0.85,
                     fillColor: '#00ff00',
                     fillOpacity: 0.85 };
+
     let circle = L.circleMarker(latLng, options);
     this.data.goToMarker = circle;
   }
@@ -33,7 +34,7 @@ class PositionStore extends Store {
       switch(action.type) {
         case this.ActionConstants.GO_TO:
           this.updateGoToMarkerPosition(action.latLng);
-          this.emitChange(this.EventConstants.CHANGE_GO_TO);
+          this.emitChange();
           break;
         default:
           break;

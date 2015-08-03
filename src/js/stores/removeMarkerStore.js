@@ -1,27 +1,24 @@
 import Store from './store';
 
-class MapStore extends Store {
+class RemoveMarkerStore extends Store {
   constructor() {
     super();
-    this.data = { map: null };
+    this.data = { markerToRemove: null };
   }
 
   registerCallbacks() {
     return this.dispatcher.register((action) => {
       switch(action.type) {
-        case this.ActionConstants.ADD_MAP:
-          this.data.map = action.map
+        case this.ActionConstants.REMOVE_MARKER:
+          this.data.markerToRemove = action.marker;
           this.emitChange();
           break;
-
         default:
           break;
       }
     });
   }
-
-
 }
 
-let mapStore = new MapStore();
-export default mapStore;
+let removeMarkerStore = new RemoveMarkerStore();
+export default removeMarkerStore;
