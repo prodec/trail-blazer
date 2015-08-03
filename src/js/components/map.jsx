@@ -5,6 +5,7 @@ import GoogleLeaflet from '../lib/google';
 import '../lib/popupLeaflet';
 import Actions from '../actions/actions';
 import mapStore from '../stores/mapStore';
+import positionStore from '../stores/positionStore';
 import { EventConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
@@ -15,7 +16,7 @@ export default class Map extends React.Component {
 
   componentDidMount() {
     this.initMap();
-    mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
+    positionStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
     mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
     mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
     mapStore.addChangeListener(this.removeMarkerFromMap, EventConstants.REMOVE_MARKER);
@@ -58,7 +59,7 @@ export default class Map extends React.Component {
   }
 
   getGoToMarker() {
-    return mapStore.getState().goToMarker;
+    return positionStore.getState().goToMarker;
   }
 
   hasLayer(layer) {
