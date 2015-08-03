@@ -7,6 +7,7 @@ import CoordinateConverter from '../../utils/coordinateConverter';
 export default class Form extends React.Component {
   constructor() {
     super();
+    
     this.state = {
       lat: null,
       lng: null,
@@ -15,8 +16,6 @@ export default class Form extends React.Component {
       zone: '',
       datum: ''
     };
-    this.bindValue = this.bindValue.bind(this);
-    this.goToCoordinate = this.goToCoordinate.bind(this);
   }
 
   render() {
@@ -80,7 +79,7 @@ export default class Form extends React.Component {
     }
   }
 
-  bindValue(e) {
+  bindValue = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   }
 
@@ -98,7 +97,7 @@ export default class Form extends React.Component {
     return L.latLng(...point);
   }
 
-  goToCoordinate(e) {
+  goToCoordinate = (e) => {
     e.preventDefault();
     Actions.goToCoordinate(this.getLatLng());
   }
