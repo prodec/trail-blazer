@@ -1,16 +1,16 @@
 import Store from './store';
 
-class MapStore extends Store {
+class AddMarkerStore extends Store {
   constructor() {
     super();
-    this.data = { map: null };
+    this.data = { markerToAdd: null };
   }
 
   registerCallbacks() {
     return this.dispatcher.register((action) => {
       switch(action.type) {
-        case this.ActionConstants.ADD_MAP:
-          this.data.map = action.map
+        case this.ActionConstants.ADD_MARKER:
+          this.data.markerToAdd = action.marker;
           this.emitChange();
           break;
 
@@ -19,9 +19,7 @@ class MapStore extends Store {
       }
     });
   }
-
-
 }
 
-let mapStore = new MapStore();
-export default mapStore;
+let addMarkerStore = new AddMarkerStore();
+export default addMarkerStore;

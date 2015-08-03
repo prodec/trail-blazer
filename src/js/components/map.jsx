@@ -4,8 +4,10 @@ import React from 'react';
 import GoogleLeaflet from '../lib/google';
 import '../lib/popupLeaflet';
 import Actions from '../actions/actions';
-import mapStore from '../stores/mapStore';
 import positionStore from '../stores/positionStore';
+import modeStore from '../stores/modeStore';
+import addMarkerStore from '../stores/addMarkerStore';
+import removeMarkerStore from '../stores/removeMarkerStore';
 import { EventConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
@@ -16,10 +18,10 @@ export default class Map extends React.Component {
 
   componentDidMount() {
     this.initMap();
-    positionStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
-    mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
-    mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
-    mapStore.addChangeListener(this.removeMarkerFromMap, EventConstants.REMOVE_MARKER);
+    positionStore.addChangeListener(this.goToPosition);
+    modeStore.addChangeListener(this.onChangeCursor);
+    addMarkerStore.addChangeListener(this.addMarkerToMap);
+    removeMarkerStore.addChangeListener(this.removeMarkerFromMap);
   }
 
   initMap() {
@@ -32,16 +34,20 @@ export default class Map extends React.Component {
   }
 
   onChangeCursor = () => {
-    $('.leaflet-container').css('cursor', mapStore.getState().cursor);
+    let data = modeStore.getState();
+    let active = modeStore.getState().active;
+    let cursor  = data.modes.get(active).cursor;
+
+    $('.leaflet-container').css('cursor', cursor);
   }
 
   addMarkerToMap = () => {
-    let marker = mapStore.getState().layerToAdd;
+    let marker = addMarkerStore.getState().markerToAdd;
     this.addToMap(marker);
   }
 
   removeMarkerFromMap = () => {
-    let marker = mapStore.getState().layerToRemove;
+    let marker = removeMarkerStore.getState().markerToRemove;
     this.removeFromMap(marker);
   }
 

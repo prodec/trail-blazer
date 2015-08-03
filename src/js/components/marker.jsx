@@ -2,10 +2,11 @@ import L from 'leaflet';
 import React from 'react';
 import classNames from 'classnames';
 import Actions from '../actions/actions';
-import mapStore from '../stores/mapStore';
 import Popup from '../utils/popup';
 import Marker from '../utils/marker';
 import { ModeConstants, MarkerConstants } from '../constants/constants';
+import mapStore from '../stores/mapStore';
+import modeStore from '../stores/modeStore';
 
 export default class MarkerUI extends React.Component {
   constructor() {
@@ -22,7 +23,7 @@ export default class MarkerUI extends React.Component {
     };
 
     this.state.sets['radio-station']['icon-map-selected'] = true;
-    mapStore.addChangeListener(this.onChangeMode.bind(this), ModeConstants.CHANGE_MODE);
+    modeStore.addChangeListener(this.onChangeMode.bind(this));
   }
 
   changeIcon = (e) => {
@@ -63,13 +64,14 @@ export default class MarkerUI extends React.Component {
     });
   }
 
-  onChangeMode() {
-    let data = mapStore.getState();
+  onChangeMode = () => {
+    let active = modeStore.getState().active;
+    let map = mapStore.getState().map;
 
-    if (data.mode === ModeConstants.MARKER_MODE) {
-      data.map.on('click', this.addMarker);
+    if (active === ModeConstants.MARKER_MODE) {
+      map.on('click', this.addMarker);
     } else {
-      data.map.off('click', this.addMarker);
+      map.off('click', this.addMarker);
     }
   }
 
@@ -114,7 +116,7 @@ export default class MarkerUI extends React.Component {
                       maxLength="140"
                       id="icon-info-description">
             </textarea>
-            <label className="mdl-textfield__label" for="icon-info-description">Observação</label>
+            <label className="mdl-textfield__label" htmlFor="icon-info-description">Observação</label>
           </div>
         </div>
       </div>
