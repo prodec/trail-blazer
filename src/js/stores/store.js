@@ -6,7 +6,7 @@ export default class Store extends EventEmitter {
   constructor() {
     super();
     this.data = {};
-    this.dispatcher = dispatcher; 
+    this.dispatcher = dispatcher;
     this.ActionConstants = ActionConstants;
     this.EventConstants = EventConstants;
 
@@ -15,6 +15,10 @@ export default class Store extends EventEmitter {
 
   getState() {
     return this.data;
+  }
+
+  getDispatcher() {
+    return this.dispatcher;
   }
 
   addChangeListener(callback, change = EventConstants.CHANGE) {
