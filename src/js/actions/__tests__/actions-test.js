@@ -11,11 +11,6 @@ describe('Actions', () => {
     dispatcher.handleAction.mockClear();
   });
 
-  it(`creates ${ActionConstants.CHANGE_CURSOR} action`, () => {
-    Actions.changeCursor({});
-    expectCommon();
-  });
-
   it(`creates ${ActionConstants.CHANGE_MODE} action`, () => {
     Actions.changeMode({});
     expectCommon();
