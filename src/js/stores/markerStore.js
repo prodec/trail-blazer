@@ -20,6 +20,14 @@ class MarkerStore extends Store {
     this.data.markers.delete(id);
   }
 
+  updateMarker(marker, content) {
+    let id = Marker.idOnMap(marker);
+    let markerData = { marker, content };
+
+    this.data.markers.set(id, markerData);
+  }
+
+
   registerCallbacks() {
     return this.dispatcher.register((action) => {
       switch(action.type) {
@@ -30,6 +38,11 @@ class MarkerStore extends Store {
 
         case this.ActionConstants.REMOVE_MARKER:
           this.removeMarker(action.marker);
+          this.emitChange();
+          break;
+
+        case this.ActionConstants.UPDATE_MARKER:
+          this.updateMarker(action.marker);
           this.emitChange();
           break;
 
