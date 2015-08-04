@@ -123,7 +123,8 @@
   },
   "scripts": {
     "test": "jest",
-    "test-debug": "node debug ./node_modules/.bin/jest -i"
+    "test-debug": "node debug ./node_modules/.bin/jest -i",
+	"style": "babel-node ./node_modules/.bin/eslint ."
   },
   "jest": {
     "moduleFileExtensions": [
