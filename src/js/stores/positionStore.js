@@ -36,6 +36,7 @@ class PositionStore extends Store {
           this.updateGoToMarkerPosition(action.latLng);
           this.emitChange();
           break;
+          
         default:
           break;
       }
