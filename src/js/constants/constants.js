@@ -27,7 +27,6 @@ export const ActionConstants = keyMirror({
   GO_TO: null,
   ADD_ITEM: null,
   REMOVE_ITEM: null,
-  CHANGE_CURSOR: null,
   CHANGE_MODE: null,
   ADD_MARKER: null,
   REMOVE_MARKER: null,
@@ -37,7 +36,6 @@ export const ActionConstants = keyMirror({
 
 export const EventConstants = keyMirror({
   CHANGE: null,
-  CHANGE_CURSOR: null,
   CHANGE_MAP: null,
   CHANGE_GO_TO: null,
   ADD_MARKER: null,
