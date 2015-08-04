@@ -10,7 +10,7 @@ class MapStore extends Store {
     return this.dispatcher.register((action) => {
       switch(action.type) {
         case this.ActionConstants.ADD_MAP:
-          this.data.map = action.map
+          this.data.map = action.map;
           this.emitChange();
           break;
 
@@ -19,7 +19,6 @@ class MapStore extends Store {
       }
     });
   }
-
 
 }
 
