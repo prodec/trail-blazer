@@ -24,7 +24,7 @@ class UpdateMarkerStore extends Store {
           this.updateMarker(action.marker, action.content);
           this.emitChange();
           break;
-          
+
         default:
           break;
       }
