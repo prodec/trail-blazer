@@ -20,7 +20,7 @@ describe('PositionStore', () => {
 
   beforeEach(() => {
     positionStore = require('../positionStore');
-    dispatcher = positionStore.getDispatcher();
+    dispatcher = positionStore.dispatcher;
     callback = dispatcher.register.mock.calls[0][0];
   });
 
