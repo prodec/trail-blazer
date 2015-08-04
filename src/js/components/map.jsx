@@ -4,7 +4,11 @@ import React from 'react';
 import GoogleLeaflet from '../lib/google';
 import '../lib/popupLeaflet';
 import Actions from '../actions/actions';
-import mapStore from '../stores/mapStore';
+import positionStore from '../stores/positionStore';
+import modeStore from '../stores/modeStore';
+import markerStore from '../stores/markerStore'
+import addMarkerStore from '../stores/addMarkerStore';
+import removeMarkerStore from '../stores/removeMarkerStore';
 import { EventConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
@@ -15,10 +19,10 @@ export default class Map extends React.Component {
 
   componentDidMount() {
     this.initMap();
-    mapStore.addChangeListener(this.goToPosition, EventConstants.CHANGE_GO_TO);
-    mapStore.addChangeListener(this.onChangeCursor, EventConstants.CHANGE_CURSOR);
-    mapStore.addChangeListener(this.addMarkerToMap, EventConstants.ADD_MARKER);
-    mapStore.addChangeListener(this.removeMarkerFromMap, EventConstants.REMOVE_MARKER);
+    positionStore.addChangeListener(this.goToPosition);
+    modeStore.addChangeListener(this.onChangeMode);
+    addMarkerStore.addChangeListener(this.addMarkerToMap);
+    removeMarkerStore.addChangeListener(this.removeMarkerFromMap);
   }
 
   initMap() {
@@ -30,17 +34,24 @@ export default class Map extends React.Component {
     Actions.addMap(map);
   }
 
-  onChangeCursor = () => {
-    $('.leaflet-container').css('cursor', mapStore.getState().cursor);
+  onChangeMode = () => {
+    let data = modeStore.getState();
+    let active = modeStore.getState().active;
+    let cursor  = data.modes.get(active).cursor;
+
+    $('.leaflet-container').css('cursor', cursor);
   }
 
   addMarkerToMap = () => {
-    let marker = mapStore.getState().layerToAdd;
+    let marker = addMarkerStore.getState().markerToAdd;
+
     this.addToMap(marker);
   }
 
   removeMarkerFromMap = () => {
-    let marker = mapStore.getState().layerToRemove;
+    let marker = removeMarkerStore.getState().markerToRemove;
+    let data = markerStore.getState();
+
     this.removeFromMap(marker);
   }
 
@@ -58,7 +69,7 @@ export default class Map extends React.Component {
   }
 
   getGoToMarker() {
-    return mapStore.getState().goToMarker;
+    return positionStore.getState().goToMarker;
   }
 
   hasLayer(layer) {
