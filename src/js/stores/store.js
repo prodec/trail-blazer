@@ -18,10 +18,6 @@ export default class Store extends EventEmitter {
     return this.data;
   }
 
-  getDispatcher() {
-    return this.dispatcher;
-  }
-
   addChangeListener(callback, change = EventConstants.CHANGE) {
     this.on(change, callback);
   }

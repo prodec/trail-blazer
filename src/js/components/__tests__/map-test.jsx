@@ -4,7 +4,8 @@ const { addons: { TestUtils } } = React;
 jest
   .dontMock('../map')
   .dontMock('../../constants/constants')
-  .dontMock('keymirror');
+  .dontMock('keymirror')
+  .dontMock('../../stores/store');
 
 describe('Map', () => {
   describe('#componentDidMount', () => {
@@ -12,13 +13,13 @@ describe('Map', () => {
     let EventConstants = require('../../constants/constants').EventConstants;
     let mapStore = require('../../stores/mapStore');
     let positionStore = require('../../stores/positionStore');
-    let cursorStore = require('../../stores/cursorStore');
+    let modeStore = require('../../stores/modeStore');
     let addMarkerStore = require('../../stores/addMarkerStore');
     let removeMarkerStore = require('../../stores/removeMarkerStore');
     let map;
     let addMapListenerMock;
     let addPositionListenerMock;
-    let addCursorListenerMock;
+    let addModeListenerMock;
     let addMarkerListenerMock;
     let removeMarkerListenerMock;
 
@@ -28,7 +29,7 @@ describe('Map', () => {
       map = TestUtils.renderIntoDocument(<Mapz />);
       addMapListenerMock = mapStore.addChangeListener.mock;
       addPositionListenerMock = positionStore.addChangeListener.mock;
-      addCursorListenerMock = cursorStore.addChangeListener.mock;
+      addModeListenerMock = modeStore.addChangeListener.mock;
       addMarkerListenerMock = addMarkerStore.addChangeListener.mock;
       removeMarkerListenerMock = removeMarkerStore.addChangeListener.mock;
     });
@@ -36,7 +37,7 @@ describe('Map', () => {
     afterEach(() => {
       mapStore.addChangeListener.mockClear();
       positionStore.addChangeListener.mockClear();
-      cursorStore.addChangeListener.mockClear();
+      modeStore.addChangeListener.mockClear();
       addMarkerStore.addChangeListener.mockClear();
       removeMarkerStore.addChangeListener.mockClear();
     });
@@ -50,9 +51,9 @@ describe('Map', () => {
       expect(addPositionListenerMock.calls[0][0]).toBe(map.goToPosition);
     });
 
-    it('adds listener to cursorStore', () => {
-      expect(addCursorListenerMock.calls.length).toBeGreaterThan(0);
-      expect(addCursorListenerMock.calls[0][0]).toBe(map.onChangeCursor);
+    it('adds listener to modeStore', () => {
+      expect(addModeListenerMock.calls.length).toBeGreaterThan(0);
+      expect(addModeListenerMock.calls[0][0]).toBe(map.onChangeMode);
     });
 
     it('adds listener to addMarkerStore', () => {

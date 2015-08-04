@@ -20,7 +20,7 @@ export default class Map extends React.Component {
   componentDidMount() {
     this.initMap();
     positionStore.addChangeListener(this.goToPosition);
-    modeStore.addChangeListener(this.onChangeCursor);
+    modeStore.addChangeListener(this.onChangeMode);
     addMarkerStore.addChangeListener(this.addMarkerToMap);
     removeMarkerStore.addChangeListener(this.removeMarkerFromMap);
   }
@@ -34,7 +34,7 @@ export default class Map extends React.Component {
     Actions.addMap(map);
   }
 
-  onChangeCursor = () => {
+  onChangeMode = () => {
     let data = modeStore.getState();
     let active = modeStore.getState().active;
     let cursor  = data.modes.get(active).cursor;
@@ -44,12 +44,14 @@ export default class Map extends React.Component {
 
   addMarkerToMap = () => {
     let marker = addMarkerStore.getState().markerToAdd;
+
     this.addToMap(marker);
   }
 
   removeMarkerFromMap = () => {
     let marker = removeMarkerStore.getState().markerToRemove;
     let data = markerStore.getState();
+
     this.removeFromMap(marker);
   }
 
