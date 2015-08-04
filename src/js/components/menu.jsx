@@ -4,7 +4,7 @@ import GoTo from './goTo/goTo';
 import Marker from './marker';
 import Actions from '../actions/actions';
 import modeStore from '../stores/modeStore';
-import { MenuConstants, CursorConstants, ModeConstants } from '../constants/constants';
+import { MenuConstants, ModeConstants } from '../constants/constants';
 
 export default class Menu extends React.Component {
   constructor() {
