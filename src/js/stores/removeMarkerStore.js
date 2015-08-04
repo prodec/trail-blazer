@@ -13,7 +13,7 @@ class RemoveMarkerStore extends Store {
           this.data.markerToRemove = action.marker;
           this.emitChange();
           break;
-          
+
         default:
           break;
       }
