@@ -6,6 +6,7 @@ import '../lib/popupLeaflet';
 import Actions from '../actions/actions';
 import positionStore from '../stores/positionStore';
 import modeStore from '../stores/modeStore';
+import markerStore from '../stores/markerStore'
 import addMarkerStore from '../stores/addMarkerStore';
 import removeMarkerStore from '../stores/removeMarkerStore';
 import { EventConstants } from '../constants/constants';
@@ -48,6 +49,7 @@ export default class Map extends React.Component {
 
   removeMarkerFromMap = () => {
     let marker = removeMarkerStore.getState().markerToRemove;
+    let data = markerStore.getState();
     this.removeFromMap(marker);
   }
 
