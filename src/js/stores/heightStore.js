@@ -55,7 +55,7 @@ class HeightStore extends Store {
   registerCallbacks() {
     return this.dispatcher.register((action) => {
       switch(action.type) {
-        case this.ActionConstants.CHANGE_COORDINATE:
+        case this.ActionConstants.MOUSE_MOVE_ON_MAP:
           this.requestHeight(action.latLng);
           this.emitChange();
           break;
