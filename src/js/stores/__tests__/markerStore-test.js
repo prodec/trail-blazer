@@ -6,8 +6,9 @@ jest
 describe('MarkerStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
   let Marker, markerStore, dispatcher, callback;
+  let markers = new Map();
 
-  const marker = {};
+  const marker = new Object();
   const content = 'content';
   const id = 1;
 
@@ -24,7 +25,7 @@ describe('MarkerStore', () => {
 
   let actionRemoveMarker = {
     type: ActionConstants.REMOVE_MARKER,
-    marker
+    marker 
   };
 
   beforeEach(() => {
