@@ -146,7 +146,8 @@
     "test": "jest",
     "test-debug": "node debug ./node_modules/.bin/jest -i",
     "watch:test": "nodemon -w __tests__ -w ./src -e js,jsx -x npm test",
-    "style": "babel-node ./node_modules/.bin/eslint ."
+    "style": "babel-node ./node_modules/.bin/eslint .",
+    "start": "babel-node --stage 0 server.js"
   },
   "jest": {
     "moduleFileExtensions": [

@@ -47,6 +47,13 @@ export default class Actions {
     });
   }
 
+  static changeCoordinate(latLng) {
+    dispatcher.handleAction({
+      type: ActionConstants.CHANGE_COORDINATE,
+      latLng
+    });
+  }
+
   static registerMapCenter(latLng) {
     dispatcher.handleAction({
       type: ActionConstants.MAP_CENTER_REGISTER,
@@ -61,4 +68,6 @@ export default class Actions {
       error
     });
   }
+
+
 }
