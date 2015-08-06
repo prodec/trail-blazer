@@ -47,9 +47,9 @@ export default class Actions {
     });
   }
 
-  static changeCoordinate(latLng) {
+  static mouseMoveOnMap(latLng) {
     dispatcher.handleAction({
-      type: ActionConstants.CHANGE_COORDINATE,
+      type: ActionConstants.MOUSE_MOVE_ON_MAP,
       latLng
     });
   }
