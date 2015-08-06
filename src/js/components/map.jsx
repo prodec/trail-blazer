@@ -30,17 +30,21 @@ export default class Map extends React.Component {
 
   initMap() {
     L.Icon.Default.imagePath = '//cdn.leafletjs.com/leaflet-0.7.3/images';
-    let map = new L.Map('map', { zoom: SettingConstants.ZOOM });
+    
+    let center = new L.LatLng(51.51, -0.11);
+    let map = new L.Map('map', { center, zoom: SettingConstants.ZOOM });
 
     map.addLayer(new GoogleLeaflet('SATELLITE'));
     this.addMapListeners(map);
     this.initMapCenter(map);
     this.setState({ map });
     Actions.addMap(map);
+    Actions.changeCoordinate(center);
   }
 
   addMapListeners(map) {
     map.on('moveend', () => { Actions.registerMapCenter(map.getCenter()); });
+    map.on('mousemove', (e) => { Actions.changeCoordinate(e.latlng); });
   }
 
   initMapCenter(map) {
