@@ -8,7 +8,7 @@ class MarkerStore extends Store {
   }
 
   addMarker(marker, content) {
-    let id = Marker.idOnMap(marker);
+    let id = this.idOnMap(marker);
     let markerData = { marker, content };
 
     this.data.markers.set(id, markerData);
@@ -27,6 +27,9 @@ class MarkerStore extends Store {
     this.data.markers.set(id, markerData);
   }
 
+  idOnMap(marker) {
+    return Marker.idOnMap(marker);
+  }
 
   registerCallbacks() {
     return this.dispatcher.register((action) => {
@@ -42,7 +45,7 @@ class MarkerStore extends Store {
           break;
 
         case this.ActionConstants.UPDATE_MARKER:
-          this.updateMarker(action.marker);
+          this.updateMarker(action.marker, action.content);
           this.emitChange();
           break;
 
