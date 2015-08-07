@@ -11,7 +11,7 @@ describe('ModeStore', () => {
 
   let actionChangeMode = {
     type: ActionConstants.CHANGE_MODE,
-    mode: 'mode'
+    mode: 'mode' 
   };
 
   beforeEach(() => {
