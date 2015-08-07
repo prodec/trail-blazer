@@ -16,13 +16,23 @@ describe('Actions', () => {
     expectCommon();
   });
 
+  it(`creates ${ActionConstants.ADD_MAP} action`, () => {
+    Actions.addMap({});
+    expectCommon();
+  });
+
   it(`creates ${ActionConstants.ADD_MARKER} action`, () => {
     Actions.addMarker({});
     expectCommon();
   });
 
-  it(`creates ${ActionConstants.ADD_MAP} action`, () => {
-    Actions.addMap({});
+  it(`creates ${ActionConstants.REMOVE_MARKER} action`, () => {
+    Actions.removeMarker({});
+    expectCommon();
+  });
+
+  it(`creates ${ActionConstants.UPDATE_MARKER} action`, () => {
+    Actions.updateMarker({});
     expectCommon();
   });
 
