@@ -5,9 +5,7 @@ jest
 
 describe('GoToPositionStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
-  let goToPositionStore;
-  let dispatcher;
-  let callback;
+  let positionStore, dispatcher, callback;
 
   let actionGoToCoordinate = {
     type: ActionConstants.GO_TO,
