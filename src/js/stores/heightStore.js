@@ -1,53 +1,33 @@
 import L from 'leaflet';
 import Store from './store';
+import ClientSocket from '../utils/clientSocket';
 
 class HeightStore extends Store {
   constructor() {
     super();
-    let messageInterval = 40;//Minimum interval time between messages in milliseconds
-    this.data = { ws: null, lastTime: null, messageInterval };
-    this.initWebSocket();
-  }
-
-  initWebSocket() {
-    let ENDPOINT = 'ws://192.168.0.116:7331';
-    let ws = new WebSocket(ENDPOINT);
-
-    ws.onmessage = ((message) => {
-      console.log("Received: "+message);
-      this.updateHeight(message);
-    });
-
-    this.data.ws = ws;
+    this.data = { ws: null};
+    this.data.ws = new ClientSocket(this.updateHeight);
   }
 
   requestHeight(latLng) {
+    let time = Date.now();
+
     let message = JSON.stringify({
       command: "point_altitude",
-      lat: latLng.lat,
-      lng: latLng.lng
+      sent_at: time,
+      payload: {
+        lat: latLng.lat,
+        lng: latLng.lng
+      }
     });
 
-    this.send(message);
-  }
-
-  send(message) {
-    let time = +new Date();
-    let dif = time - this.data.lastTime;
-
-    if(dif > this.data.messageInterval) {
-      this.data.lastTime = time;
-      let ws = this.data.ws;
-
-      if (ws.readyState === WebSocket.OPEN) {
-        ws.send(message);
-      }
-    }    
+    this.data.ws.send(message);
   }
 
   updateHeight(message) {
-    let { altitude } = JSON.parse(message.data);
-
+    
+    let { altitude } = JSON.parse(message.data).data;
+    
     //update height component
     console.log('Height Updated: %s', altitude);
   }
