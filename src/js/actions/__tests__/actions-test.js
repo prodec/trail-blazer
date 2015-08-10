@@ -31,7 +31,7 @@ describe('Actions', () => {
     expectCommon();
   });
 
-  let expectCommon = () => {
+  function expectCommon() {
     expect(dispatcher.handleAction.mock.calls.length).toBe(1);
-  };
+  }
 });

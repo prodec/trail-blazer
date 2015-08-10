@@ -1,7 +1,7 @@
 import L from 'leaflet';
 import Store from './store';
 
-class PositionStore extends Store {
+class GoToPositionStore extends Store {
   constructor() {
     super();
     this.data = { goToMarker: null };
@@ -44,5 +44,5 @@ class PositionStore extends Store {
   }
 }
 
-let positionStore = new PositionStore();
-export default positionStore;
+let goToPositionStore = new GoToPositionStore();
+export default goToPositionStore;

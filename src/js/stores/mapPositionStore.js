@@ -4,10 +4,12 @@ import mapStore from './mapStore';
 class MapPositionStore extends Store {
   constructor() {
     super();
-    let map = mapStore.getState().map;
+    this.data = { latLng: null };
 
-    if (map) {
-      this.data.latLng = map.getCenter();
+    if (mapStore.getState() && mapStore.getState().map) {
+      let map = mapStore.getState().map;
+
+      this.data = { latLng: map.getCenter() };
     }
   }
 
