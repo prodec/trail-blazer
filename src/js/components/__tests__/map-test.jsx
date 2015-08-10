@@ -10,9 +10,8 @@ jest
 describe('Map', () => {
   describe('#componentDidMount', () => {
     let Mapz = require('../map');
-    let EventConstants = require('../../constants/constants').EventConstants;
     let mapStore = require('../../stores/mapStore');
-    let positionStore = require('../../stores/positionStore');
+    let goToPositionStore = require('../../stores/goToPositionStore');
     let modeStore = require('../../stores/modeStore');
     let addMarkerStore = require('../../stores/addMarkerStore');
     let removeMarkerStore = require('../../stores/removeMarkerStore');
@@ -28,7 +27,7 @@ describe('Map', () => {
       Mapz.prototype.initMap = jest.genMockFunction();
       map = TestUtils.renderIntoDocument(<Mapz />);
       addMapListenerMock = mapStore.addChangeListener.mock;
-      addPositionListenerMock = positionStore.addChangeListener.mock;
+      addPositionListenerMock = goToPositionStore.addChangeListener.mock;
       addModeListenerMock = modeStore.addChangeListener.mock;
       addMarkerListenerMock = addMarkerStore.addChangeListener.mock;
       removeMarkerListenerMock = removeMarkerStore.addChangeListener.mock;
@@ -36,7 +35,7 @@ describe('Map', () => {
 
     afterEach(() => {
       mapStore.addChangeListener.mockClear();
-      positionStore.addChangeListener.mockClear();
+      goToPositionStore.addChangeListener.mockClear();
       modeStore.addChangeListener.mockClear();
       addMarkerStore.addChangeListener.mockClear();
       removeMarkerStore.addChangeListener.mockClear();
@@ -46,7 +45,7 @@ describe('Map', () => {
       expect(map.initMap.mock.calls.length).toBe(1);
     });
 
-    it('adds listener to positionStore', () => {
+    it('adds listener to goToPositionStore', () => {
       expect(addPositionListenerMock.calls.length).toBeGreaterThan(0);
       expect(addPositionListenerMock.calls[0][0]).toBe(map.goToPosition);
     });
