@@ -41,13 +41,7 @@ export const EndpointConstants = {
 };
 
 export const EventConstants = keyMirror({
-  CHANGE: null,
-  CHANGE_MAP: null,
-  CHANGE_GO_TO: null,
-  ADD_MARKER: null,
-  REMOVE_MARKER: null,
-  UPDATE_MARKER: null,
-  SAVE_MARKER_CONTENT: null
+  CHANGE: null
 });
 
 export const GoToTabConstants = {
