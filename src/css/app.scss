@@ -204,7 +204,7 @@ button::-moz-focus-inner {
     -moz-transition: margin 0.2s;
     -o-transition: margin 0.2s;
     transition: margin 0.2s;
-} 
+}
 
 #slideout-marker .mdl-textfield :after {
     background-color: #a5de37;
@@ -221,6 +221,7 @@ button::-moz-focus-inner {
   background-color: rgba(0, 0, 0, .87);
   overflow: visible;
   opacity: .88;
+  line-height: normal;
 
   &:hover {
     opacity: 1;
