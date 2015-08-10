@@ -1,4 +1,5 @@
 import L from 'leaflet';
+import $ from 'jquery';
 import React from 'react';
 import classNames from 'classnames';
 import Actions from '../actions/actions';
@@ -8,6 +9,11 @@ import { ModeConstants, MarkerConstants } from '../constants/constants';
 import mapStore from '../stores/mapStore';
 import modeStore from '../stores/modeStore';
 
+let iconUrls = MarkerConstants.ICONS.reduce((obj, icon) => {
+  obj[icon] = require(`../../images/${icon}.png`);
+  return obj;
+}, {});
+
 export default class MarkerUI extends React.Component {
   constructor() {
     super();
@@ -16,7 +22,8 @@ export default class MarkerUI extends React.Component {
 
     this.state = {
       icons,
-      selectedIcon: new L.Icon({ iconUrl: '/src/images/radio-station.png', iconAnchor: MarkerConstants.ICON_ANCHOR }),
+      selectedIcon: new L.Icon({ iconUrl: iconUrls['radio-station'],
+                                 iconAnchor: MarkerConstants.ICON_ANCHOR }),
       text: '',
       active: 'radio-station',
       sets
@@ -42,7 +49,7 @@ export default class MarkerUI extends React.Component {
     let reducer = (sets, item) => {
       sets[item] = { 'icon-map': true, 'icon-map-selected': false };
       return sets;
-    }
+    };
 
     return icons.reduce(reducer, {});
   }
@@ -50,11 +57,11 @@ export default class MarkerUI extends React.Component {
   selectIcon = (e) => {
     let current = e.currentTarget.id;
 
-    this.setState((state, props) => {
-      let isActive = (current == state.active);
+    this.setState((state) => {
+      let isActive = (current === state.active);
 
       if (!isActive) {
-        state.sets[state.active]['icon-map-selected'] = false
+        state.sets[state.active]['icon-map-selected'] = false;
       }
 
       state.sets[current]['icon-map-selected'] = true;
@@ -92,18 +99,18 @@ export default class MarkerUI extends React.Component {
   }
 
   render() {
-    return(
+    return (
       <div id="icon-selection">
         {this.state.icons.map((icon, i) => {
-          return(
+          return (
             <a href="javascript:void(0)" key={i}>
-              <img src={"/src/images/" + icon + ".png"}
+              <img src={iconUrls[icon]}
                    className={classNames(this.state.sets[icon])}
                    key={i}
                    onClick={this.changeIcon}
                    id={icon} />
             </a>
-          )
+          );
         })}
 
         <div id="icon-info">
@@ -120,6 +127,6 @@ export default class MarkerUI extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
