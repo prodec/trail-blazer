@@ -36,7 +36,9 @@
     "keymirror": "^0.1.1",
     "leaflet": "^0.7.3",
     "moment-timezone": "^0.4.0",
+    "material-design-lite": "^1.0.2",
     "node-sass": "^3.0.0-beta.4",
+    "nodemon": "^1.4.0",
     "object-assign": "^1.0.0",
     "proj4": "^2.3.6",
     "proj4js-defs": "0.0.1",
@@ -48,8 +50,7 @@
     "style-loader": "^0.11.0",
     "url-loader": "^0.5.5",
     "webpack": "^1.10.5",
-    "webpack-dev-server": "^1.10.1",
-    "material-design-lite": "^1.0.2"
+    "webpack-dev-server": "^1.10.1"
   },
   "engines": {
     "iojs": "^2.3.4"
@@ -142,7 +143,8 @@
     "start": "babel-node --stage 0 server.js",
     "test": "jest",
     "test-debug": "node debug ./node_modules/.bin/jest -i",
-	"style": "babel-node ./node_modules/.bin/eslint ."
+    "watch:test": "nodemon -w __tests__ -w ./src -e js,jsx -x npm test",
+    "style": "babel-node ./node_modules/.bin/eslint ."
   },
   "jest": {
     "moduleFileExtensions": [
