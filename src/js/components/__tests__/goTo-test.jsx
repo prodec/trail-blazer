@@ -5,6 +5,7 @@ const { addons: { TestUtils } } = React;
 ['goTo', 'tab', 'form'].forEach(path => {
   jest.dontMock(`../goTo/${path}`);
 });
+jest.dontMock('isomorphic-fetch');
 
 describe('GoTo', () => {
   let GoTo = require('../goTo/goTo');
