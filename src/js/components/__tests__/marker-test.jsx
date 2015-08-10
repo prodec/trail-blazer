@@ -12,7 +12,6 @@ jest
 describe('Marker', () => {
   let Marker = require('../marker');
   let Actions = require('../../actions/actions');
-  let Constants = require('../../constants/constants');
   let marker;
     
   beforeEach(() => {
@@ -23,7 +22,7 @@ describe('Marker', () => {
     let icon = marker.refs[1];
 
     TestUtils.Simulate.click(icon)
-    expect(marker.state.active).toEqual(Constants.MarkerConstants.ICONS[1]); 
+    expect(marker.state.active).toEqual('helicopter'); 
   });
 
   it('adds a marker icon', () => {
