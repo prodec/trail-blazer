@@ -40,10 +40,7 @@ export default class MarkerUI extends React.Component {
                             iconAnchor: MarkerConstants.ICON_ANCHOR,
                             draggable: true });
 
-    this.setState((state) => {
-      state.selectedIcon = icon;
-      return state;
-    });
+    this.setState({ selectedIcon: icon });
   }
 
   initClassSets(icons) {
