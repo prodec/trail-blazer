@@ -6,7 +6,23 @@ class HeightStore extends Store {
   constructor() {
     super();
     this.data = { ws: null};
-    this.data.ws = new ClientSocket(this.updateHeight);
+    this.data.ws = new ClientSocket(this.receiveMessage);
+    this.keepAlive();
+  }
+
+  keepAlive() {
+    //15 seconds
+    let interval = 15000;
+
+    setInterval(() => {
+      let time = Date.now();
+      let message = JSON.stringify({
+        command: "ping",
+        sent_at: time
+      });
+      
+      this.data.ws.send(message);
+    }, interval);
   }
 
   requestHeight(latLng) {
@@ -24,12 +40,13 @@ class HeightStore extends Store {
     this.data.ws.send(message);
   }
 
-  updateHeight(message) {
-    
-    let { altitude } = JSON.parse(message.data).data;
-    
-    //update height component
-    console.log('Height Updated: %s', altitude);
+  receiveMessage(message) {
+    let body = JSON.parse(message.data);
+    if (body.response === "point_altitude") {
+      let { altitude } = body.data;
+      //update height component
+      console.log('Height Updated: %s', altitude);
+    }
   }
 
   registerCallbacks() {

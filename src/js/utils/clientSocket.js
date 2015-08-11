@@ -3,6 +3,7 @@ export const ENDPOINT = 'ws://suchgreatheights.sigvia.com';
 export default class ClientSocket {
   
   constructor(callback) {
+    //message interval in milliseconds
     this.messageInterval = 40;
     this.lastTime = Date.now();
 
