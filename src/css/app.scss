@@ -218,13 +218,28 @@ button::-moz-focus-inner {
   right: 10px;
   width: 195px;
   color: #f4f4f4;
-  background-color: rgba(0, 0, 0, .87);
   overflow: visible;
-  opacity: .88;
   line-height: normal;
 
   &:hover {
     opacity: 1;
+  }
+
+  > * {
+    @keyframes blink-danger {
+      50% { background-color: rgba(0, 0, 0, .87); }
+      50.001% { background-color: rgba(45, 0, 0, .87); }
+      100% { background-color: rgba(45, 0, 0, .87); }
+    }
+
+    display: block;
+    margin-top: 10px;
+    background-color: rgba(0, 0, 0, .87);
+    opacity: .88;
+
+    &.danger {
+      animation: blink-danger 2s infinite;
+    }
   }
 
   #wind-speed-widget {
@@ -242,7 +257,7 @@ button::-moz-focus-inner {
       height: 38px;
 
       .turbine {
-        @-webkit-keyframes rotatemill {
+        @keyframes rotatemill {
           0%   { transform: rotate(0deg); }
           100% { transform: rotate(120deg); }
         }
