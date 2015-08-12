@@ -20,7 +20,7 @@ class ContextPositionStore extends Store {
     return this.dispatcher.register((action) => {
       switch(action.type) {
         case this.ActionConstants.MAP_CENTER_REGISTER:
-          if(pathPositionStore.getState().latLng) { break; }
+          if(pathPositionStore.getState() && pathPositionStore.getState().latLng) { break; }
           this.dispatcher.waitFor([mapPositionStore.dispatchToken]);
           this.data.latLng = mapPositionStore.getState().latLng;
           this.emitChange();
