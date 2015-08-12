@@ -5,7 +5,6 @@ const { addons: { TestUtils } } = React;
 ['goTo', 'tab', 'form'].forEach(path => {
   jest.dontMock(`../goTo/${path}`);
 });
-jest.dontMock('isomorphic-fetch');
 
 describe('GoTo', () => {
   let GoTo = require('../goTo/goTo');
@@ -58,21 +57,21 @@ describe('GoTo', () => {
     });
   });
 
-  let getTabs = (component) => {
+  function getTabs(component) {
     let tabs = Object.keys(require.requireActual('../../constants/constants').GoToTabConstants);
 
     return tabs.sort().map(key => {
       return React.findDOMNode(component.refs[key]);
     });
-  };
+  }
 
-  let getForm = (component) => {
+  function getForm(component) {
     return React.findDOMNode(TestUtils.findRenderedDOMComponentWithTag(component, 'form'));
-  };
+  }
 
-  let getFirstInputName = (component) => {
+  function getFirstInputName(component) {
     let form = getForm(component);
 
     return $(form).find('input').first().attr('name');
-  };
+  }
 });
