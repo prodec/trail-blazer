@@ -56,10 +56,10 @@ export default class Menu extends React.Component {
     return (
       <div id="menu-wrapper">
         <div id="menu">
-          <button id="goto" className="button button-square button-jumbo button-royal" onClick={this.setupGoTo}>
+          <button ref="goto" id="goto" className="button button-square button-jumbo button-royal" onClick={this.setupGoTo}>
             <i className="glyphicons compass"></i>
           </button>
-          <button id="marker" className="button button-square button-jumbo button-action" onClick={this.setupMarker}>
+          <button ref="marker" id="marker" className="button button-square button-jumbo button-action" onClick={this.setupMarker}>
             <i className="glyphicons google_maps"></i>
           </button>
           <button id="line" className="button button-square button-jumbo button-caution" onClick={this.togglePanel}>
