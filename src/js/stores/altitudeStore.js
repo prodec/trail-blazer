@@ -2,10 +2,10 @@ import L from 'leaflet';
 import Store from './store';
 import ClientSocket from '../utils/clientSocket';
 
-class HeightStore extends Store {
+class AltitudeStore extends Store {
   constructor() {
     super();
-    this.data = { ws: null};
+    this.data = { ws: null, altitude: 0};
     this.data.ws = new ClientSocket(this.receiveMessage);
     this.keepAlive();
   }
@@ -40,12 +40,12 @@ class HeightStore extends Store {
     this.data.ws.send(message);
   }
 
-  receiveMessage(message) {
+  receiveMessage = (message) => {
     let body = JSON.parse(message.data);
     if (body.response === "point_altitude") {
       let { altitude } = body.data;
-      //update height component
-      console.log('Height Updated: %s', altitude);
+      this.data.altitude = altitude;
+      this.emitChange();
     }
   }
 
@@ -64,5 +64,5 @@ class HeightStore extends Store {
   }
 }
 
-let heightStore = new HeightStore();
-export default heightStore;
+let altitudeStore = new AltitudeStore();
+export default altitudeStore;
