@@ -9,7 +9,7 @@ import modeStore from '../stores/modeStore';
 import markerStore from '../stores/markerStore'
 import addMarkerStore from '../stores/addMarkerStore';
 import removeMarkerStore from '../stores/removeMarkerStore';
-import heightStore from '../stores/heightStore';
+import altitudeStore from '../stores/altitudeStore';
 import { EventConstants, SettingConstants } from '../constants/constants';
 
 export default class Map extends React.Component {
