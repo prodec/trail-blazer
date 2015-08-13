@@ -9,11 +9,6 @@ import { ModeConstants, MarkerConstants } from '../constants/constants';
 import mapStore from '../stores/mapStore';
 import modeStore from '../stores/modeStore';
 
-let iconUrls = MarkerConstants.ICONS.reduce((obj, icon) => {
-  obj[icon] = require(`../../images/${icon}.png`);
-  return obj;
-}, {});
-
 export default class MarkerUI extends React.Component {
   constructor() {
     super();
@@ -23,7 +18,7 @@ export default class MarkerUI extends React.Component {
     this.state = {
       icons,
       selectedIcon: new L.Icon({
-        iconUrl: '/src/images/radio-station.png',
+        iconUrl: '../../src/images/radio-station',
         iconAnchor: MarkerConstants.ICON_ANCHOR }),
       text: '',
       active: 'radio-station',
@@ -102,7 +97,8 @@ export default class MarkerUI extends React.Component {
         {this.state.icons.map((icon, i) => {
           return (
             <a href="javascript:void(0)" key={i}>
-              <img src={iconUrls[icon]} ref={i}
+              <img src={`../../images/${icon}.png`}
+                   ref={i}
                    className={classNames(this.state.sets[icon])}
                    key={i}
                    onClick={this.changeIcon}

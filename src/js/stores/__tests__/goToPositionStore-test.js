@@ -5,7 +5,7 @@ jest
 
 describe('GoToPositionStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
-  let positionStore, dispatcher, callback;
+  let goToPositionStore, dispatcher, callback;
 
   let actionGoToCoordinate = {
     type: ActionConstants.GO_TO,
@@ -22,13 +22,9 @@ describe('GoToPositionStore', () => {
     callback = dispatcher.register.mock.calls[0][0];
   });
 
-  it('registers a callback with the dispatcher', () => {
-    expect(dispatcher.register.mock.calls.length).toBe(1);
-  });
-
   describe('goToMarker', () => {
     it('initializes with latLng when null', () => {
-      expect(goToPositionStore.getState().goToMarker).toBe(null);
+      expect(goToPositionStore.getState().goToMarker).toBeNull();
       callback(actionGoToCoordinate);
       let latLng = goToPositionStore.getState().goToMarker.getLatLng().toString();
       expect(latLng).toBe('LatLng(1, 2)');
@@ -36,7 +32,7 @@ describe('GoToPositionStore', () => {
 
     it('updates latLng', () => {
       callback(actionGoToCoordinate);
-      expect(goToPositionStore.getState().goToMarker).not.toBe(null);
+      expect(goToPositionStore.getState().goToMarker).not.toBeNull();
       callback(actionGoToCoordinateUpdate);
       let latLng = goToPositionStore.getState().goToMarker.getLatLng().toString();
       expect(latLng).toBe('LatLng(3, 4)');
