@@ -37,20 +37,20 @@ export default class Map extends React.Component {
     let map = new L.Map('map', { center, zoom: SettingConstants.ZOOM });
 
     map.addLayer(new GoogleLeaflet('SATELLITE'));
+    this.initMapCenter(map, center);
     this.addMapListeners(map);
-    this.initMapCenter(map);
     this.setState({ map });
     Actions.addMap(map);
-    Actions.changeCoordinate(center);
+    Actions.mouseMoveOnMap(center);
   }
 
   addMapListeners(map) {
     map.on('moveend', () => { Actions.registerMapCenter(this.state.map.getCenter()); });
-    map.on('mousemove', (e) => { Actions.changeCoordinate(e.latlng); });
+    map.on('mousemove', (e) => { Actions.mouseMoveOnMap(e.latlng); });
   }
 
-  initMapCenter(map) {
-    map.once('locationerror', () => { this.updateMapCenter(new L.LatLng(51.51, -0.11)); });
+  initMapCenter(map, center) {
+    map.once('locationerror', () => { this.updateMapCenter(center); });
     map.locate({ setView: true, maxZoom: SettingConstants.ZOOM });
   }
 
@@ -73,10 +73,6 @@ export default class Map extends React.Component {
     let data = markerStore.getState();
 
     this.removeFromMap(marker);
-  }
-
-  render() {
-    return <div id="map"></div>;
   }
 
   goToPosition = () => {

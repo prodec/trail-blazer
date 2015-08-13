@@ -33,7 +33,7 @@ export const ActionConstants = keyMirror({
   UPDATE_MARKER: null,
   SAVE_MARKER_CONTENT: null,
   MAP_CENTER_REGISTER: null,
-  CHANGE_COORDINATE: null,
+  MOVE_MOUSE_ON_MAP: null,
   ERROR_HANDLE: null
 });
 
