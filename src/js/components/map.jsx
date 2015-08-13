@@ -6,6 +6,7 @@ import '../lib/popupLeaflet';
 import Actions from '../actions/actions';
 import goToPositionStore from '../stores/goToPositionStore';
 import modeStore from '../stores/modeStore';
+import markerStore from '../stores/markerStore'
 import addMarkerStore from '../stores/addMarkerStore';
 import removeMarkerStore from '../stores/removeMarkerStore';
 import heightStore from '../stores/heightStore';
@@ -31,7 +32,7 @@ export default class Map extends React.Component {
 
   initMap() {
     L.Icon.Default.imagePath = '//cdn.leafletjs.com/leaflet-0.7.3/images';
-    
+
     let center = new L.LatLng(51.51, -0.11);
     let map = new L.Map('map', { center, zoom: SettingConstants.ZOOM });
 
@@ -40,16 +41,16 @@ export default class Map extends React.Component {
     this.initMapCenter(map);
     this.setState({ map });
     Actions.addMap(map);
-    Actions.changeCoordinate(center);
+    Actions.mouseMoveOnMap(center);
   }
 
   addMapListeners(map) {
-    map.on('moveend', () => { Actions.registerMapCenter(map.getCenter()); });
-    map.on('mousemove', (e) => { Actions.changeCoordinate(e.latlng); });
+    map.on('moveend', () => { Actions.registerMapCenter(this.state.map.getCenter()); });
+    map.on('mousemove', (e) => { Actions.mouseMoveOnMap(e.latlng); });
   }
 
-  initMapCenter(map) {
-    map.once('locationerror', () => { this.updateMapCenter(new L.LatLng(51.51, -0.11)); });
+  initMapCenter(map, center) {
+    map.once('locationerror', () => { this.updateMapCenter(center); });
     map.locate({ setView: true, maxZoom: SettingConstants.ZOOM });
   }
 
@@ -63,12 +64,19 @@ export default class Map extends React.Component {
 
   addMarkerToMap = () => {
     let marker = addMarkerStore.getState().markerToAdd;
+
     this.addToMap(marker);
   }
 
   removeMarkerFromMap = () => {
     let marker = removeMarkerStore.getState().markerToRemove;
+    let data = markerStore.getState();
+
     this.removeFromMap(marker);
+  }
+
+  render() {
+    return <div id="map"></div>;
   }
 
   goToPosition = () => {
