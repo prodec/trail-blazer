@@ -31,6 +31,7 @@ describe('Map', () => {
       addModeListenerMock = modeStore.addChangeListener.mock;
       addMarkerListenerMock = addMarkerStore.addChangeListener.mock;
       removeMarkerListenerMock = removeMarkerStore.addChangeListener.mock;
+
     });
 
     afterEach(() => {
