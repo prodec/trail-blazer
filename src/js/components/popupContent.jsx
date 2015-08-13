@@ -59,8 +59,8 @@ export default class PopupContent extends React.Component {
                     placeholder="Observações" />
 
           <div className="popup-actions">
-            <a href="#" onClick={this.saveContent} className="popup-action-link">Salvar</a>
-            <a href="#" onClick={this.cancelEditContent}>Cancelar</a>
+            <a href="#" onClick={this.saveContent} className="popup-action-link save-link">Salvar</a>
+            <a href="#" onClick={this.cancelEditContent} className="cancel-link">Cancelar</a>
           </div>
         </div>;
         
@@ -71,7 +71,7 @@ export default class PopupContent extends React.Component {
             <b>{this.state.text}</b>
           </div>
           <div className="popup-actions">
-            <a href="#" onClick={this.editContent} className="popup-action-link">Editar</a>
+            <a href="#" onClick={this.editContent} className="popup-action-link edit-link">Editar</a>
             <a href="#" onClick={this.removeMarker}>Remover</a>
           </div>
         </div>;
