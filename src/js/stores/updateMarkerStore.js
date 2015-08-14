@@ -1,5 +1,4 @@
 import Store from './store';
-import Marker from '../utils/marker';
 import markerStore from './markerStore';
 
 class UpdateMarkerStore extends Store {
