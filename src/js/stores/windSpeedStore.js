@@ -15,11 +15,6 @@ class WindSpeedStore extends Store {
   registerCallbacks() {
     return this.dispatcher.register((action) => {
       switch(action.type) {
-        case this.ActionConstants.WIND_SPEED_FETCH:
-          this.data.windSpeed = action.windSpeed;
-          this.emitChange();
-          break;
-
         case this.ActionConstants.MAP_CENTER_REGISTER:
           this.dispatcher.waitFor([contextPositionStore.dispatchToken]);
           this.fetchAndEmitChange();
