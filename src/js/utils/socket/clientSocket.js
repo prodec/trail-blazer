@@ -17,15 +17,8 @@ export default class ClientSocket {
   }
 
   send(message) {
-    let time = Date.now();
-    let dif = time - this.lastTime;
-
-    if (dif > this.messageInterval) {
-      this.lastTime = time;
-      
-      if (this.ws.readyState === WebSocket.OPEN) {
-        this.ws.send(message);
-      }
+    if (this.ws.readyState === WebSocket.OPEN) {
+      this.debounce(this.ws.send(message), this.messageInterval);
     }
   }
 
