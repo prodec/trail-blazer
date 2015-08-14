@@ -9,11 +9,6 @@ import { ModeConstants, MarkerConstants } from '../constants/constants';
 import mapStore from '../stores/mapStore';
 import modeStore from '../stores/modeStore';
 
-let iconUrls = MarkerConstants.ICONS.reduce((obj, icon) => {
-  obj[icon] = require(`../../images/${icon}.png`);
-  return obj;
-}, {});
-
 export default class MarkerUI extends React.Component {
   constructor() {
     super();
@@ -22,8 +17,9 @@ export default class MarkerUI extends React.Component {
 
     this.state = {
       icons,
-      selectedIcon: new L.Icon({ iconUrl: iconUrls['radio-station'],
-                                 iconAnchor: MarkerConstants.ICON_ANCHOR }),
+      selectedIcon: new L.Icon({
+        iconUrl: '../../src/images/radio-station',
+        iconAnchor: MarkerConstants.ICON_ANCHOR }),
       text: '',
       active: 'radio-station',
       sets
@@ -39,10 +35,7 @@ export default class MarkerUI extends React.Component {
                             iconAnchor: MarkerConstants.ICON_ANCHOR,
                             draggable: true });
 
-    this.setState((state) => {
-      state.selectedIcon = icon;
-      return state;
-    });
+    this.setState({ selectedIcon: icon });
   }
 
   initClassSets(icons) {
@@ -104,7 +97,8 @@ export default class MarkerUI extends React.Component {
         {this.state.icons.map((icon, i) => {
           return (
             <a href="javascript:void(0)" key={i}>
-              <img src={iconUrls[icon]}
+              <img src={`../../images/${icon}.png`}
+                   ref={i}
                    className={classNames(this.state.sets[icon])}
                    key={i}
                    onClick={this.changeIcon}
@@ -123,7 +117,9 @@ export default class MarkerUI extends React.Component {
                       maxLength="140"
                       id="icon-info-description">
             </textarea>
-            <label className="mdl-textfield__label" htmlFor="icon-info-description">Observação</label>
+            <label className="mdl-textfield__label" htmlFor="icon-info-description">
+            Observação
+            </label>
           </div>
         </div>
       </div>

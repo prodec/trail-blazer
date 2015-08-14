@@ -8,6 +8,7 @@ export default class Popup {
     this.marker = marker;
     this.text = text;
     this.id = `${id}-marker-popup`;
+    this.body = `<div id =${this.id}></div>`;
     this.options = { offset: MarkerConstants.POPUP_OFFSET,
                      className: 'marker-popup',
                      minWidth: 200,
@@ -15,9 +16,7 @@ export default class Popup {
   }
 
   bindOnMarker() {
-    let body = `<div id =${this.id}></div>`;
-
-    this.marker.bindPopup(body, this.options).openPopup();
+    this.marker.bindPopup(this.body, this.options).openPopup();
     React.render(<PopupContent text={this.text} marker={this.marker} />,
                   document.getElementById(this.id));
   }
