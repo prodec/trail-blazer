@@ -18,7 +18,7 @@ export default class AltitudeSocket extends ClientSocket {
   }
 
   keepAlive() {
-    this.debounce(this.sendPing(), 15000);
+    setInterval(this.sendPing(), 15000);
   }
 
   sendPing() {
