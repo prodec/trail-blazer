@@ -12,7 +12,6 @@ export default class ClientSocket {
 
   initWebSocket(callback) {
     this.ws = new WebSocket(ENDPOINT);
-
     this.ws.onmessage = callback;
   }
 
