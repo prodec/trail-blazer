@@ -7,7 +7,7 @@ describe('MapStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
   let mapStore, dispatcher, callback;
 
-  const map = new Object();
+  const map = {};
 
   let actionAddMap = {
     type: ActionConstants.ADD_MAP,

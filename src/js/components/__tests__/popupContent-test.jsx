@@ -14,7 +14,7 @@ describe('PopupContent', () => {
   let popupContent;
 
   const originalText = "hi";
-  const marker = new Object();
+  const marker = {};
     
   beforeEach(() => {
     let ui = <PopupContent text={originalText} marker={marker} />

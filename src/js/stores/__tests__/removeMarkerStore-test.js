@@ -7,7 +7,7 @@ describe('RemoveMarkerStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
   let removeMarkerStore, dispatcher, callback;
 
-  const marker = new Object();
+  const marker = {};
 
   let actionRemoveMarker = {
     type: ActionConstants.REMOVE_MARKER,

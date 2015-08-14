@@ -5,8 +5,8 @@ jest
 
 describe('AddMarkerStore', () => {
   let ActionConstants = require('../../constants/constants').ActionConstants;
-  let addMarkerStore, dispatcher, callback; 
-  let marker = new Object();
+  let addMarkerStore, dispatcher, callback;
+  let marker = {};
 
   let actionAddMarker = {
     type: ActionConstants.ADD_MARKER,
