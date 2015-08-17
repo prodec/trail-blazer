@@ -30,10 +30,11 @@ export const ActionConstants = keyMirror({
   ERROR_HANDLE: null,
   GO_TO: null,
   MAP_CENTER_REGISTER: null,
+  MOVE_MOUSE_ON_MAP: null,
   REMOVE_ITEM: null,
   REMOVE_MARKER: null,
   SAVE_MARKER_CONTENT: null,
-  MOVE_MOUSE_ON_MAP: null,
+  UPDATE_MARKER: null
 });
 
 export const EndpointConstants = {
