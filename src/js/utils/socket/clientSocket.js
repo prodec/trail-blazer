@@ -1,3 +1,4 @@
+import debounce from '../debounce'
 import { AltitudeEndpoint } from '../../constants/constants'
 
 export default class ClientSocket {
@@ -15,23 +16,7 @@ export default class ClientSocket {
 
   send(message) {
     if (this.ws.readyState === WebSocket.OPEN) {
-      this.debounce(this.ws.send(message), this.messageInterval);
+      debounce(this.ws.send(message), this.messageInterval);
     }
   }
-
-  debounce(fn, period) {
-    let currentTimeout;
-
-    return ((...args) => {
-      if (currentTimeout) {
-        clearTimeout(currentTimeout);
-        currentTimeout = null;
-      }
-
-      currentTimeout = setTimeout(() => {
-        fn.apply(null, args);
-      }, period);
-    });
-  }
-
 }

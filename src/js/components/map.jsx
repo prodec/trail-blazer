@@ -37,14 +37,14 @@ export default class Map extends React.Component {
 
     map.addLayer(new GoogleLeaflet('SATELLITE'));
     this.addMapListeners(map);
-    this.initMapCenter(map);
+    this.initMapCenter(map, center);
     this.setState({ map });
     Actions.addMap(map);
     Actions.mouseMoveOnMap(center);
   }
 
   addMapListeners(map) {
-    map.on('moveend', () => { Actions.registerMapCenter(this.state.map.getCenter()); });
+    map.on('moveend', () => { Actions.registerMapCenter(map.getCenter()); });
     map.on('mousemove', (e) => { Actions.mouseMoveOnMap(e.latlng); });
   }
 
@@ -63,14 +63,11 @@ export default class Map extends React.Component {
 
   addMarkerToMap = () => {
     let marker = addMarkerStore.getState().markerToAdd;
-
     this.addToMap(marker);
   }
 
   removeMarkerFromMap = () => {
     let marker = removeMarkerStore.getState().markerToRemove;
-    let data = markerStore.getState();
-
     this.removeFromMap(marker);
   }
 
