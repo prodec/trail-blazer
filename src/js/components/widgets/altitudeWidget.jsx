@@ -13,11 +13,6 @@ export default class AltitudeWidget extends React.Component {
     return (
       <div id="wind-speed-widget">
         <div className="windmill">
-          <div>
-            <div className="blade"></div>
-            <div className="blade"></div>
-            <div className="blade"></div>
-          </div>
         </div>
         <div className="speed-wrapper">
           <span className="speed-value">{this.state.altitude}</span>
