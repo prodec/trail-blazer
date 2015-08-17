@@ -40,7 +40,7 @@ export default class Map extends React.Component {
   }
 
   addMapListeners(map) {
-    map.on('moveend', () => { Actions.registerMapCenter(this.state.map.getCenter()); });
+    map.on('moveend', () => { Actions.registerMapCenter(map.getCenter()); });
   }
 
   initMapCenter(map) {

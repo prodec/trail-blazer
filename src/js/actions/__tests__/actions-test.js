@@ -41,6 +41,16 @@ describe('Actions', () => {
     expectCommon();
   });
 
+  it(`creates ${ActionConstants.MAP_CENTER_REGISTER} action`, () => {
+    Actions.registerMapCenter({});
+    expectCommon();
+  });
+
+  it(`creates ${ActionConstants.ERROR_HANDLE} action`, () => {
+    Actions.handleError({});
+    expectCommon();
+  });
+
   function expectCommon() {
     expect(dispatcher.handleAction.mock.calls.length).toBe(1);
   }
