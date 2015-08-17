@@ -6,11 +6,7 @@ export default class AltitudeWidget extends React.Component {
   constructor() {
     super();
     this.state = { altitude: this.getAltitude() };
-  }
-
-  componentDidMount() {
     altitudeStore.addChangeListener(this.setAltitude);
-    this.setAltitude();
   }
 
   render() {

@@ -1,18 +1,15 @@
-export const ENDPOINT = 'ws://suchgreatheights.sigvia.com';
+import { AltitudeEndpoint } from '../../constants/constants'
 
 export default class ClientSocket {
   
-  constructor(callback) {
+  constructor() {
     //message interval in milliseconds
     this.messageInterval = 40;
     this.lastTime = Date.now();
-
-    this.initWebSocket(callback);
   }
 
   initWebSocket(callback) {
-    this.ws = new WebSocket(ENDPOINT);
-
+    this.ws = new WebSocket(AltitudeEndpoint);
     this.ws.onmessage = callback;
   }
 
@@ -23,17 +20,17 @@ export default class ClientSocket {
   }
 
   debounce(fn, period) {
-   let currentTimeout;
+    let currentTimeout;
 
-   return ((...args) => {
-     if (currentTimeout) {
-       clearTimeout(currentTimeout);
-       currentTimeout = null;
-     }
+    return ((...args) => {
+      if (currentTimeout) {
+        clearTimeout(currentTimeout);
+        currentTimeout = null;
+      }
 
-     currentTimeout = setTimeout(() => {
-       fn.apply(null, args);
-     }, period); 
+      currentTimeout = setTimeout(() => {
+        fn.apply(null, args);
+      }, period);
     });
   }
 

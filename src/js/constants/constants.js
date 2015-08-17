@@ -55,3 +55,5 @@ export const SettingConstants = {
   MAP_PROJECTION: 'EPSG:4326',
   ZOOM: 17
 };
+
+export const AltitudeEndpoint = 'ws://suchgreatheights.sigvia.com';
