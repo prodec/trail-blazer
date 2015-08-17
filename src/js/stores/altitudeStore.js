@@ -6,7 +6,8 @@ class AltitudeStore extends Store {
   constructor() {
     super();
     this.data = { ws: null, altitude: 0};
-    this.data.ws = new AltitudeSocket(this.receiveMessage);
+    this.data.ws = new AltitudeSocket();
+    this.data.ws.initWebSocket(this.receiveMessage);
     this.data.ws.keepAlive();
   }
 

@@ -6,11 +6,7 @@ export default class WindSpeedWidget extends React.Component {
   constructor() {
     super();
     this.state = { windSpeed: this.getWindSpeed() };
-  }
-
-  componentDidMount() {
     windSpeedStore.addChangeListener(this.setWindSpeed);
-    this.setWindSpeed();
   }
 
   render() {
