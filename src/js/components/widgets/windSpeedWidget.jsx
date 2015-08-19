@@ -25,10 +25,10 @@ export default class WindSpeedWidget extends React.Component {
             <div className="blade"></div>
           </div>
         </div>
-        <div className="speed-wrapper">
-          <span className="speed-value">{this.state.windSpeed}</span>
+        <div className="widget-data-wrapper">
+          <span className="widget-data-value">{this.state.windSpeed}</span>
         </div>
-        <span className="widget-unit">km/h</span>
+        <span className="widget-data-unit">km/h</span>
       </div>
     );
   }

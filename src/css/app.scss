@@ -289,52 +289,43 @@ button::-moz-focus-inner {
         }
       }
     }
+  }
 
-    .speed-wrapper {
-      display: inline-block;
-      position: relative;
-      vertical-align: top;
-      top: -5px;
-      width: 96px;
-      height: 65px;
-      overflow: hidden;
-
-      .speed-value {
+    .widget-data-wrapper {
         display: inline-block;
-        float: right;
-        font-size: 55px;
+        position: relative;
+        vertical-align: top;
+        top: -5px;
+        width: 96px;
+        height: 65px;
+        overflow: hidden;
 
-        &:before {
-          content: '000';
-          color: #555;
+        .widget-data-value {
+            display: inline-block;
+            float: right;
+            font-size: 55px;
+
+            &:before {
+                content: '000';
+                color: #555;
+            }
         }
-      }
     }
 
-  }
+    #altitude-widget {
+        font-weight: 700;
+        padding: 15px 0px 15px 43px;
+        height: 82px;
+        overflow-x: visible;
+    }
 
-  #altitude-widget {
-      font-weight: 700;
-      padding: 15px 0px 15px 15px;
-      height: 82px;
-      overflow-x: visible;
-
-      .altitude-icon {
+    .widget-data-unit {
         display: inline-block;
-        margin: 10px 17px 0 9px;
+        font-size: 15px;
+        font-weight: 400;
+        margin-left: 7px;
         position: relative;
-        background-color: #f4f4f4;
-        width: 2px;
-        height: 38px;
-      }
-  }
-
-  .widget-unit {
-      display: inline-block;
-      font-size: 15px;
-      font-weight: 400;
-      margin-left: 7px;
-      position: relative;
-      bottom: 2px;
-  }
+        bottom: 15px;
+        vertical-align: bottom;
+    }
 }

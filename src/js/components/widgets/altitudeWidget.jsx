@@ -11,13 +11,11 @@ export default class AltitudeWidget extends React.Component {
 
   render() {
     return (
-      <div id="wind-speed-widget">
-        <div className="windmill">
+      <div id="altitude-widget">
+        <div className="widget-data-wrapper">
+          <span className="widget-data-value">{this.state.altitude}</span>
         </div>
-        <div className="speed-wrapper">
-          <span className="speed-value">{this.state.altitude}</span>
-        </div>
-        <span className="widget-unit">m</span>
+        <span className="widget-data-unit">m</span>
       </div>
     );
   }
