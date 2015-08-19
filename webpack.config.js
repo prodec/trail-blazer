@@ -1,8 +1,6 @@
 var path = require('path');
 var webpack = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var dotenv = require('dotenv');
-dotenv.load();
 
 module.exports = {
   debug: true,
@@ -23,8 +21,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
-      environment: process.env.NODE_ENV,
-      port: process.env.PORT
+      environment: process.env.NODE_ENV || 'development',
+      port: process.env.PORT || 3001
     })
   ],
   resolve: {

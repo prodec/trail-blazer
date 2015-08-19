@@ -5,12 +5,10 @@ import apiRoutes from './routes/api';
 import DevServer from './devServer';
 import webpackConfig from './webpack.config';
 import webpackDevServerConfig from './webpackDevServer.config';
-import dotenv from 'dotenv';
-dotenv.load();
 
 let app = express();
-let port = parseInt(process.env.PORT);
-let isDevelopment = process.env.NODE_ENV === 'development';
+let port = process.env.PORT || 3001;
+let isDevelopment = process.env.NODE_ENV !== 'production';
 
 app
   .use(cors())
@@ -23,8 +21,7 @@ app
   });
 
 if (isDevelopment) {
-  let devPort = parseInt(process.env.DEV_PORT);
   let devServer = new DevServer(webpackConfig, webpackDevServerConfig);
 
-  devServer.listen(devPort);
+  devServer.listen(3000);
 }

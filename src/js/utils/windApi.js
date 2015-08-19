@@ -11,10 +11,12 @@ export default class WindApi {
     this.lat = lat;
     this.lng = lng;
     this.time = time ? `,${time}` : '';
+    this.forecast_api_endpoint = 'https://api.forecast.io/forecast';
+    this.forecast_api_key = 'xxx';
   }
 
   buildUrl() {
-    return `${process.env.FORECAST_API_ENDPOINT}/${process.env.FORECAST_API_KEY}/${this.lat},${this
+    return `${this.forecast_api_endpoint}/${this.forecast_api_key}/${this.lat},${this
               .lng}${this.time}?${Qs.stringify(this.query)}`;
   }
 
