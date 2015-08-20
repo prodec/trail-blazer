@@ -13,6 +13,7 @@ let isDevelopment = process.env.NODE_ENV !== 'production';
 app
   .use(cors())
   .use(express.static(path.join(__dirname, 'dist')))
+  .use(express.static(path.join(__dirname, 'src', 'images')))
   .use('/api', apiRoutes)
   .get('/', (_, res) => { res.sendFile('index.html'); })
   .listen(port, (error) => {

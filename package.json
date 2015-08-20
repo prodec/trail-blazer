@@ -152,12 +152,14 @@
     "moduleFileExtensions": [
       "js",
       "jsx",
-      "json"
+      "json",
+      "png"
     ],
     "scriptPreprocessor": "<rootDir>/jestPreprocessor.js",
     "unmockedModulePathPatterns": [
       "<rootDir>/node_modules/react",
       "<rootDir>/node_modules/jquery",
+      "<rootDir>/src/images/",
       "<rootDir>/node_modules/babel-runtime"
     ],
     "testFileExtensions": [

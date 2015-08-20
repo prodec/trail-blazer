@@ -7,16 +7,6 @@ describe('WindApi', () => {
     WindApi = require('../windApi');
   });
 
-  it('gets weather', () => {
-    mockLibs(4);
-    process.env.FORECAST_API_ENDPOINT = 'a';
-    process.env.FORECAST_API_KEY = 'b';
-    let url = `a/b/1,2,3?4`;
-
-    new WindApi(1,2,3).getWeather();
-    expect(fetch).toBeCalledWith(url, { method: 'get' })
-  });
-
   it('gets windSpeed', () => {
     let speed = 99;
     WindApi.prototype.getWeather = () => { return { then: (fn) => {
