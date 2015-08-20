@@ -29,5 +29,5 @@ sudo rm -rf /usr/local/{lib/node{,/.npm,_modules},bin,share/man}/{npm*,node*,man
 ```
 
 ## Forecast
-The wind speed feature uses forecast as api. You need a key to use it, grab one at [https://developer.forecast.io/register](https://developer.forecast.io/register) put it [here](https://github.com/prodec/trail-blazer/blob/master/src/js/utils/windApi.js#L15): 
+The wind speed feature uses forecast as api. You need a key to use it, grab one at [https://developer.forecast.io/register](https://developer.forecast.io/register) and put it [here](https://github.com/prodec/trail-blazer/blob/master/src/js/utils/windApi.js#L15): 
 
