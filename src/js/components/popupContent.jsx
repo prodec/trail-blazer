@@ -46,26 +46,26 @@ export default class PopupContent extends React.Component {
     let content;
 
     if (this.state.text === '') {
-      this.state.contentSet['popup-content'] = false;      
+      this.state.contentSet['popup-content'] = false;
     }
-    
+
     if (this.state.editing) {
-      content = 
+      content =
         <div>
           <textarea className="content-editable"
                     value={this.state.text}
                     maxLength="140"
                     onChange={this.changeText}
-                    placeholder="Observações" />
+                    placeholder="Comments" />
 
           <div className="popup-actions">
             <a href="#" onClick={this.saveContent} className="popup-action-link save-link">Salvar</a>
             <a href="#" onClick={this.cancelEditContent} className="cancel-link">Cancelar</a>
           </div>
         </div>;
-        
+
     } else {
-      content = 
+      content =
         <div>
           <div className={classNames(this.state.contentSet)}>
             <b>{this.state.text}</b>
@@ -75,7 +75,7 @@ export default class PopupContent extends React.Component {
             <a href="#" onClick={this.removeMarker}>Remover</a>
           </div>
         </div>;
-    } 
+    }
 
     return content;
   }
