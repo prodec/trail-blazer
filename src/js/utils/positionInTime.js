@@ -4,7 +4,7 @@ import flightTimeStore from '../stores/flightTimeStore';
 export default class PositionInTime {
   static getCurrent() {
     let { lat, lng } = this.getCurrentPosition();
-    let time = this.getCurrentTime();
+    let time = this.getCurrentTime().format();
 
     return { lat, lng, time };
   }

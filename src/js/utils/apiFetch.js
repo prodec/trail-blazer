@@ -2,7 +2,7 @@ import Qs from 'qs';
 import 'isomorphic-fetch';
 
 export default class ApiFetch {
-  isDevelopment = ServerConstants.NODE_ENV === 'development'
+  isDevelopment = ServerConstants.NODE_ENV !== 'production'
   port = ServerConstants.PORT
 
   constructor(options) {

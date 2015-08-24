@@ -60,6 +60,20 @@ export default class Actions {
       latLng
     });
   }
+  
+  static registerUTC(utc) {
+    dispatcher.handleAction({
+      type: ActionConstants.UTC_REGISTER,
+      utc
+    });
+  }
+
+  static updateFlightTime(flightTime) {
+    dispatcher.handleAction({
+      type: ActionConstants.FLIGHT_TIME_UPDATE,
+      flightTime
+    });
+  }
 
   static handleError(error) {
     console.log(error);

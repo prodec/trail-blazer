@@ -9,8 +9,8 @@ $sans-serif: "Roboto", sans-serif;
 @import url(http://fonts.googleapis.com/css?family=Roboto:400,700);
 
 %sans-bold {
-  font-family: $sans-serif;
-  font-weight: 700;
+    font-family: $sans-serif;
+    font-weight: 700;
 }
 
 @mixin container-slideout {
@@ -43,6 +43,10 @@ html, body {
     padding: 0;
     margin: 0;
     color: #222;
+
+    a {
+        cursor: pointer;
+    }
 }
 
 .glyphicons {
@@ -78,9 +82,9 @@ html, body {
 }
 
 @each $position in $positions {
-  .l-box#{$position} {
-    padding#{$position}: 1.17em;
-  }
+    .l-box#{$position} {
+        padding#{$position}: 1.17em;
+    }
 }
 
 .content {
@@ -210,86 +214,318 @@ button::-moz-focus-inner {
     background-color: #a5de37;
 }
 
+.rdtPicker {
+    table {
+        min-width: 172px;
+        border-spacing: 2px;
+        border-collapse: separate;
+    }
+}
+
 #widgets {
-  @extend %sans-bold;
-  z-index: 0;
-  position: absolute;
-  bottom: 25px;
-  right: 10px;
-  width: 195px;
-  color: #f4f4f4;
-  overflow: visible;
-  line-height: normal;
+    @extend %sans-bold;
+    z-index: 0;
+    position: absolute;
+    bottom: 25px;
+    right: 10px;
+    width: 202px;
+    color: #f4f4f4;
+    overflow: visible;
+    line-height: normal;
 
-  &:hover {
-    opacity: 1;
-  }
-
-  > * {
-    @keyframes blink-danger {
-      50% { background-color: rgba(0, 0, 0, .87); }
-      50.001% { background-color: rgba(45, 0, 0, .87); }
-      100% { background-color: rgba(45, 0, 0, .87); }
-    }
-
-    display: block;
-    margin-top: 10px;
-    background-color: rgba(0, 0, 0, .87);
-    opacity: .88;
-
-    &.danger {
-      animation: blink-danger 2s infinite;
-    }
-  }
-
-  #wind-speed-widget {
-    font-weight: 700;
-    padding: 15px 0px 15px 15px;
-    height: 82px;
-    overflow-x: visible;
-
-    .windmill {
-      display: inline-block;
-      margin: 10px 17px 0 9px;
-      position: relative;
-      background-color: #f4f4f4;
-      width: 2px;
-      height: 38px;
-
-      .turbine {
-        @keyframes rotatemill {
-          0%   { transform: rotate(0deg); }
-          100% { transform: rotate(120deg); }
+    > * {
+        @keyframes blink-danger {
+            50% { background-color: rgba(0, 0, 0, .87); }
+            50.001% { background-color: rgba(45, 0, 0, .87); }
+            100% { background-color: rgba(45, 0, 0, .87); }
         }
 
-        position: relative;
-        top: -5px;
-        left: -2px;
-        width: 6px;
-        height: 6px;
-        border-radius: 50%;
-        animation: rotatemill 0s linear infinite;
+      display: block;
+      margin-top: 10px;
+      background-color: rgba(0, 0, 0, .87);
+      opacity: .88;
+      padding: 15px;
+      height: 86px;
 
-        &.slow { animation-duration: 1.8s; }
-        &.normal { animation-duration: .6s; }
-        &.fast { animation-duration: .2s; }
+      &.danger {
+          animation: blink-danger 2s infinite;
+      }
 
-       .blade {
-          position: absolute;
-          left: 0px;
-          bottom: 3px;
-          border-style: solid;
-          border-color: transparent;
-          border-bottom-width: 15px;
-          border-bottom-color: #fff;
-          transform-origin: bottom;
-
-          &:nth-child(2) { transform: rotate(120deg); }
-          &:nth-child(3) { transform: rotate(240deg); }
-        }
+      &:hover {
+          opacity: 1;
       }
     }
-  }
+
+
+    a {
+        color: #f4f4f4;
+
+        &:hover {
+            color: #5ebbe0;
+        }
+    }
+
+    select {
+        background-color: transparent;
+        color: white;
+
+        option {
+            margin:40px;
+            background-color: inherit;
+            color:#fff;
+            text-shadow:0 1px 0 rgba(0,0,0,0.4);
+        }
+    }
+
+    .glyphicons {
+        left: 0;
+        float: none;
+        bottom: 6px;
+        padding-right: 12px;
+
+        &:before {
+           font-size: 1.6em;
+        }
+    }
+
+    .sm-datum {
+        display: inline-block;
+        font-size: 14px;
+    }
+
+    .sm-unit {
+        display: block;
+        font-weight: 400;
+        text-align: right;
+        font-size: 13px;
+        margin-bottom: 3px;
+    }
+
+    .sm-side-unit {
+        display: inline-block;
+        font-weight: 400;
+        padding-left: 3px;
+        font-size: 13px;
+    }
+
+    .widget-button {
+        width: 100%;
+
+        &.button-tiny.button-border-thin {
+            border-color: #5ebbe0;
+            color: #5ebbe0;
+
+            &:hover, &:active, &:focus {
+                color: #f4f4f4;
+                border-color: #319ECA;
+                background-color: #319ECA;
+                font-weight: 700;
+            }
+        }
+    }
+
+    #flight-time-widget {
+        position: relative;
+        padding-top: 21px;
+
+        &.editing-date {
+            height: initial;
+            padding-top: 15px;
+
+            .rdtPicker {
+                table {
+                    width: 100%;
+
+                    button {
+                        display: inline-block;
+                        width: 100%;
+                        min-height: 20px;
+                        background-color: transparent;
+                        border: none;
+                        outline:none;
+                    }
+
+                    td.day, td.month, td.year, td.timeToggle, th, .btn {
+                        cursor: pointer;
+
+                        &:hover {
+                            color: #5ebbe0;
+                        }
+                    }
+
+                    td.disabled, td.day.old.disabled {
+                        background-color: rgb(52, 52, 52);
+                        color: rgb(84, 84, 84);
+
+                        &:hover {
+                            cursor: default;
+                            color: rgb(84, 84, 84);
+                        }
+                    }
+
+                    th.dow {
+                        cursor:default;
+
+                        &:hover {
+                            color: inherit;
+                        }
+                    }
+
+                    td {
+                        &.timeToggle {
+                            text-align: center;
+                        }
+
+                        &.day, &.month, &.year {
+                            font-weight: 400;
+                        }
+
+                        &.month, &.year {
+                            text-align: center;
+                            line-height: 1.5;
+                        }
+
+                        &.day {
+                            text-align: right;
+
+                            &.old {
+                                color: gray;
+                            }
+
+                            &.active {
+                                color: #f4f4f4;
+                                background-color: #319ECA;
+                                font-weight: 700;
+                            }
+                        }
+
+                        .rdtCount, .rdtCounterSeparator {
+                            text-align: center;
+                        }
+                    }
+
+                    th {
+                        line-height: 1.5;
+                    }
+
+                    tfoot td {
+                        line-height: 2.5;
+                    }
+                }
+            }
+        }
+
+        > a {
+          display: block;
+
+          &:hover .pure-u-1-2:last-child .clock-second {
+              background-color: #5ebbe0;
+          }
+        }
+
+        .pure-u-1-2 {
+            &:first-child {
+                 padding-bottom: 18px;
+            }
+
+            &:last-child {
+                 position: relative;
+                 text-align: right;
+
+                 .clock-second {
+                     @keyframes tictac {
+                         to { transform: rotate(360deg); }
+                     }
+
+                     position: absolute;
+                     bottom: 8px;
+                     left: 14px;
+                     height: 5px;
+                     width: 1px;
+                     background-color: #f4f4f4;
+                     transform-origin: bottom;
+                     animation: tictac 60s steps(60) infinite;
+                 }
+            }
+        }
+
+        .pure-u-1 {
+            text-align: center;
+        }
+
+        #utc-select-wrapper {
+            position: relative;
+            top: 20px;
+
+            #utc-select {
+                position: absolute;
+                bottom: 0;
+                width: 100%;
+                background-color: #000;
+                overflow-x: hidden;
+
+                option {
+                  margin: 1px 0;
+                }
+            }
+        }
+    }
+
+    #altitude-widget {
+        font-weight: 700;
+        padding: 15px 0px 15px 43px;
+        height: 82px;
+        overflow-x: visible;
+    }
+
+    #wind-speed-widget {
+        font-weight: 700;
+        padding: 15px 0px 15px 15px;
+        height: 82px;
+        overflow-x: visible;
+
+        .windmill {
+            display: inline-block;
+            margin: 10px 17px 0 9px;
+            position: relative;
+            background-color: #f4f4f4;
+            width: 2px;
+            height: 38px;
+
+            .turbine {
+                @keyframes rotatemill {
+                    0%   { transform: rotate(0deg); }
+                    100% { transform: rotate(120deg); }
+                }
+
+                position: relative;
+                top: -5px;
+                left: -2px;
+                width: 6px;
+                height: 6px;
+                border-radius: 50%;
+                animation: rotatemill 0s linear infinite;
+
+                &.slow { animation-duration: 1.8s; }
+                &.normal { animation-duration: .6s; }
+                &.fast { animation-duration: .2s; }
+
+               .blade {
+                    position: absolute;
+                    left: 0px;
+                    bottom: 3px;
+                    border-style: solid;
+                    border-color: transparent;
+                    border-bottom-width: 15px;
+                    border-bottom-color: #fff;
+                    transform-origin: bottom;
+
+                    &:nth-child(2) { transform: rotate(120deg); }
+                    &:nth-child(3) { transform: rotate(240deg); }
+                }
+            }
+        }
+    }
 
     .widget-data-wrapper {
         display: inline-block;
@@ -310,13 +546,6 @@ button::-moz-focus-inner {
                 color: #555;
             }
         }
-    }
-
-    #altitude-widget {
-        font-weight: 700;
-        padding: 15px 0px 15px 43px;
-        height: 82px;
-        overflow-x: visible;
     }
 
     .widget-data-unit {

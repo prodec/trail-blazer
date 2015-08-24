@@ -1,0 +1,138 @@
+[
+  {
+    "offset": -720,
+    "text": "(UTC-12:00) International Date Line West"
+  },
+  {
+    "offset": -660,
+    "text": "(UTC-11:00) Midway Island, Samoa"
+  },
+  {
+    "offset": -600,
+    "text": "(UTC-10:00) Hawaii"
+  },
+  {
+    "offset": -540,
+    "text": "(UTC-09:00) Alaska"
+  },
+  {
+    "offset": -480,
+    "text": "(UTC-08:00) Pacific Time (US and Canada); Tijuana"
+  },
+  {
+    "offset": -420,
+    "text": "(UTC-07:00) Arizona"
+  },
+  {
+    "offset": -360,
+    "text": "(UTC-06:00) Central America"
+  },
+  {
+    "offset": -300,
+    "text": "(UTC-05:00) Bogota, Lima, Quito"
+  },
+  {
+    "offset": -270,
+    "text": "(UTC-04:30) Caracas"
+  },
+  {
+    "offset": -240,
+    "text": "(UTC-04:00) Santiago"
+  },
+  {
+    "offset": -210,
+    "text": "(UTC-03:30) Newfoundland"
+  },
+  {
+    "offset": -180,
+    "text": "(UTC-03:00) Brasilia, Buenos Aires"
+  },
+  {
+    "offset": -120,
+    "text": "(UTC-02:00) Mid-Atlantic"
+  },
+  {
+    "offset": -60,
+    "text": "(UTC-01:00) Cape Verde Islands"
+  },
+  {
+    "offset": 0,
+    "text": "(UTC) Dublin, Edinburgh, Lisbon, London"
+  },
+  {
+    "offset": 60,
+    "text": "(UTC+01:00) Brussels, Copenhagen, Madrid, Paris"
+  },
+  {
+    "offset": 120,
+    "text": "(UTC+02:00) Athens, Istanbul, Minsk"
+  },
+  {
+    "offset": 180,
+    "text": "(UTC+03:00) Moscow, St. Petersburg, Volgograd"
+  },
+  {
+    "offset": 210,
+    "text": "(UTC+03:30) Tehran"
+  },
+  {
+    "offset": 240,
+    "text": "(UTC+04:00) Abu Dhabi, Muscat"
+  },
+  {
+    "offset": 270,
+    "text": "(UTC+04:30) Kabul"
+  },
+  {
+    "offset": 300,
+    "text": "(UTC+05:00) Islamabad, Karachi, Tashkent"
+  },
+  {
+    "offset": 330,
+    "text": "(UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi"
+  },
+  {
+    "offset": 345,
+    "text": "(UTC+05:45) Kathmandu"
+  },
+  {
+    "offset": 360,
+    "text": "(UTC+06:00) Astana, Dhaka"
+  },
+  {
+    "offset": 390,
+    "text": "(UTC+06:30) Yangon Rangoon"
+  },
+  {
+    "offset": 420,
+    "text": "(UTC+07:00) Bangkok, Hanoi, Jakarta"
+  },
+  {
+    "offset": 480,
+    "text": "(UTC+08:00) Kuala Lumpur, Singapore"
+  },
+  {
+    "offset": 540,
+    "text": "(UTC+09:00) Osaka, Sapporo, Tokyo"
+  },
+  {
+    "offset": 570,
+    "text": "(UTC+09:30) Darwino"
+  },
+  {
+    "offset": 600,
+    "text": "(UTC+10:00) Canberra, Melbourne, Sydney"
+  },
+  {
+    "offset": 660,
+    "text": "(UTC+11:00) Magadan, Solomon Islands, New Caledonia"
+  },
+  {
+    "offset": 720,
+    "text": "(UTC+12:00) Fiji Islands, Kamchatka, Marshall Islands"
+  },
+  {
+    "offset": 780,
+    "text": "(UTC+13:00) Nuku'alofa"
+  }
+]
