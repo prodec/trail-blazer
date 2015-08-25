@@ -16,7 +16,7 @@ nvm alias default iojs-2.4
 npm i -g babel
 ```
 
-## Start the servidor:
+## Start the server:
 ```
 cd ~/git/trail-blazer
 npm install
