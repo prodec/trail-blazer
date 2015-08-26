@@ -9,15 +9,15 @@ describe('ApiFetch', () => {
     options = {
       url: 'path/',
       query: { q: '1' }
-    }
-    window.ServerConstants = {};
+    };
+    window.ServerConstants = { NODE_ENV: 'production' };
   });
 
   it('fetches and calls parser', () => {
     let mockFn = mockFetch();
-    options.responseParser = () => { 'sou um callback feliz' };
+    options.responseParser = () => { 'im a happy callback'; };
 
-    new ApiFetch(options).run()
+    new ApiFetch(options).run();
     expect(mockFn).toBeCalledWith(options.responseParser);
   });
 

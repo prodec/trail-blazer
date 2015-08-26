@@ -46,6 +46,16 @@ describe('Actions', () => {
     expectCommon();
   });
 
+  it(`creates ${ActionConstants.UTC_REGISTER} action`, () => {
+    Actions.registerUTC({});
+    expectCommon();
+  });
+
+  it(`creates ${ActionConstants.FLIGHT_TIME_UPDATE} action`, () => {
+    Actions.updateFlightTime({});
+    expectCommon();
+  });
+
   it(`creates ${ActionConstants.ERROR_HANDLE} action`, () => {
     Actions.handleError({});
     expectCommon();

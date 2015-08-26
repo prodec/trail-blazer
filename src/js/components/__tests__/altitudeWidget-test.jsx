@@ -2,19 +2,15 @@ import React from 'react/addons';
 const { addons: { TestUtils } } = React;
 
 jest
-  .dontMock('../altitudeWidget')
-  .dontMock('../../../constants/constants')
-  .dontMock('keymirror');
+  .dontMock('../widgets/altitudeWidget');
 
 describe('AltitudeWidget', () => {
-  let AltitudeWidget = require('../altitudeWidget');
-  let Actions = require('../../../actions/actions');
-  let Constants = require('../../../constants/constants');
-  let store = require('../../../stores/altitudeStore');
-  let widget
+  let AltitudeWidget = require('../widgets/altitudeWidget');
+  let store = require('../../stores/altitudeStore');
+  let widget;
   const altitude = 456;
   const modifiedAltitude = 999;
-    
+
   beforeEach(() => {
     store.getState.mockReturnValue({ altitude });
     widget = TestUtils.renderIntoDocument(<AltitudeWidget />);
@@ -29,9 +25,8 @@ describe('AltitudeWidget', () => {
   });
 
   it('widget set value', () => {
-    store.getState.mockReturnValue({ altitude:modifiedAltitude });
+    store.getState.mockReturnValue({ altitude: modifiedAltitude });
     widget.setAltitude();
     expect(widget.state.altitude).toEqual(modifiedAltitude);
   });
-
 });

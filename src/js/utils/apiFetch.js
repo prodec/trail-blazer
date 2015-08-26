@@ -3,7 +3,7 @@ import 'isomorphic-fetch';
 
 export default class ApiFetch {
   isDevelopment = ServerConstants.NODE_ENV !== 'production'
-  port = ServerConstants.PORT
+  port = ServerConstants.PORT || 3001
 
   constructor(options) {
     this.url = this.buildUrl(options.url);

@@ -4,7 +4,7 @@ import moment from 'moment';
 class FlightTimeStore extends Store {
   constructor() {
     super();
-    this.data.time = this.getDeviceDateTime();
+    this.data = { time: this.getDeviceDateTime() };
   }
 
   registerCallbacks() {

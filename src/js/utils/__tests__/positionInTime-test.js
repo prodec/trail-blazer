@@ -8,12 +8,14 @@ describe('PositionInTime', () => {
   });
 
   it('gets current position and time', () => {
+    let format = jest.genMockFunction();
     PositionInTime.getCurrentPosition = jest.genMockFunction().mockReturnValue({});
-    PositionInTime.getCurrentTime = jest.genMockFunction();
+    PositionInTime.getCurrentTime = jest.genMockFunction().mockReturnValue({ format });
 
     PositionInTime.getCurrent();
     expect(PositionInTime.getCurrentPosition).toBeCalled();
     expect(PositionInTime.getCurrentTime).toBeCalled();
+    expect(format).toBeCalled();
   });
 
   it('gets current position', () => {
