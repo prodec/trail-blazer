@@ -118,7 +118,7 @@ export default class MarkerUI extends React.Component {
                       id="icon-info-description">
             </textarea>
             <label className="mdl-textfield__label" htmlFor="icon-info-description">
-            Observação
+              Comment
             </label>
           </div>
         </div>

@@ -28,13 +28,15 @@ export const ActionConstants = keyMirror({
   ADD_MARKER: null,
   CHANGE_MODE: null,
   ERROR_HANDLE: null,
+  FLIGHT_TIME_UPDATE: null,
   GO_TO: null,
   MAP_CENTER_REGISTER: null,
   MOVE_MOUSE_ON_MAP: null,
   REMOVE_ITEM: null,
   REMOVE_MARKER: null,
   SAVE_MARKER_CONTENT: null,
-  UPDATE_MARKER: null
+  UPDATE_MARKER: null,
+  UTC_REGISTER: null
 });
 
 export const EndpointConstants = {

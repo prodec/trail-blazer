@@ -7,7 +7,7 @@ import CoordinateConverter from '../../utils/coordinateConverter';
 export default class Form extends React.Component {
   constructor() {
     super();
-    
+
     this.state = {
       lat: null,
       lng: null,
@@ -41,11 +41,11 @@ export default class Form extends React.Component {
           <form className="pure-form" onSubmit={this.goToCoordinate.bind(this)}>
             <div className="pure-g">
               <div className="pure-u-1 l-box-top l-box-bottom">
-                <input required className="pure-input-1" key="north" type="number" step="any" name="north" placeholder="Norte"
+                <input required className="pure-input-1" key="north" type="number" step="any" name="north" placeholder="North"
                   value={this.state.north} onChange={this.bindValue} />
               </div>
               <div className="pure-u-1 l-box-bottom">
-                <input required className="pure-input-1" key="east" type="number" step="any" name="east" placeholder="Leste"
+                <input required className="pure-input-1" key="east" type="number" step="any" name="east" placeholder="East"
                   value={this.state.east} onChange={this.bindValue} />
               </div>
               <div className="pure-u-12-24 l-box-right l-box-bottom">

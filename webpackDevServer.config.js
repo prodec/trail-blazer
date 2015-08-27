@@ -2,9 +2,9 @@ import config from './webpack.config';
 
  let devServerConfig = {
   publicPath: config.output.publicPath,
-  proxy: { 
+  proxy: {
     '/api': 'http://localhost:3001',
-    '/*.png': 'http://localhost:3001',
+    '/*.png': 'http://localhost:3001'
   },
   hot: true,
   historyApiFallback: true,

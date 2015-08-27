@@ -4,6 +4,7 @@ import ApiFetch from '../utils/apiFetch';
 import PositionInTime from '../utils/positionInTime';
 import debounce from '../utils/debounce';
 import contextPositionStore from './contextPositionStore';
+import flightTimeStore from './flightTimeStore';
 import { EndpointConstants, SettingConstants } from '../constants/constants';
 
 class WindSpeedStore extends Store {
@@ -18,6 +19,11 @@ class WindSpeedStore extends Store {
       switch(action.type) {
         case this.ActionConstants.MAP_CENTER_REGISTER:
           this.dispatcher.waitFor([contextPositionStore.dispatchToken]);
+          this.fetchAndEmitChange();
+          break;
+
+        case this.ActionConstants.FLIGHT_TIME_UPDATE:
+          this.dispatcher.waitFor([flightTimeStore.dispatchToken]);
           this.fetchAndEmitChange();
           break;
 

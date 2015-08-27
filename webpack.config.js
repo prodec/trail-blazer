@@ -18,6 +18,7 @@ module.exports = {
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
+    new webpack.ProvidePlugin({ jQuery: 'jquery' }),
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: 'src/index.html',
