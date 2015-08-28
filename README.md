@@ -2,7 +2,9 @@
 
 The drone flight planner :) 
 
-This project runs with [io.js](https://iojs.org/).
+![Screenshot of Trail Blazer app](https://github.com/prodec/trail-blazer/blob/master/src/images/screenshot.png)
+
+> This project runs with [io.js](https://iojs.org/).
 
 ## Installing iojs through NVM
 ```
